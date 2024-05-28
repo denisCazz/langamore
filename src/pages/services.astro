@@ -1,33 +1,22 @@
 ---
-title: "servizi"
-summary: "A simple website for a bed and breakfast business."
-url: "bed-and-breakfast-website"
+title: "servizi";
+summary: "A simple website for a bed and breakfast business.";
+url: "bed-and-breakfast-website";
 
-import Header from "../components/header.astro"
-import Footer from "../components/footer.astro"
+import BaseLayout from "../layouts/baseLayout.astro";
 ---
 
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Servizi</title>
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
-    </head>
-    <body>
-        <Header />
-        <div class="container mx-auto p-4">
-            <h1 class="text-2xl font-bold mb-4">Servizi</h1>
-            <p>Il nostro bed and breakfast offre i seguenti servizi:</p>
-            <ul class="list-disc list-inside">
-                <li>Colazione inclusa</li>
-                <li>Wi-Fi gratuito</li>
-                <li>Parcheggio gratuito</li>
-                <li>Animali ammessi</li>
-                <li>Giardino</li>
-                <li>Barbecue</li>
-            </ul>
-        </div>
-        <Footer />
-    </body>
-</html>
+<BaseLayout title="Servizi | BB">
+    <div class="container mx-auto p-4">
+        <h1 class="text-2xl font-bold mb-4">Servizi</h1>
+        <p>Il nostro bed and breakfast offre i seguenti servizi:</p>
+        <ul class="list-disc list-inside">
+            <li>Colazione inclusa</li>
+            <li>Wi-Fi gratuito</li>
+            <li>Parcheggio gratuito</li>
+            <li>Animali ammessi</li>
+            <li>Giardino</li>
+            <li>Barbecue</li>
+        </ul>
+    </div>
+</BaseLayout>
