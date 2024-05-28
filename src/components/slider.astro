@@ -1,0 +1,81 @@
+---
+// src/components/Slider.astro
+import { useState, useEffect } from 'react';
+---
+
+<style>
+  .slider {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+  }
+  .slides {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+  }
+  .slide {
+    min-width: 100%;
+    box-sizing: border-box;
+  }
+  .controls {
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    transform: translateY(-50%);
+  }
+  .control {
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+  }
+</style>
+
+<div class="slider">
+  <div class="slides" id="slides">
+    <div class="slide"><img src="images/casa.jpeg"></div>
+    <div class="slide"><img src="images/ingresso.jpeg"></div>
+    <div class="slide"><img src="images/stanza.jpeg"></div>
+  </div>
+  <div class="controls">
+    <button class="control" id="prevBtn">❮</button>
+    <button class="control" id="nextBtn">❯</button>
+  </div>
+</div>
+
+<script>
+  const slides = document.getElementById('slides');
+  const prevBtn = document.getElementById('prevBtn');
+  const nextBtn = document.getElementById('nextBtn');
+
+  let currentIndex = 0;
+
+  function showSlide(index: number) {
+    const totalSlides = slides.children.length;
+    if (index >= totalSlides) {
+      currentIndex = 0;
+    } else if (index < 0) {
+      currentIndex = totalSlides - 1;
+    } else {
+      currentIndex = index;
+    }
+    const offset = -currentIndex * 100;
+    slides.style.transform = `translateX(${offset}%)`;
+  }
+
+  prevBtn.addEventListener('click', () => {
+    showSlide(currentIndex - 1);
+  });
+
+  nextBtn.addEventListener('click', () => {
+    showSlide(currentIndex + 1);
+  });
+
+  // Optional: Auto slide every 3 seconds
+  setInterval(() => {
+    showSlide(currentIndex + 1);
+  }, 3000);
+</script>
