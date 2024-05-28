@@ -1,48 +1,22 @@
 ---
 // src/components/Slider.astro
-import { useState, useEffect } from 'react';
 ---
 
-<style>
-  .slider {
-    position: relative;
-    width: 100%;
-    overflow: hidden;
-  }
-  .slides {
-    display: flex;
-    transition: transform 0.5s ease-in-out;
-  }
-  .slide {
-    min-width: 100%;
-    box-sizing: border-box;
-  }
-  .controls {
-    position: absolute;
-    top: 50%;
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    transform: translateY(-50%);
-  }
-  .control {
-    background: rgba(0, 0, 0, 0.5);
-    color: white;
-    border: none;
-    padding: 10px;
-    cursor: pointer;
-  }
-</style>
-
-<div class="slider">
-  <div class="slides" id="slides">
-    <div class="slide"><img src="images/casa.jpeg"></div>
-    <div class="slide"><img src="images/ingresso.jpeg"></div>
-    <div class="slide"><img src="images/stanza.jpeg"></div>
+<div class="relative w-full overflow-hidden">
+  <div class="flex transition-transform duration-500 ease-in-out" id="slides">
+    <div class="w-full flex-shrink-0">
+      <img src="images/casa.jpeg" class="w-full h-auto max-h-80 object-contain mx-auto">
+    </div>
+    <div class="w-full flex-shrink-0">
+      <img src="images/ingresso.jpeg" class="w-full h-auto max-h-80 object-contain mx-auto">
+    </div>
+    <div class="w-full flex-shrink-0">
+      <img src="images/stanza.jpeg" class="w-full h-auto max-h-80 object-contain mx-auto">
+    </div>
   </div>
-  <div class="controls">
-    <button class="control" id="prevBtn">❮</button>
-    <button class="control" id="nextBtn">❯</button>
+  <div class="absolute top-1/2 w-full flex justify-between transform -translate-y-1/2">
+    <button class="bg-black bg-opacity-50 text-white border-none py-2 px-4 cursor-pointer" id="prevBtn">❮</button>
+    <button class="bg-black bg-opacity-50 text-white border-none py-2 px-4 cursor-pointer" id="nextBtn">❯</button>
   </div>
 </div>
 
@@ -77,5 +51,5 @@ import { useState, useEffect } from 'react';
   // Optional: Auto slide every 3 seconds
   setInterval(() => {
     showSlide(currentIndex + 1);
-  }, 3000);
+  }, 5000);
 </script>
