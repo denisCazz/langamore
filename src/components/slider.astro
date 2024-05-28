@@ -4,31 +4,74 @@
 
 <div class="relative w-full overflow-hidden">
   <div class="flex transition-transform duration-500 ease-in-out" id="slides">
-    <div class="w-full flex-shrink-0">
-      <img src="images/casa.jpeg" class="w-full h-auto max-h-80 object-contain mx-auto">
+    <div class="w-full flex-shrink-0 flex justify-center">
+      <img src="images/casa.jpeg" class="slide-image">
     </div>
-    <div class="w-full flex-shrink-0">
-      <img src="images/ingresso.jpeg" class="w-full h-auto max-h-80 object-contain mx-auto">
+    <div class="w-full flex-shrink-0 flex justify-center">
+      <img src="images/ingresso.jpeg" class="slide-image">
     </div>
-    <div class="w-full flex-shrink-0">
-      <img src="images/stanza.jpeg" class="w-full h-auto max-h-80 object-contain mx-auto">
+    <div class="w-full flex-shrink-0 flex justify-center">
+      <img src="images/stanza.jpeg" class="slide-image">
     </div>
   </div>
   <div class="absolute top-1/2 w-full flex justify-between transform -translate-y-1/2">
-    <button class="bg-black bg-opacity-50 text-white border-none py-2 px-4 cursor-pointer" id="prevBtn">❮</button>
-    <button class="bg-black bg-opacity-50 text-white border-none py-2 px-4 cursor-pointer" id="nextBtn">❯</button>
+    <button class="nav-button" id="prevBtn">❮</button>
+    <button class="nav-button" id="nextBtn">❯</button>
   </div>
 </div>
 
+
+<style>
+  .slide-image {
+  display: block;
+  width: 60%;
+  height: auto;
+  max-height: 50vh;
+  object-fit: contain;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+  transition: transform 0.3s, box-shadow 0.3s;
+  padding: 10px;
+  margin: 20px;
+}
+
+.slide-image:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.7);
+}
+
+.nav-button {
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-size: 24px;
+  transition: background-color 0.3s, transform 0.3s;
+  border-radius: 50%;
+  margin: 0 20px 0 20px;
+}
+
+.nav-button:hover {
+  background-color: rgba(0, 0, 0, 0.7);
+  transform: scale(1.1);
+}
+
+.nav-button:focus {
+  outline: none;
+}
+
+</style>
+
 <script>
-  const slides = document.getElementById('slides');
-  const prevBtn = document.getElementById('prevBtn');
-  const nextBtn = document.getElementById('nextBtn');
+  const slides = document.getElementById("slides");
+  const prevBtn = document.getElementById("prevBtn");
+  const nextBtn = document.getElementById("nextBtn");
 
   let currentIndex = 0;
 
   function showSlide(index: number) {
-    const totalSlides = slides.children.length;
+    const totalSlides = slides ? slides.children.length : 0;
     if (index >= totalSlides) {
       currentIndex = 0;
     } else if (index < 0) {
@@ -37,19 +80,25 @@
       currentIndex = index;
     }
     const offset = -currentIndex * 100;
-    slides.style.transform = `translateX(${offset}%)`;
+    if (slides) {
+      slides.style.transform = `translateX(${offset}%)`;
+    }
   }
 
-  prevBtn.addEventListener('click', () => {
-    showSlide(currentIndex - 1);
-  });
+  if (prevBtn) {
+    prevBtn.addEventListener("click", () => {
+      showSlide(currentIndex - 1);
+    });
+  }
 
-  nextBtn.addEventListener('click', () => {
-    showSlide(currentIndex + 1);
-  });
+  if (nextBtn) {
+    nextBtn.addEventListener("click", () => {
+      showSlide(currentIndex + 1);
+    });
+  }
 
   // Optional: Auto slide every 3 seconds
   setInterval(() => {
     showSlide(currentIndex + 1);
-  }, 5000);
+  }, 7000);
 </script>
