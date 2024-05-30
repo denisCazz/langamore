@@ -5,87 +5,54 @@ url: "/";
 
 import BaseLayout from "../layouts/baseLayout.astro";
 import Slider from "../components/slider.astro";
+
+import IndexPresentation from "../components/indexPresentation.astro";
 ---
 
 <BaseLayout title="Home | LangAmore">
 	<!-- Main content -->
 	<main class="max-w-7xl mx-auto px-4 py-6 flex flex-col items-center">
 		<!-- Title -->
-		<h1 class="text-4xl font-bold text-gray-800 my-6">
+		<h1 class="text-4xl font-bold text-gray-800 my-6 font-roboto">
 			Benvenuti alla Guest House LangAmore
 		</h1>
 
 		<!-- Image Slider -->
 		<Slider />
 
-		<!-- Description -->
-		<section class="text-gray-600 body-font py-10 lg:p-20">
-			<div class="container mx-auto px-5 text-center">
-				<h2 class="text-3xl font-bold text-gray-800 mb-6">
-					Benvenuti alla Guest House LangAmore
-				</h2>
-				<p class="text-lg leading-relaxed mb-8">
-					Scoprite la Guest House LangAmore, situata nel suggestivo borgo di
-					Pollenzo, ai piedi delle Langhe e a breve distanza da Alba e Bra. La
-					nostra struttura offre un'esperienza unica di relax e scoperta delle
-					bellezze enogastronomiche della regione, con ogni dettaglio pensato
-					per garantire un soggiorno all'insegna del comfort e del benessere.
-				</p>
-				<h4 class="text-2xl font-bold text-gray-800 mb-6">
-					Un Rifugio di Tranquillità e Comfort
-				</h4>
-				<p class="text-lg leading-relaxed mb-8">
-					A LangAmore, vi sentirete come a casa, sia che siate qui per una fuga
-					romantica, un viaggio enogastronomico o per necessità. La nostra guest
-					house offre tutto ciò di cui avete bisogno per un soggiorno perfetto.
-					LangAmore nasce dal desiderio di condividere l'amore per il Piemonte,
-					un territorio ricco di storia, cultura e bellezze naturali.
-				</p>
-				<h4 class="text-2xl font-bold text-gray-800 mb-6">
-					Una Combinazione di Tradizione e Modernità
-				</h4>
-				<p class="text-lg leading-relaxed mb-8">
-					Situata nel cuore del borgo di Pollenzo, la nostra struttura combina
-					tradizione e modernità, creando un rifugio ideale per chi cerca
-					tranquillità e comfort. Il nostro servizio attento e personalizzato vi
-					farà sentire accolti e coccolati in ogni momento.
-				</p>
-				<h4 class="text-2xl font-bold text-gray-800 mb-6">
-					Vicino a Tutto Ciò di Cui Avete Bisogno
-				</h4>
-				<p class="text-lg leading-relaxed mb-8">
-					LangAmore si trova a pochi chilometri dall’ospedale di Verduno,
-					rendendola la scelta perfetta sia per chi cerca un soggiorno di relax
-					sia per chi necessita di una sistemazione comoda e vicina a una
-					struttura sanitaria di eccellenza.
-				</p>
-				<h4 class="text-2xl font-bold text-gray-800 mb-6">
-					Prenota Ora il Tuo Soggiorno Perfetto
-				</h4>
-				<p class="text-lg leading-relaxed mb-8">
-					Venite a scoprire LangAmore e lasciatevi incantare dalla bellezza del
-					Piemonte. Prenotate ora il vostro soggiorno e preparatevi a vivere
-					un'esperienza indimenticabile.
-				</p>
-			</div>
-		</section>
+		<IndexPresentation />
 
 		<!-- Call to Action -->
 		<a
-			href="/contact"
-			class="bg-gradient-to-r from-blue-500 to-blue-700 hover:from-blue-700 hover:to-blue-900 text-white font-bold py-3 px-6 rounded-full shadow-lg transform transition-transform duration-300 ease-in-out hover:scale-105 mt-6 inline-block"
+			href="/services"
+			class="bg-gradient-to-r from-red-500 to-blue-700 hover:from-blue-700 hover:to-red-900 text-white font-bold py-3 px-6 rounded-full shadow-lg transform transition-transform duration-300 ease-in-out hover:scale-105 mt-6 inline-block"
 		>
 			Scopri i Nostri Servizi
 		</a>
 
-		<br />
-
-		<!-- another CTA -->
 		<a
-			href="/contact"
-			class="bg-gradient-to-r from-blue-500 to-blue-700 hover:from-blue-700 hover:to-blue-900 text-white font-bold py-3 px-6 rounded-full shadow-lg transform transition-transform duration-300 ease-in-out hover:scale-105 mt-6 inline-block"
+			href="https://www.booking.com/hotel/it/langamore-pollenzo.it.html"
+			target="_blank"
+			rel="noopener noreferrer"
+			class="booking-button bg-gradient-to-r from-blue-500 to-blue-700 hover:from-blue-700 hover:to-blue-900 text-white font-bold py-3 px-6 rounded-full shadow-lg transform transition-transform duration-300 ease-in-out hover:scale-105 mt-6 inline-block"
 		>
-			Contattaci
+			Prenota ora su Booking.com
+			<img src="/images/loghi/booking.png" alt="Booking Logo" />
 		</a>
 	</main>
+
+	<style>
+		.booking-button {
+			display: inline-block;
+		}
+
+		.booking-button img {
+			width: 150px; /* Imposta la larghezza dell'immagine */
+			height: auto; /* L'altezza si adatta automaticamente */
+			border: none; /* Rimuovi il bordo dell'immagine */
+			align-items: center; /* Allinea l'immagine al centro */
+			vertical-align: middle; /* Allinea l'immagine verticalmente */
+			margin-left: 30px; /* Aggiungi un margine a sinistra */
+		}
+	</style>
 </BaseLayout>

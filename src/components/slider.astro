@@ -1,104 +1,105 @@
----
-// src/components/Slider.astro
----
-
-<div class="relative w-full overflow-hidden">
-  <div class="flex transition-transform duration-500 ease-in-out" id="slides">
-    <div class="w-full flex-shrink-0 flex justify-center">
-      <img src="images/casa.jpeg" class="slide-image">
-    </div>
-    <div class="w-full flex-shrink-0 flex justify-center">
-      <img src="images/ingresso.jpeg" class="slide-image">
-    </div>
-    <div class="w-full flex-shrink-0 flex justify-center">
-      <img src="images/stanza.jpeg" class="slide-image">
-    </div>
+<div class="relative w-full overflow-hidden hidden md:block p-10">
+  <div class="slide-container">
+    <img src="images/casa.jpeg" alt="Immagine della casa" class="slide-image" />
+    <img
+      src="images/ingresso.jpeg"
+      alt="Immagine dell'ingresso"
+      class="slide-image"
+    />
+    <img
+      src="images/stanza.jpeg"
+      alt="Immagine della stanza"
+      class="slide-image"
+    />
   </div>
-  <div class="absolute top-1/2 w-full flex justify-between transform -translate-y-1/2">
-    <button class="nav-button" id="prevBtn">❮</button>
-    <button class="nav-button" id="nextBtn">❯</button>
-  </div>
+  <!-- nascondiamo per ora i button 
+    <div class="absolute top-1/2 w-full flex justify-between transform -translate-y-1/2">
+      <button class="nav-button" id="prevBtn">❮</button>
+      <button class="nav-button" id="nextBtn">❯</button>
+    </div>
+  -->
 </div>
 
-
 <style>
+  .relative {
+    height: 60vh; /* Imposta l'altezza del contenitore principale */
+  }
+
+  .slide-container {
+    display: flex; /* Layout flex per contenere le immagini in linea */
+    transition: transform 0.5s ease; /* Transizione per lo spostamento */
+    width: 300%; /* Larghezza al 300% per contenere tutte le immagini */
+  }
+
   .slide-image {
-  display: block;
-  width: 60%;
-  height: auto;
-  max-height: 50vh;
-  object-fit: contain;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
-  transition: transform 0.3s, box-shadow 0.3s;
-  padding: 10px;
-  margin: 20px;
-}
+    width: 33.3333%; /* Larghezza delle immagini al 33.3333% */
+    height: auto;
+    object-fit: cover; /* Ritaglia l'immagine per adattarsi al contenitore */
+    border-radius: 40px; /* Arrotonda gli angoli */
+    padding: 20px; /* Padding interno */
+    max-width: 80%;
+    max-height: 55vh;
+  }
 
-.slide-image:hover {
-  transform: scale(1.05);
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.7);
-}
+  .nav-button {
+    background: rgba(0, 0, 0, 0.5);
+    border: none;
+    color: white;
+    font-size: 2rem;
+    padding: 10px;
+    cursor: pointer;
+  }
 
-.nav-button {
-  background-color: rgba(0, 0, 0, 0.5);
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  cursor: pointer;
-  font-size: 24px;
-  transition: background-color 0.3s, transform 0.3s;
-  border-radius: 50%;
-  margin: 0 20px 0 20px;
-}
+  .nav-button:hover {
+    background-color: rgba(0, 0, 0, 0.8); /* Ombra più scura su hover */
+    transform: scale(1.1);
+  }
 
-.nav-button:hover {
-  background-color: rgba(0, 0, 0, 0.7);
-  transform: scale(1.1);
-}
+  .nav-button:focus {
+    outline: none;
+  }
 
-.nav-button:focus {
-  outline: none;
-}
-
+  @media (max-width: 768px) {
+    .slide-image {
+      display: none; /* Nascondi le immagini su schermi più piccoli */
+    }
+  }
 </style>
 
 <script>
-  const slides = document.getElementById("slides");
-  const prevBtn = document.getElementById("prevBtn");
-  const nextBtn = document.getElementById("nextBtn");
+  document.addEventListener("DOMContentLoaded", function () {
+    const slides = document.querySelectorAll(".slide-image");
+    const slideContainer = document.querySelector(".slide-container");
+    //const prevBtn = document.getElementById("prevBtn");
+    //const nextBtn = document.getElementById("nextBtn");
 
-  let currentIndex = 0;
+    let currentIndex = 0;
 
-  function showSlide(index: number) {
-    const totalSlides = slides ? slides.children.length : 0;
-    if (index >= totalSlides) {
-      currentIndex = 0;
-    } else if (index < 0) {
-      currentIndex = totalSlides - 1;
-    } else {
-      currentIndex = index;
+    function showSlide(index) {
+      const totalSlides = slides.length;
+      currentIndex = (index + totalSlides) % totalSlides; // Assicura che l'indice si riavvolga
+      const offset = (currentIndex * -100) / totalSlides - 1;
+      if (slideContainer) {
+        const slideContainer = document.querySelector(
+          ".slide-container",
+        ) as HTMLElement;
+        slideContainer.style.transform = `translateX(${offset}%)`;
+        slideContainer.style.justifyContent = "center"; // Aggiungi questa linea per centrare l'immagine
+      }
     }
-    const offset = -currentIndex * 100;
-    if (slides) {
-      slides.style.transform = `translateX(${offset}%)`;
-    }
-  }
 
-  if (prevBtn) {
-    prevBtn.addEventListener("click", () => {
+    /*prevBtn.addEventListener("click", () => {
       showSlide(currentIndex - 1);
     });
-  }
 
-  if (nextBtn) {
     nextBtn.addEventListener("click", () => {
       showSlide(currentIndex + 1);
     });
-  }
+*/
+    setInterval(() => {
+      showSlide(currentIndex + 1);
+    }, 3000);
 
-  // Optional: Auto slide every 3 seconds
-  setInterval(() => {
-    showSlide(currentIndex + 1);
-  }, 7000);
+    showSlide(currentIndex); // Mostra l'immagine iniziale
+  });
 </script>

@@ -1,0 +1,170 @@
+---
+const images = [
+    "/images/Locazione_turistica/206702d5-5f2c-4bff-a8c6-83cbd2b3d91a.jpg",
+    "/images/Camera_Deluxe/56315b49-643a-47a7-88f2-83111c241217.jpg",
+    "/images/Ingresso/fe539f10-4384-4cc5-827f-31f29a30f8bd.jpg",
+    "/images/Camera_vasca_idro/930190c4-8ea3-4575-9611-8ee6fc250575.jpg",
+];
+---
+
+<style>
+    .fade-in {
+        opacity: 0;
+        transform: translateY(20px);
+        transition:
+            opacity 1s ease-out,
+            transform 1s ease-out;
+    }
+
+    .fade-in.visible {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    .img-left,
+    .img-right {
+        width: 100%;
+        max-width: 400px;
+        height: auto;
+        max-height: 300px;
+        object-fit: cover;
+        border-radius: 0.5rem;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        margin-bottom: 1.5rem;
+    }
+
+    @media (min-width: 1024px) {
+        .img-left,
+        .img-right {
+            width: 45%;
+        }
+
+        .content {
+            width: 50%;
+        }
+    }
+
+    .row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+    /* Stack Images Vertically on Small Screens */
+    @media (max-width: 767px) {
+        .row {
+            flex-direction: column; /* Make rows stack vertically on small screens */
+        }
+
+        .img-left,
+        .img-right {
+            width: 100%; /* Images take full width on small screens */
+        }
+
+        .row.reverse {
+            flex-direction: column-reverse; /* Reverse the order of the columns on small screens */
+        }
+
+    }
+</style>
+
+<script>
+    const handleScroll = () => {
+        const fadeInElements = document.querySelectorAll(".fade-in");
+        fadeInElements.forEach((element) => {
+            const rect = element.getBoundingClientRect();
+            if (rect.top < window.innerHeight && rect.bottom > 0) {
+                element.classList.add("visible");
+            }
+        });
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    document.addEventListener("DOMContentLoaded", handleScroll);
+</script>
+
+<section class="text-gray-600 body-font py-10 lg:p-20">
+    <div class="container mx-auto px-5 text-center">
+        <div class="row">
+            <img
+                src={images[0]}
+                alt="Immagine LangAmore"
+                class="img-left fade-in"
+            />
+            <div class="content fade-in">
+                <p class="text-lg leading-relaxed mb-8">
+                    Scoprite la Guest House LangAmore, situata nel suggestivo
+                    borgo di Pollenzo, ai piedi delle Langhe e a breve distanza
+                    da Alba e Bra. La nostra struttura offre un'esperienza unica
+                    di relax e scoperta delle bellezze enogastronomiche della
+                    regione, con ogni dettaglio pensato per garantire un
+                    soggiorno all'insegna del comfort e del benessere.
+                </p>
+            </div>
+        </div>
+        <div class="row reverse">
+            <div class="content fade-in">
+                <h4 class="text-2xl font-bold text-gray-800 mb-6">
+                    Un Rifugio di Tranquillità e Comfort
+                </h4>
+                <p class="text-lg leading-relaxed mb-8">
+                    A LangAmore, vi sentirete come a casa, sia che siate qui per
+                    una fuga romantica, un viaggio enogastronomico o per
+                    necessità. La nostra guest house offre tutto ciò di cui
+                    avete bisogno per un soggiorno perfetto. LangAmore nasce dal
+                    desiderio di condividere l'amore per il Piemonte, un
+                    territorio ricco di storia, cultura e bellezze naturali.
+                </p>
+            </div>
+            <img
+                src={images[1]}
+                alt="Immagine LangAmore"
+                class="img-right fade-in"
+            />
+        </div>
+        <div class="row">
+            <img
+                src={images[2]}
+                alt="Immagine LangAmore"
+                class="img-left fade-in"
+            />
+            <div class="content fade-in">
+                <h4 class="text-2xl font-bold text-gray-800 mb-6">
+                    Una Combinazione di Tradizione e Modernità
+                </h4>
+                <p class="text-lg leading-relaxed mb-8">
+                    Situata nel cuore del borgo di Pollenzo, la nostra struttura
+                    combina tradizione e modernità, creando un rifugio ideale
+                    per chi cerca tranquillità e comfort. Il nostro servizio
+                    attento e personalizzato vi farà sentire accolti e coccolati
+                    in ogni momento.
+                </p>
+            </div>
+        </div>
+        <div class="row reverse">
+            <div class="content fade-in">
+                <h4 class="text-2xl font-bold text-gray-800 mb-6">
+                    Vicino a Tutto Ciò di Cui Avete Bisogno
+                </h4>
+                <p class="text-lg leading-relaxed mb-8">
+                    LangAmore si trova a pochi chilometri dall’ospedale di
+                    Verduno, rendendola la scelta perfetta sia per chi cerca un
+                    soggiorno di relax sia per chi necessita di una sistemazione
+                    comoda e vicina a una struttura sanitaria di eccellenza.
+                </p>
+            </div>
+            <img
+                src={images[3]}
+                alt="Immagine LangAmore"
+                class="img-right fade-in"
+            />
+        </div>
+        <h4 class="text-2xl font-bold text-gray-800 mb-6 fade-in">
+            Prenota Ora il Tuo Soggiorno Perfetto
+        </h4>
+        <p class="text-lg leading-relaxed mb-8 fade-in">
+            Venite a scoprire LangAmore e lasciatevi incantare dalla bellezza
+            del Piemonte. Prenotate ora il vostro soggiorno e preparatevi a
+            vivere un'esperienza indimenticabile.
+        </p>
+    </div>
+</section>
