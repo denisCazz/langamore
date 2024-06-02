@@ -1,0 +1,85 @@
+---
+import BaseLayout from "./baseLayout.astro";
+
+const {type, maintext} = Astro.props;
+
+var img = "/images/Camera_vasca_idro/bdeddc17-8310-4e40-b568-d65afcd3ff8a.jpg"
+var title = "Camera ";
+
+switch (type){
+    case "idro":
+        img = "/images/Camera_vasca_idro/bdeddc17-8310-4e40-b568-d65afcd3ff8a.jpg"
+        title = title + "Idro | LangAmore"
+        break;
+    case "deluxe":
+        img = "/images/Camera_Deluxe/7bbd882e-5d58-49b3-8548-4e546a6f969e.jpg"
+        title = title + "Deluxe | LangAmore"
+        break;
+    case "matrimoniale":
+        img = "/images/Camera_2/a966dda3-ad10-4637-8689-436fc88ac10b.jpg"
+        title = title + "Matrimoniale | LangAmore"
+        break;
+}
+
+---
+
+<BaseLayout title={title}>
+    <style>
+        .hero-image {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .content-section {
+            padding: 2rem;
+            background-color: #fff;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .booking-button {
+            display: inline-block;
+            margin-top: 2rem;
+            padding: 0.75rem 1.5rem;
+            background-color: #3490dc;
+            color: #fff;
+            font-weight: 600;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s ease;
+        }
+        .booking-button:hover {
+            background-color: #2779bd;
+        }
+    </style>
+
+    <main class="container mx-auto px-8 py-12 mb-12">
+        <h1 class="text-4xl font-bold text-center mb-8">Camera {type}</h1>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div>
+                <img
+                    src={img}                 
+                    alt="Camera"
+                    class="hero-image"
+                />
+            </div>
+
+            <div class="content-section">
+                <h2 class="text-3xl font-semibold mb-4">Cosa offre?</h2>
+
+                <p class="text-lg text-gray-700 mb-4">
+                    {maintext}              
+                </p>
+                <a
+                    href="/contact"
+                    class="booking-button"
+                >
+                    Prenota ora
+                </a>
+            </div>
+        </div>
+    </main>
+
+</BaseLayout>

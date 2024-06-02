@@ -3,48 +3,10 @@ title: "Camera Matrimonale | LangAmore";
 summary: "Scopri le nostre camere accoglienti e confortevoli per un soggiorno indimenticabile a LangAmore.";
 url: "camere";
 
-import BaseLayout from "../../layouts/baseLayout.astro";
+import LayoutCamera from "../../layouts/layoutCamera.astro";
+
+var text = "La camera matrimoniale è la soluzione ideale per le coppie che desiderano trascorrere un soggiorno romantico e rilassante. La camera è dotata di un letto matrimoniale, bagno privato con doccia, asciugacapelli, set di cortesia e TV. La camera matrimoniale è disponibile anche con vista sul giardino o sulle langhe.";
+
 ---
 
-<BaseLayout title="Camere | LangAmore">
-    <main class="container mx-auto px-16 py-8">
-        <h1 class="text-3xl font-bold text-center">Camere Matrimonale</h1>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-8">
-            <div>
-                <img
-                    src="/img/camera-Matrimonale.jpg"
-                    alt="Camera Matrimonale"
-                    class="w-full h-full object-cover rounded-lg shadow-lg"
-                />
-            </div>
-
-            <div>
-                <h2 class="text-2xl font-bold">Camera Matrimonale</h2>
-
-                <p class="text-lg mt-4">
-                    La camera Matrimonale è la soluzione ideale per chi cerca un
-                    soggiorno confortevole e accogliente. Le camere sono dotate
-                    di un letto matrimoniale, bagno privato, aria condizionata,
-                    TV, Wi-Fi gratuito e minibar.
-                </p>
-
-                <p class="text-lg mt-4">
-                    Le camere Matrimonale sono disponibili in versione singola,
-                    doppia o tripla.
-                </p>
-
-                <p class="text-lg mt-4">
-                    Tariffe a partire da € 100 a notte.
-                </p>
-
-                <a
-                    href="/prenota"
-                    class="inline-block mt-8 px-4 py-2 bg-primary text-white font-semibold rounded-lg shadow-md hover:bg-primary-dark"
-                >
-                    Prenota ora
-                </a>
-            </div>
-        </div>
-    </main>
-</BaseLayout>
+<LayoutCamera type="matrimoniale" maintext={text}/>
