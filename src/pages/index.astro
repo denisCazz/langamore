@@ -14,8 +14,12 @@ import IndexPresentation from "../components/indexPresentation.astro";
 	<main class="max-w-7xl mx-auto px-4 py-6 flex flex-col items-center">
 		<!-- Title -->
 		<h1 class="text-4xl font-bold text-gray-800 my-6 font-roboto">
-			Benvenuti alla Guest House LangAmore
+			Guest House e locazione turistica
 		</h1>
+		<h1 class="text-4xl font-bold text-gray-800 my-6 font-roboto -mt-4 -mb-6">
+			LangAmore
+		</h1>
+
 
 		<!-- Image Slider -->
 		<Slider />
@@ -25,20 +29,11 @@ import IndexPresentation from "../components/indexPresentation.astro";
 		<!-- Call to Action -->
 		<a
 			href="/services"
-			class="bg-gradient-to-r from-red-500 to-blue-700 hover:from-blue-700 hover:to-red-900 text-white font-bold py-3 px-6 rounded-full shadow-lg transform transition-transform duration-300 ease-in-out hover:scale-105 mt-6 inline-block"
+			class="bg-blue-300 text-black hover:bg-blue-800 hover:text-white font-bold py-3 px-6 rounded-full shadow-lg transform transition-transform duration-300 ease-in-out hover:scale-105 inline-block -mt-10 mb-8"
 		>
 			Scopri i Nostri Servizi
 		</a>
 
-		<a
-			href="https://www.booking.com/hotel/it/langamore-pollenzo.it.html"
-			target="_blank"
-			rel="noopener noreferrer"
-			class="booking-button bg-gradient-to-r from-blue-500 to-blue-700 hover:from-blue-700 hover:to-blue-900 text-white font-bold py-3 px-6 rounded-full shadow-lg transform transition-transform duration-300 ease-in-out hover:scale-105 mt-6 inline-block"
-		>
-			Prenota ora su Booking.com
-			<img src="/images/loghi/booking.png" alt="Booking Logo" />
-		</a>
 	</main>
 
 	<style>

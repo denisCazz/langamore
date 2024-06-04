@@ -1,0 +1,71 @@
+---
+title: "Locazione turistica";
+summary: "Scopri la nostra Locazione turistica accoglienti e confortevoli per un soggiorno indimenticabile a LangAmore.";
+url: "Locazione turistica";
+
+import Slider from "../components/slider.astro";
+import BaseLayout from "../layouts/baseLayout.astro";
+---
+
+<BaseLayout title="Locazione Turistica | LangAmore">
+    <main class="container mx-auto px-16 py-8">
+        <h1 class="text-3xl font-bold text-center">
+            La Locazione Turistica di LangAmore
+        </h1>
+        <p class="text-lg mt-4 text-gray-700 text-center leading-9">
+            Scopri la nostra locazione turistica accogliente e confortevole per
+            un soggiorno indimenticabile a LangAmore. Siamo situati nel cuore
+            della langhe e offriamo camere spaziose e luminose, arredate con
+            gusto e dotate di tutti i comfort. La nostra struttura è il luogo
+            ideale per rilassarsi e godersi la bellezza della natura circostante
+            e i sapori della cucina piemontese. Ti aspettiamo per un soggiorno
+            indimenticabile!
+        </p>
+
+        <section class="mt-8">
+            <h2 class="text-2xl font-bold text-center">
+                Maggiori Informazioni sulla Locazione Turistica
+            </h2>
+
+            <Slider />
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-6">
+                <div class="bg-gray-100 p-6 rounded-lg shadow-lg">
+                    <h3 class="text-xl font-bold">Camere Confortevoli</h3>
+                    <p class="mt-4 text-gray-700">
+                        Le nostre camere sono spaziose e luminose, arredate con
+                        gusto e dotate di tutti i comfort per garantire un
+                        soggiorno piacevole e rilassante. Ogni camera dispone di
+                        bagno privato, aria condizionata, TV a schermo piatto,
+                        connessione Wi-Fi gratuita e molto altro.
+                    </p>
+                </div>
+
+                <div class="bg-gray-100 p-6 rounded-lg shadow-lg">
+                    <h3 class="text-xl font-bold">Servizi Esclusivi</h3>
+                    <p class="mt-4 text-gray-700">
+                        Presso la nostra locazione turistica potrai usufruire di
+                        una serie di servizi esclusivi per rendere il tuo
+                        soggiorno ancora più piacevole e confortevole. Tra i
+                        servizi offerti: colazione a buffet, parcheggio
+                        gratuito, giardino con piscina, noleggio biciclette e
+                        molto altro.
+                    </p>
+                </div>
+            </div>
+
+            <section class="mt-8 text-center">
+                <h2 class="text-2xl font-bold">Prenota il Tuo Soggiorno</h2>
+                <p class="text-lg mt-4 text-gray-700">
+                    Scegli la camera che più si adatta alle tue esigenze e
+                    prenota il tuo soggiorno a LangAmore. Ti aspettiamo!
+                </p>
+                <div
+                    class="bg-green-300 hover:bg-green-600 text-white font-bold py-3 px-6 rounded-full shadow-lg transform transition-transform duration-300 ease-in-out hover:scale-105 mt-6 inline-block"
+                >
+                    <a href="/contact" class="">Prenota Ora</a>
+                </div>
+            </section>
+        </section>
+    </main>
+</BaseLayout>
