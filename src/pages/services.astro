@@ -7,84 +7,162 @@ import BaseLayout from "../layouts/baseLayout.astro";
 ---
 
 <BaseLayout title="Servizi | LangAmore">
-    <div class="container mx-auto p-4 text-center">
+    <div class="container mx-auto p-4 text-center mb-20">
         <h1 class="text-3xl font-bold mb-4">I nostri servizi</h1>
         <p class="text-lg text-gray-600 mb-4">
-            Offriamo una vasta gamma di servizi per rendere il tuo soggiorno
+            Offriamo una vasta gamma di convenzioni per rendere il tuo soggiorno
             indimenticabile.
         </p>
         <p class="text-lg text-gray-600 mb-4">
-            Scopri i servizi inclusi nel prezzo del tuo soggiorno:
+            Scopri le convenzioni incluse nel prezzo del tuo soggiorno:
         </p>
         <br>
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            <div class="card">
-                <img
-                    src="https://i.pinimg.com/originals/74/26/cf/7426cf05ffe331b889b1459cd0005054.png"
-                    alt="Logo Colazione"
-                    class="logo"
-                />
-                <div class="card-content">
-                    <h3 class="card-title">Colazione inclusa</h3>
-                    <p class="card-text">
-                        Goditi una deliziosa colazione preparata con ingredienti
-                        freschi e locali.
-                    </p>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4">
+            <div class="card-container">
+                <div class="card">
+                    <div class="card-front">
+                        <img
+                            src="/images/conventions/tennis_court.png"
+                            alt="Campo da tennis"
+                            class="logo"
+                        />
+                        <div class="card-content">
+                            <h3 class="card-title">Campo da tennis</h3>
+                            <p class="card-text">
+                                Goditi il nostro campo da tennis durante il tuo soggiorno.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="card-back">
+                        <p>
+                            Prenota il nostro campo da tennis per goderti una partita immersa nel verde.
+                        </p>
+                    </div>
                 </div>
             </div>
-            <div class="card">
-                <img
-                    src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ae/WiFi_Logo.svg/2560px-WiFi_Logo.svg.png"
-                    alt="Logo Wi-Fi"
-                    class="logo"
-                />
-                <div class="card-content">
-                    <h3 class="card-title">Wi-Fi gratuito</h3>
-                    <p class="card-text">
-                        Resta connesso durante il tuo soggiorno con il nostro
-                        Wi-Fi gratuito e veloce.
-                    </p>
+            <div class="card-container">
+                <div class="card">
+                    <div class="card-front">
+                        <img
+                            src="/images/conventions/pollenzo.png"
+                            alt="Tour privati"
+                            class="logo"
+                        />
+                        <div class="card-content">
+                            <h3 class="card-title">Tour privati a Pollenzo</h3>
+                            <p class="card-text">
+                                Esplora Pollenzo con guide personalizzate per un'esperienza unica.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="card-back">
+                        <p>
+                            Scopri Pollenzo con i nostri tour privati per un'esperienza indimenticabile.
+                        </p>
+                    </div>
                 </div>
             </div>
-            <div class="card">
-                <img
-                    src="https://cdn-icons-png.flaticon.com/512/4276/4276449.png"
-                    alt="Logo Spa"
-                    class="logo"
-                />
-                <div class="card-content">
-                    <h3 class="card-title">Spa e benessere</h3>
-                    <p class="card-text">
-                        Rilassati e rigenerati con i trattamenti benessere
-                        offerti dal nostro centro spa.
-                    </p>
+            <div class="card-container">
+                <div class="card">
+                    <div class="card-front">
+                        <img
+                            src="/images/conventions/vespa.png"
+                            alt="Giri in vespa"
+                            class="logo"
+                        />
+                        <div class="card-content">
+                            <h3 class="card-title">Giri in vespa</h3>
+                            <p class="card-text">
+                                Scopri il paesaggio circostante con i nostri giri in vespa.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="card-back">
+                        <p>
+                            Noleggia una Vespa per esplorare la zona in modo divertente e avventuroso.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="card-container">
+                <div class="card">
+                    <div class="card-front">
+                        <img
+                            src="/images/conventions/wine.png"
+                            alt="Degustazioni vinarie"
+                            class="logo"
+                        />
+                        <div class="card-content">
+                            <h3 class="card-title">Degustazioni vinarie</h3>
+                            <p class="card-text">
+                                Partecipa alle nostre degustazioni di vini locali.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="card-back">
+                        <p>
+                            Scopri i migliori vini locali con le nostre degustazioni guidate.
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
     <style>
-        .card {
-            background-color: #ffffff;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease;
+        .card-container {
+            perspective: 1000px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 100%;
         }
 
-        .card:hover {
-            transform: translateY(-5px);
-            border: 1px black solid;
-            box-shadow: black 0px 0px 10px;
+        .card {
+            width: 100%;
+            max-width: 550px;
+            height: 500px;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 0.6s;
+        }
+
+        .card-container:hover .card {
+            transform: rotateY(180deg);
+        }
+
+        .card-front, .card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(107, 125, 100, 0.1);
+        }
+
+        .card-front {
+            background-color: #ffffff;
+        }
+
+        .card-back {
+            background-color: #74747451;
+            transform: rotateY(180deg);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
 
         .card img {
             width: 100%;
-            height: auto;
+            max-height: 300px;
         }
 
         .card-content {
-            padding: 20px;
+            padding: 40px;
         }
 
         .card-title {
