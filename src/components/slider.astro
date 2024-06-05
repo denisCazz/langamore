@@ -1,16 +1,21 @@
+---
+
+var imagesSrc = Astro.props.src;
+var ImagesAlt = Astro.props.alt;
+
+---
+
 <div class="relative w-full overflow-hidden hidden md:block p-10">
   <div class="slide-container">
-    <img src="images/casa.jpeg" alt="Immagine della casa" class="slide-image" />
-    <img
-      src="images/ingresso.jpeg"
-      alt="Immagine dell'ingresso"
-      class="slide-image"
-    />
-    <img
-      src="images/stanza.jpeg"
-      alt="Immagine della stanza"
-      class="slide-image"
-    />
+    {
+      imagesSrc.map((image, index) => (
+        <img
+          src={image}
+          alt={ImagesAlt[index]}
+          class="slide-image"
+        />
+      ))
+    }
   </div>
   <!-- nascondiamo per ora i button 
     <div class="absolute top-1/2 w-full flex justify-between transform -translate-y-1/2">

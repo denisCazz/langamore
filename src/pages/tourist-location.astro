@@ -5,6 +5,19 @@ url: "Locazione turistica";
 
 import Slider from "../components/slider.astro";
 import BaseLayout from "../layouts/baseLayout.astro";
+
+//define the images for the slider
+var imagesSrc = [
+	"/images/Locazione_turistica/96e53ab7-2aee-4e68-a29c-f105862f4139.jpg",
+	"/images/Locazione_turistica/51e8fb78-1bec-4834-965a-61e81994d723.jpg",
+	"/images/Locazione_turistica/e0f10a51-be4b-41d4-9474-394e7124cb0c.jpg"
+];
+
+var imagesAlt = [
+	"Camera da letto",
+	"Ingresso",
+	"Camera da letto"
+];
 ---
 
 <BaseLayout title="Locazione Turistica | LangAmore">
@@ -27,7 +40,7 @@ import BaseLayout from "../layouts/baseLayout.astro";
                 Maggiori Informazioni sulla Locazione Turistica
             </h2>
 
-            <Slider />
+            <Slider src={imagesSrc} alt = {imagesAlt}/>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-6">
                 <div class="bg-gray-100 p-6 rounded-lg shadow-lg">
