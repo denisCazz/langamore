@@ -21,6 +21,13 @@ import BaseLayout from "../layouts/baseLayout.astro";
             max-width: 55%;
             height: auto;
         }
+
+        @media (max-width: 768px) {
+            .custom-image {
+                max-width: 100%;
+            }
+        }
+    
     </style>
 
     <main class="container mx-auto px-8 py-12">
@@ -43,15 +50,30 @@ import BaseLayout from "../layouts/baseLayout.astro";
             A LangAmore, il tempo scorre lentamente, tra passeggiate nella natura, visite ai borghi medievali e momenti di relax nella nostra accogliente sala comune. Venite a scoprire LangAmore e lasciatevi incantare dalla bellezza del Piemonte.
         </p>
 
+        <h1 class="text-3xl font-bold text-center text-primary mt-8 fade-in">La Nostra Storia</h1>
+
+        <h1 class="text-2xl font-bold text-center text-primary mt-8 fade-in">Il Castello di Pollenzo</h1>
+        <p class="text-lg mt-4 text-gray-700 text-center leading-8 max-w-3xl mx-auto fade-in">
+            A pochi passi da LangAmore si erge il maestoso castello di Pollenzo, una delle residenze sabaude riconosciute dall'UNESCO come patrimonio dell'umanità.
+            <br />
+            Il castello è circondato da un vasto parco, che ospita il Centro Universitario di Gastronomia e Scienze degli Alimenti dell'Università di Scienze Gastronomiche di Pollenzo.
+        </p>
+
         <div class="mt-8 flex justify-center fade-in">
-            <img src="/images/langhe/pollenzo.jpeg" alt="Colazione LangAmore" class="custom-image rounded-lg shadow-lg" />
+            <img src="/images/langhe/pollenzo1.jpeg" alt="Pollenzo" class="custom-image rounded-lg shadow-lg" />
         </div>
 
         <section class="mt-12 fade-in">
             <h2 class="text-3xl font-semibold text-center text-primary">Un Territorio da Esplorare</h2>
             <div class="flex justify-center mt-4">
-                <img src="/images/langhe/paesaggio.jpeg" alt="Paesaggio Langhe" class="custom-image rounded-lg shadow-lg" />
+                <img src="/images/langhe/ingresso_pollenzo.jpeg" alt="Paesaggio Langhe" class="custom-image rounded-lg shadow-lg" />
             </div>
+
+            <p class="text-lg mt-4 text-gray-700 text-center leading-8 max-w-3xl mx-auto">
+                Le Langhe sono un territorio ricco di storia, cultura e sapori autentici. 
+                <br />
+                Da LangAmore potrete facilmente raggiungere i borghi medievali più belli della zona, come Barolo, La Morra e Monforte d'Alba, e scoprire le tradizioni e le eccellenze enogastronomiche del Piemonte.
+            </p>
         </section>
 
         <section class="mt-12 fade-in">
@@ -59,6 +81,12 @@ import BaseLayout from "../layouts/baseLayout.astro";
             <div class="mt-4 flex justify-center">
                 <img src="/images/langhe/cibo.jpeg" alt="Piatti tipici piemontesi" class="custom-image rounded-lg shadow-lg" />
             </div>
+            <p class="text-lg mt-4 text-gray-700 text-center leading-8 max-w-3xl mx-auto">
+                Le Langhe sono famose in tutto il mondo per i loro vini pregiati e i piatti tipici della tradizione piemontese. 
+                <br />
+                Da LangAmore potrete facilmente raggiungere le cantine vinicole più rinomate e i ristoranti stellati della zona, per un'esperienza enogastronomica indimenticabile.
+            </p>
+        
         </section>
 
         <section class="mt-12 fade-in">
@@ -66,6 +94,12 @@ import BaseLayout from "../layouts/baseLayout.astro";
             <div class="flex justify-center mt-4">
                 <img src="/images/langhe/relax.jpeg" alt="Sala comune LangAmore" class="custom-image rounded-lg shadow-lg" />
             </div>
+            <p class="text-lg mt-4 text-gray-700 text-center leading-8 max-w-3xl mx-auto">
+                A LangAmore, il tempo scorre lentamente, tra passeggiate nella natura, visite ai borghi medievali e momenti di relax nella nostra accogliente sala comune. 
+                <br />
+                Venite a scoprire LangAmore e lasciatevi incantare dalla bellezza del Piemonte.
+            </p>
+        
         </section>
 
         <section class="mt-12 fade-in">
@@ -73,7 +107,7 @@ import BaseLayout from "../layouts/baseLayout.astro";
             <ul class="list-disc list-inside text-lg mt-6 text-gray-700 mx-auto max-w-2xl">
                 <li class="mt-4">Atmosfera accogliente e familiare</li>
                 <li class="mt-4">Camere confortevoli e curate</li>
-                <li class="mt-4">Colazione ricca e gustosa</li>
+                <li class="mt-4">Vari servizi convenzionati (scopri di piu <a href="/services" class="text-blue-400">qui</a>)</li>
                 <li class="mt-4">Posizione ideale per esplorare le Langhe</li>
                 <li class="mt-4">Servizio attento e personalizzato</li>
                 <li class="mt-4">Esperienze enogastronomiche autentiche</li>
@@ -87,21 +121,22 @@ import BaseLayout from "../layouts/baseLayout.astro";
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-8">
                 <blockquote class="bg-white p-8 rounded-lg shadow-md">
                     <p class="text-lg font-medium text-gray-700">
-                        "Ho trascorso un soggiorno meraviglioso presso il vostro bed and breakfast. La camera era pulita e confortevole, e la colazione era deliziosa. Tornerò sicuramente!"
+                        "Elisa è stata squisita, la location è nuovissima ed arredata con ottimo gusto, è stato proprio un bel weekend!"
                     </p>
-                    <footer class="text-sm mt-4 text-gray-500">- Giovanni Rossi</footer>
+                    <footer class="text-sm mt-4 text-gray-500">- Laura (Booking.com)</footer>
                 </blockquote>
                 <blockquote class="bg-white p-8 rounded-lg shadow-md">
                     <p class="text-lg font-medium text-gray-700">
-                        "Il bed and breakfast si trova in una posizione incantevole, con una vista mozzafiato sulla campagna. Il personale è stato cordiale e accogliente, e la camera era pulita e confortevole. Lo consiglio vivamente!"
+                        "Camera pulita, letto comodo e vasca idromassaggio ad uso privato.
+                        Abbiamo apprezzato la simpatia e l' ospitalità di Elisa. Assolutamente consigliato."
                     </p>
-                    <footer class="text-sm mt-4 text-gray-500">- Maria Bianchi</footer>
+                    <footer class="text-sm mt-4 text-gray-500">- Patrizia (Booking.com)</footer>
                 </blockquote>
                 <blockquote class="bg-white p-8 rounded-lg shadow-md">
                     <p class="text-lg font-medium text-gray-700">
-                        "Ho trascorso un soggiorno fantastico presso il vostro bed and breakfast. La camera era spaziosa e confortevole, e la colazione era deliziosa. Tornerò sicuramente!"
+                        "Tutto nuovissimo e comodo. Siamo stati qui solo una notte, ma la proprietaria ci ha accolto con gentilezza, è stata davvero premurosa ❤️ ci ha fornito tutto ciò di cui avevamo bisogno. Abbiamo particolarmente apprezzato la posizione (a Pollenzo, non lontano da Bra e Alba) e la vasca da bagno: questa struttura è perfetta per un weekend di relax!!"
                     </p>
-                    <footer class="text-sm mt-4 text-gray-500">- Sara Esposito</footer>
+                    <footer class="text-sm mt-4 text-gray-500">- Vanessa (Booking.com)</footer>
                 </blockquote>
             </div>
         </section>
