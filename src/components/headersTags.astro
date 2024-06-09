@@ -1,13 +1,23 @@
 ---
 //componente per la gestione dei tag head
+import { AstroFont } from "astro-font";
 ---
 
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<meta name="description" content="" />
-<meta name="author" content="SMEON" />
+<meta
+    name="description"
+    content="LangAmore è una guest house che offre diversi tipi di servizi tra cui camere con idromassaggio o un intero appartamento con tutti i servizi di cui hai bisogno."
+/>
+<meta
+    name="keywords"
+    content="guest house, bed and breakfast, camere con idromassaggio, appartamento, servizi, LangAmore"
+/>
+<meta name="robots" content="index, follow" />
+<meta name="language" content="Italian" />
+<meta name="title" content="LangAmore" />
+<meta name="author" content="LangAmore" />
 <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <link
     rel="stylesheet"
     href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
@@ -55,3 +65,25 @@
 
 <!-- FAVICON -->
 <link rel="icon" href="/images/loghi/logo.ico" />
+
+<!-- sitemap -->
+<link rel="sitemap" href="/sitemap-index.xml" />
+
+<AstroFont
+    config={[
+        {
+            name: "Afacad",
+            src: [
+                {
+                    style: "normal",
+                    weight: "200",
+                    path: "https://fonts.gstatic.com/s/afacad/v1/6NUK8FKMIQOGaw6wjYT7ZHG_zsBBfvLqagk-80KjZfJ_uw.woff2",
+                },
+            ],
+            preload: true,
+            display: "swap",
+            selector: "body",
+            fallback: "sans-serif",
+        },
+    ]}
+/>
