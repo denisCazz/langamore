@@ -1,0 +1,44 @@
+---
+const { images } = Astro.props;
+---
+<div class="relative w-full max-w-3xl mx-auto">
+  <div class="overflow-hidden relative h-64 md:h-96 lg:h-[30rem]">
+    <div id="slider" class="flex transition-transform duration-500 ease-in-out">
+      {images.map((image, index) => (
+        <img src={image} alt={`Slide ${index + 1}`} class="w-full flex-shrink-0 h-64 md:h-96 lg:h-[30rem] object-cover" />
+      ))}
+    </div>
+  </div>
+  <button id="prev" class="absolute top-1/2 left-0 transform -translate-y-1/2 bg-gray-800 text-white p-2">Prev</button>
+  <button id="next" class="absolute top-1/2 right-0 transform -translate-y-1/2 bg-gray-800 text-white p-2">Next</button>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  let currentIndex = 0;
+  const images = document.querySelectorAll('#slider img');
+  const totalImages = images.length;
+  const slider = document.getElementById('slider');
+
+  const updateSliderWidth = () => {
+    const sliderWidth = slider.clientWidth;
+    slider.style.transform = `translateX(-${currentIndex * sliderWidth}px)`;
+    images.forEach(image => {
+      image.style.width = `${sliderWidth}px`;
+    });
+  };
+
+  window.addEventListener('resize', updateSliderWidth);
+  updateSliderWidth();
+
+  document.getElementById('prev').addEventListener('click', () => {
+    currentIndex = (currentIndex - 1 + totalImages) % totalImages;
+    slider.style.transform = `translateX(-${currentIndex * slider.clientWidth}px)`;
+  });
+
+  document.getElementById('next').addEventListener('click', () => {
+    currentIndex = (currentIndex + 1) % totalImages;
+    slider.style.transform = `translateX(-${currentIndex * slider.clientWidth}px)`;
+  });
+});
+</script>

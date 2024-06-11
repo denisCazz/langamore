@@ -1,24 +1,39 @@
 ---
 import BaseLayout from "./baseLayout.astro";
+import Slider4Bed from "../components/slider4bed.astro";
 
 const {type, maintext} = Astro.props;
 
-var img = "/images/Camera_vasca_idro/bdeddc17-8310-4e40-b568-d65afcd3ff8a.jpg"
+var img = ["/images/Camera_vasca_idro/bdeddc17-8310-4e40-b568-d65afcd3ff8a.jpg"]
 var title = "Camera ";
 
 switch (type){
-    case "idro":
-        img = "/images/Camera_vasca_idro/bdeddc17-8310-4e40-b568-d65afcd3ff8a.jpg"
-        title = title + "Idro | LangAmore"
-        break;
-    case "deluxe":
-        img = "/images/Camera_Deluxe/7bbd882e-5d58-49b3-8548-4e546a6f969e.jpg"
-        title = title + "Deluxe | LangAmore"
-        break;
     case "matrimoniale":
-        img = "/images/Camera_2/a966dda3-ad10-4637-8689-436fc88ac10b.jpg"
+        img = [ "/images/Camera_2/a966dda3-ad10-4637-8689-436fc88ac10b.jpg",
+                "/images/Camera_2/47a25e6b-5b17-47c2-abbb-bb9500bccbfe.jpg",
+                "/images/Camera_2/a8231ec5-4024-420e-81d3-04fa759522a5.jpg",
+                "/images/Camera_2/fd1262c9-4f64-42c4-8583-009dc65aef57.jpg"
+            ]
+        title = title + "Idro | LangAmore"
+    break;
+    case "deluxe":
+        img = ["/images/Camera_Deluxe/7bbd882e-5d58-49b3-8548-4e546a6f969e.jpg",
+                "/images/Camera_Deluxe/56315b49-643a-47a7-88f2-83111c241217.jpg",
+                "/images/Camera_Deluxe/2f12d3a8-2d9f-4e27-b258-27af36b1a0d6.jpg",
+                "/images/Camera_Deluxe/cc2a8806-8182-4bf5-a043-9adf4c412d27.jpg"
+        ]
+        title = title + "Deluxe | LangAmore"
+    break;
+    case "idro":
+        img = ["/images/Camera_vasca_idro/e223e8e8-1699-4858-8548-5edf5aa0f88f.jpg",
+                "/images/Camera_vasca_idro/7f7de2a9-8eed-47a2-a458-b67bc38df296.jpg",
+                "/images/Camera_vasca_idro/bdeddc17-8310-4e40-b568-d65afcd3ff8a.jpg",
+                "/images/Camera_vasca_idro/ca419402-1526-44c4-bd83-80b10921e10c.jpg",
+                "/images/Camera_vasca_idro/930190c4-8ea3-4575-9611-8ee6fc250575.jpg",
+                "/images/Camera_vasca_idro/41918472-2c68-4d17-b7da-2a99f181f01f.jpg"
+        ]
         title = title + "Matrimoniale | LangAmore"
-        break;
+    break;
 }
 
 ---
@@ -58,12 +73,8 @@ switch (type){
         <h1 class="text-4xl font-bold text-center mb-8">Camera {type}</h1>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div>
-                <img
-                    src={img}                 
-                    alt="Camera"
-                    class="hero-image"
-                />
+            <div class="">
+                <Slider4Bed images={img} />
             </div>
 
             <div class="content-section">
