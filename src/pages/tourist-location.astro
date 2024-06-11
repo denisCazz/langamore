@@ -5,6 +5,7 @@ url: "Locazione turistica";
 
 import Slider from "../components/slider.astro";
 import BaseLayout from "../layouts/baseLayout.astro";
+import Slider4Bed from "../components/slider4bed.astro";
 
 //define the images for the slider
 var imagesSrc = [
@@ -18,6 +19,8 @@ var imagesAlt = [
 	"Ingresso",
 	"Camera da letto"
 ];
+
+var img = ["/images/Locazione_turistica/20d9c557-a362-4e05-8e2d-6c9eb3d2708d.jpg"]
 ---
 
 <BaseLayout title="Locazione Turistica | LangAmore">
@@ -26,19 +29,39 @@ var imagesAlt = [
             La Locazione Turistica di LangAmore
         </h1>
         <p class="text-lg mt-4 text-gray-700 text-center leading-9">
-            Scopri la nostra locazione turistica accogliente e confortevole per
-            un soggiorno indimenticabile a LangAmore. Siamo situati nel cuore
-            della langhe e offriamo camere spaziose e luminose, arredate con
-            gusto e dotate di tutti i comfort. La nostra struttura è il luogo
-            ideale per rilassarsi e godersi la bellezza della natura circostante
-            e i sapori della cucina piemontese. Ti aspettiamo per un soggiorno
-            indimenticabile!
+            Scopri la nostra locazione turistica a LangAmore, perfetta per un soggiorno indimenticabile. Situata vicino alle Langhe e al Roero, la nostra struttura offre camere spaziose e arredate con gusto, dotate di tutti i comfort.
+            <br />
+            L'appartamento è ideale per immergersi nella natura e gustare i piatti della tradizione piemontese. 
+            <br />
+            Grazie alla posizione strategica di LangAmore, potrai esplorare le Langhe e il Roero, patrimonio dell'Unesco. Visita cantine prestigiose, degusta vini pregiati e scopri borghi medievali.
+            <br />
+            Vieni a LangAmore e lasciati affascinare dalla bellezza del Piemonte. Ti aspettiamo per un soggiorno indimenticabile.
+            <br /> <br />
         </p>
 
         <section class="mt-8">
             <h2 class="text-2xl font-bold text-center">
                 Maggiori Informazioni sulla Locazione Turistica
             </h2>
+            
+            <main class="container mx-auto px-8 py-12 mb-12">        
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="">
+                        <Slider4Bed images={img} />
+                    </div>
+                    <div class="content-section">
+                        <p>
+                            Caratteristiche principali dell'appartamento:
+                            <li class="font-bold">Camera da letto: Arredata con gusto e climatizzata, offre la possibilità di aggiungere un letto supplementare.</li>
+                            <li class="font-bold">Zona living: Spaziosa e luminosa, comprende un divano letto per ospiti aggiuntivi.</li>
+                            <li class="font-bold">Cucina: Completamente attrezzata con fornelli a induzione, macchinetta del caffè e tutto il necessario per preparare una colazione leggera a base di tè, caffè o cappuccino, fette biscottate e marmellata.</li>
+                            <li class="font-bold">Bagno: Dotato di doccia e tutti i servizi essenziali, inclusi asciugamani e asciugacapelli.</li>
+                            <br />
+                            L'aria condizionata è presente in tutto l'appartamento per garantire il massimo comfort. Perfetto per coppie, famiglie o piccoli gruppi, questo appartamento ti farà sentire come a casa mentre esplori le meraviglie di LangAmore.
+                        </p>
+                    </div>
+                </div>
+            </main>
 
             <Slider src={imagesSrc} alt = {imagesAlt}/>
 
