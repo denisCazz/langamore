@@ -22,8 +22,6 @@ import { AstroFont } from "astro-font";
     rel="stylesheet"
     href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
 />
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <link
     rel="stylesheet"
     href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
@@ -72,18 +70,13 @@ import { AstroFont } from "astro-font";
 <AstroFont
     config={[
         {
-            name: "Afacad",
-            src: [
-                {
-                    style: "normal",
-                    weight: "200",
-                    path: "https://fonts.gstatic.com/s/afacad/v1/6NUK8FKMIQOGaw6wjYT7ZHG_zsBBfvLqagk-80KjZfJ_uw.woff2",
-                },
-            ],
+            src: [],
+            name: "PT SANS",
+            googleFontsURL: "https://fonts.googleapis.com/css2?famil:PT+Sans:ital,wght@0,400;0,700;1,400;1,700&displa:swap",
             preload: true,
             display: "swap",
             selector: "body",
-            fallback: "sans-serif",
+            fallback: "sans-serif"
         },
     ]}
 />
