@@ -7,7 +7,7 @@ import BaseLayout from "../layouts/baseLayout.astro";
 ---
 
 <BaseLayout title="Servizi | LangAmore">
-    <div class="container mx-auto p-4 text-center mb-20">
+    <div class="container mx-auto p-4 text-center mb-20 mt-10">
         <h1 class="text-3xl font-bold mb-4">I nostri servizi</h1>
         <p class="text-lg text-gray-600 mb-4">
             Offriamo una vasta gamma di convenzioni per rendere il tuo soggiorno
@@ -108,6 +108,18 @@ import BaseLayout from "../layouts/baseLayout.astro";
             </div>
         </div>
     </div>
+
+    <section class="mt-16 text-center mb-20">
+        <h2 class="text-2xl md:text-3xl font-bold">Prenota il Tuo Soggiorno</h2>
+        <p class="text-lg mt-4 text-gray-700">
+            Prenota ora il tuo soggiorno per godere di tutti i nostri servizi!
+        </p>
+        <div
+            class="bg-green-500 hover:bg-green-700 text-white font-bold py-3 px-6 rounded-full shadow-lg transform transition-transform duration-300 ease-in-out hover:scale-105 mt-6 inline-block"
+        >
+            <a href="/contact" class="">Prenota Ora</a>
+        </div>
+    </section>
 
     <style>
         .card-container {
