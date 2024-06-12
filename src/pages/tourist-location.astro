@@ -1,9 +1,8 @@
 ---
 title: "Locazione turistica";
 summary: "Scopri la nostra Locazione turistica accoglienti e confortevoli per un soggiorno indimenticabile a LangAmore.";
-url: "Locazione turistica";
+url: "https://www.langamorepollenzo.it/tourist-location";
 
-import Slider from "../components/slider.astro";
 import BaseLayout from "../layouts/baseLayout.astro";
 import Slider4Bed from "../components/slider4bed.astro";
 
@@ -13,22 +12,14 @@ var imagesSrc = [
 	"/images/Locazione_turistica/letto.jpeg",
 	"/images/Locazione_turistica/letto3.jpeg"
 ];
-
-var imagesAlt = [
-	"Camera da letto",
-	"Ingresso",
-	"Camera da letto"
-];
-
-var img = ["/images/Locazione_turistica/20d9c557-a362-4e05-8e2d-6c9eb3d2708d.jpg"]
 ---
 
 <BaseLayout title="Locazione Turistica | LangAmore">
-    <main class="container mx-auto px-16 py-8">
+    <main class="container mx-auto px-10 py-4">
         <h1 class="text-3xl font-bold text-center">
             La Locazione Turistica di LangAmore
         </h1>
-        <p class="text-lg mt-4 text-gray-700 text-center leading-9">
+        <p class="text-lg mt-4 text-gray-700 text-center leading-9 mb-10">
             Scopri la nostra locazione turistica a LangAmore, perfetta per un soggiorno indimenticabile. Situata vicino alle Langhe e al Roero, la nostra struttura offre camere spaziose e arredate con gusto, dotate di tutti i comfort.
             <br />
             L'appartamento è ideale per immergersi nella natura e gustare i piatti della tradizione piemontese. 
@@ -36,18 +27,17 @@ var img = ["/images/Locazione_turistica/20d9c557-a362-4e05-8e2d-6c9eb3d2708d.jpg
             Grazie alla posizione strategica di LangAmore, potrai esplorare le Langhe e il Roero, patrimonio dell'Unesco. Visita cantine prestigiose, degusta vini pregiati e scopri borghi medievali.
             <br />
             Vieni a LangAmore e lasciati affascinare dalla bellezza del Piemonte. Ti aspettiamo per un soggiorno indimenticabile.
-            <br /> <br />
         </p>
 
         <section class="mt-8">
-            <h2 class="text-2xl font-bold text-center">
+            <h2 class="text-2xl font-bold text-center mb-6">
                 Maggiori Informazioni sulla Locazione Turistica
             </h2>
             
-            <main class="container mx-auto px-8 py-12 mb-12">        
+            <main class="container mx-auto mb-12 mt-10">        
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    <div class="">
-                        <Slider4Bed images={img} />
+                    <div>
+                        <Slider4Bed images={imagesSrc} />
                     </div>
                     <div class="content-section">
                         <p>
@@ -62,8 +52,6 @@ var img = ["/images/Locazione_turistica/20d9c557-a362-4e05-8e2d-6c9eb3d2708d.jpg
                     </div>
                 </div>
             </main>
-
-            <Slider src={imagesSrc} alt = {imagesAlt}/>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-6">
                 <div class="bg-gray-100 p-6 rounded-lg shadow-lg">

@@ -1,11 +1,13 @@
 ---
 const { images } = Astro.props;
+import { Image } from "astro:assets";
+
 ---
 <div class="relative w-full max-w-3xl mx-auto">
   <div class="overflow-hidden relative h-64 md:h-96 lg:h-[30rem]">
     <div id="slider" class="flex transition-transform duration-500 ease-in-out">
       {images.map((image, index) => (
-        <img src={image} alt={`Slide ${index + 1}`} class="w-full flex-shrink-0 h-64 md:h-96 lg:h-[30rem] object-cover" />
+        <Image src={image} alt={`Slide ${index + 1}`} width={200} height={200} class="w-full flex-shrink-0 h-64 md:h-96 lg:h-[30rem] object-cover" />
       ))}
     </div>
   </div>

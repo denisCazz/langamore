@@ -3,17 +3,15 @@
 var imagesSrc = Astro.props.src;
 var ImagesAlt = Astro.props.alt;
 
+import { Image } from 'astro:assets';
+
 ---
 
 <div class="relative w-full overflow-hidden hidden md:block p-10">
   <div class="slide-container">
     {
       imagesSrc.map((image, index) => (
-        <img
-          src={image}
-          alt={ImagesAlt[index]}
-          class="slide-image"
-        />
+        <Image src={image} alt={ImagesAlt[index]} width={200} height={200} class="slide-image" />
       ))
     }
   </div>
