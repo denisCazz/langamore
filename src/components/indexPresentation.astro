@@ -1,6 +1,6 @@
 ---
 const images = [
-    "/images/Locazione_turistica/letto.jpg",
+    "/images/Ingresso/angolo.jpg",
     "/images/Locazione_turistica/letto2.jpeg",
     "/images/Locazione_turistica/ingresso.jpeg",
     "/images/Locazione_turistica/letto3.jpeg",
@@ -90,16 +90,19 @@ import { Image } from 'astro:assets';
     <meta itemprop="description" content="Discover the LangAmore Guest House, located in the picturesque village of Pollenzo, at the foot of the Langhe and a short distance from Alba and Bra.">
 
     <div class="container mx-auto px-5 text-center">
+
         <div class="row" itemprop="mainContentOfPage" itemscope itemtype="http://schema.org/WebPageElement">
-            <Image src={images[0]} alt="Immagine LangAmore" height={200} width={200} class="img-left fade-in" itemprop="image" />
+            <Image src={images[2]} alt="Immagine LangAmore" height={200} width={200} class="img-left fade-in" itemprop="image" />
             <div class="content fade-in">
+                <h2 class="text-2xl font-bold text-gray-800 mb-6" itemprop="headline">
+                    Una Combinazione di Tradizione e Modernità
+                </h2>
                 <p class="text-lg leading-relaxed mb-8" itemprop="text">
-                    Scoprite la Guest House LangAmore, situata nel suggestivo
-                    borgo di Pollenzo, tra le Langhe e il Roero, a breve distanza
-                    da Alba e Bra. La nostra struttura offre un'esperienza unica
-                    di relax e scoperta delle bellezze enogastronomiche della
-                    regione, con ogni dettaglio pensato per garantire un
-                    soggiorno all'insegna del comfort e del benessere.
+                    Situata nel cuore del borgo di Pollenzo, la nostra struttura
+                    combina tradizione e modernità, creando un rifugio ideale
+                    per chi cerca tranquillità e comfort. Il nostro servizio
+                    attento e personalizzato vi farà sentire accolti e coccolati
+                    in ogni momento.
                 </p>
             </div>
         </div>
@@ -119,18 +122,20 @@ import { Image } from 'astro:assets';
             </div>
             <Image src={images[1]} alt="Immagine LangAmore" height={200} width={200} class="img-right fade-in" itemprop="image" />
         </div>
+        
         <div class="row" itemprop="mainContentOfPage" itemscope itemtype="http://schema.org/WebPageElement">
-            <Image src={images[2]} alt="Immagine LangAmore" height={200} width={200} class="img-left fade-in" itemprop="image" />
+            <Image src={images[0]} alt="Immagine LangAmore" height={200} width={200} class="img-left fade-in" itemprop="image" />
             <div class="content fade-in">
                 <h2 class="text-2xl font-bold text-gray-800 mb-6" itemprop="headline">
-                    Una Combinazione di Tradizione e Modernità
+                    Comfort, benessere e molto altro...
                 </h2>
                 <p class="text-lg leading-relaxed mb-8" itemprop="text">
-                    Situata nel cuore del borgo di Pollenzo, la nostra struttura
-                    combina tradizione e modernità, creando un rifugio ideale
-                    per chi cerca tranquillità e comfort. Il nostro servizio
-                    attento e personalizzato vi farà sentire accolti e coccolati
-                    in ogni momento.
+                    Scoprite la Guest House LangAmore, situata nel suggestivo
+                    borgo di Pollenzo, tra le Langhe e il Roero, a breve distanza
+                    da Alba e Bra. La nostra struttura offre un'esperienza unica
+                    di relax e scoperta delle bellezze enogastronomiche della
+                    regione, con ogni dettaglio pensato per garantire un
+                    soggiorno all'insegna del comfort e del benessere.
                 </p>
             </div>
         </div>

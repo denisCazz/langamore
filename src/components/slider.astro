@@ -7,63 +7,41 @@ import { Image } from 'astro:assets';
 
 ---
 
-<div class="relative w-full overflow-hidden hidden md:block p-10">
+<div class="relative w-full overflow-hidden p-10" id="slider">
   <div class="slide-container">
     {
       imagesSrc.map((image, index) => (
-        <Image src={image} alt={ImagesAlt[index]} width={200} height={200} class="slide-image" />
+        <Image src={image} alt={ImagesAlt[index]} width={800} height={400} class="slide-image" />
       ))
     }
   </div>
-  <!-- nascondiamo per ora i button 
-    <div class="absolute top-1/2 w-full flex justify-between transform -translate-y-1/2">
-      <button class="nav-button" id="prevBtn">❮</button>
-      <button class="nav-button" id="nextBtn">❯</button>
-    </div>
-  -->
 </div>
 
 <style>
   .relative {
-    height: 60vh; /* Imposta l'altezza del contenitore principale */
+    height: 50vh; /* Imposta l'altezza del contenitore principale */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
   }
 
   .slide-container {
     display: flex; /* Layout flex per contenere le immagini in linea */
     transition: transform 0.5s ease; /* Transizione per lo spostamento */
-    width: 300%; /* Larghezza al 300% per contenere tutte le immagini */
+    width: 100%; /* Larghezza al 100% per contenere tutte le immagini */
   }
 
   .slide-image {
-    width: 33.3333%; /* Larghezza delle immagini al 33.3333% */
-    height: auto;
-    object-fit: cover; /* Ritaglia l'immagine per adattarsi al contenitore */
-    border-radius: 40px; /* Arrotonda gli angoli */
-    padding: 20px; /* Padding interno */
-    max-width: 80%;
-    max-height: 55vh;
+    flex: 0 0 100%; /* Ogni immagine occupa il 100% della larghezza del contenitore */
+    height: 100%; /* Altezza delle immagini al 100% */
+    object-fit:scale-down; /* Ritaglia l'immagine per adattarsi al contenitore */
+    border-radius: 100px; /* Arrotonda gli angoli */
   }
 
-  .nav-button {
-    background: rgba(0, 0, 0, 0.5);
-    border: none;
-    color: white;
-    font-size: 2rem;
-    padding: 10px;
-    cursor: pointer;
-  }
-
-  .nav-button:hover {
-    background-color: rgba(0, 0, 0, 0.8); /* Ombra più scura su hover */
-    transform: scale(1.1);
-  }
-
-  .nav-button:focus {
-    outline: none;
-  }
 
   @media (max-width: 768px) {
-    .slide-image {
+    #slider{
       display: none; /* Nascondi le immagini su schermi più piccoli */
     }
   }
@@ -73,32 +51,16 @@ import { Image } from 'astro:assets';
   document.addEventListener("DOMContentLoaded", function () {
     const slides = document.querySelectorAll(".slide-image");
     const slideContainer = document.querySelector(".slide-container");
-    //const prevBtn = document.getElementById("prevBtn");
-    //const nextBtn = document.getElementById("nextBtn");
 
     let currentIndex = 0;
 
     function showSlide(index) {
       const totalSlides = slides.length;
       currentIndex = (index + totalSlides) % totalSlides; // Assicura che l'indice si riavvolga
-      const offset = (currentIndex * -100) / totalSlides - 1;
-      if (slideContainer) {
-        const slideContainer = document.querySelector(
-          ".slide-container",
-        ) as HTMLElement;
-        slideContainer.style.transform = `translateX(${offset}%)`;
-        slideContainer.style.justifyContent = "center"; // Aggiungi questa linea per centrare l'immagine
-      }
+      const offset = currentIndex * -100; // Calcola l'offset corretto
+      slideContainer.style.transform = `translateX(${offset}%)`;
     }
 
-    /*prevBtn.addEventListener("click", () => {
-      showSlide(currentIndex - 1);
-    });
-
-    nextBtn.addEventListener("click", () => {
-      showSlide(currentIndex + 1);
-    });
-*/
     setInterval(() => {
       showSlide(currentIndex + 1);
     }, 3000);
