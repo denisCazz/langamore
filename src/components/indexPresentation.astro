@@ -1,6 +1,6 @@
 ---
 const images = [
-    "/images/Locazione_turistica/20d9c557-a362-4e05-8e2d-6c9eb3d2708d.jpg",
+    "/images/Locazione_turistica/letto.jpg",
     "/images/Locazione_turistica/letto2.jpeg",
     "/images/Locazione_turistica/ingresso.jpeg",
     "/images/Locazione_turistica/letto3.jpeg",
@@ -85,12 +85,15 @@ import { Image } from 'astro:assets';
     document.addEventListener("DOMContentLoaded", handleScroll);
 </script>
 
-<section class="text-gray-600 body-font py-10 lg:p-20">
+<section class="text-gray-600 body-font py-10 lg:p-20" itemscope itemtype="http://schema.org/WebPage">
+    <meta itemprop="name" content="LangAmore Guest House">
+    <meta itemprop="description" content="Discover the LangAmore Guest House, located in the picturesque village of Pollenzo, at the foot of the Langhe and a short distance from Alba and Bra.">
+
     <div class="container mx-auto px-5 text-center">
-        <div class="row">
-            <Image src={images[0]} alt="Immagine LangAmore" height={200} width={200} class="img-left fade-in" />
+        <div class="row" itemprop="mainContentOfPage" itemscope itemtype="http://schema.org/WebPageElement">
+            <Image src={images[0]} alt="Immagine LangAmore" height={200} width={200} class="img-left fade-in" itemprop="image" />
             <div class="content fade-in">
-                <p class="text-lg leading-relaxed mb-8">
+                <p class="text-lg leading-relaxed mb-8" itemprop="text">
                     Scoprite la Guest House LangAmore, situata nel suggestivo
                     borgo di Pollenzo, ai piedi delle Langhe e a breve distanza
                     da Alba e Bra. La nostra struttura offre un'esperienza unica
@@ -100,12 +103,12 @@ import { Image } from 'astro:assets';
                 </p>
             </div>
         </div>
-        <div class="row reverse">
+        <div class="row reverse" itemprop="mainContentOfPage" itemscope itemtype="http://schema.org/WebPageElement">
             <div class="content fade-in">
-                <h4 class="text-2xl font-bold text-gray-800 mb-6">
+                <h2 class="text-2xl font-bold text-gray-800 mb-6" itemprop="headline">
                     Un Rifugio di Tranquillità e Comfort
-                </h4>
-                <p class="text-lg leading-relaxed mb-8">
+                </h2>
+                <p class="text-lg leading-relaxed mb-8" itemprop="text">
                     A LangAmore, vi sentirete come a casa, sia che siate qui per
                     una fuga romantica, un viaggio enogastronomico o per
                     necessità. La nostra guest house offre tutto ciò di cui
@@ -114,15 +117,15 @@ import { Image } from 'astro:assets';
                     territorio ricco di storia, cultura e bellezze naturali.
                 </p>
             </div>
-            <Image src={images[1]} alt="Immagine LangAmore" height={200} width={200} class="img-right fade-in" />
+            <Image src={images[1]} alt="Immagine LangAmore" height={200} width={200} class="img-right fade-in" itemprop="image" />
         </div>
-        <div class="row">
-            <Image src={images[2]} alt="Immagine LangAmore" height={200} width={200} class="img-left fade-in" />
+        <div class="row" itemprop="mainContentOfPage" itemscope itemtype="http://schema.org/WebPageElement">
+            <Image src={images[2]} alt="Immagine LangAmore" height={200} width={200} class="img-left fade-in" itemprop="image" />
             <div class="content fade-in">
-                <h4 class="text-2xl font-bold text-gray-800 mb-6">
+                <h2 class="text-2xl font-bold text-gray-800 mb-6" itemprop="headline">
                     Una Combinazione di Tradizione e Modernità
-                </h4>
-                <p class="text-lg leading-relaxed mb-8">
+                </h2>
+                <p class="text-lg leading-relaxed mb-8" itemprop="text">
                     Situata nel cuore del borgo di Pollenzo, la nostra struttura
                     combina tradizione e modernità, creando un rifugio ideale
                     per chi cerca tranquillità e comfort. Il nostro servizio
@@ -131,24 +134,24 @@ import { Image } from 'astro:assets';
                 </p>
             </div>
         </div>
-        <div class="row reverse">
+        <div class="row reverse" itemprop="mainContentOfPage" itemscope itemtype="http://schema.org/WebPageElement">
             <div class="content fade-in">
-                <h4 class="text-2xl font-bold text-gray-800 mb-6">
+                <h2 class="text-2xl font-bold text-gray-800 mb-6" itemprop="headline">
                     Vicino a Tutto Ciò di Cui Avete Bisogno
-                </h4>
-                <p class="text-lg leading-relaxed mb-8">
+                </h2>
+                <p class="text-lg leading-relaxed mb-8" itemprop="text">
                     LangAmore si trova a pochi chilometri dall’ospedale di
                     Verduno, rendendola la scelta perfetta sia per chi cerca un
                     soggiorno di relax sia per chi necessita di una sistemazione
                     comoda e vicina a una struttura sanitaria di eccellenza.
                 </p>
             </div>
-            <Image src={images[3]} alt="Immagine LangAmore" height={200} width={200} class="img-right fade-in" />
+            <Image src={images[3]} alt="Immagine LangAmore" height={200} width={200} class="img-right fade-in" itemprop="image" />
         </div>
-        <h4 class="text-2xl font-bold text-gray-800 mb-6 fade-in">
+        <h2 class="text-2xl font-bold text-gray-800 mb-6 fade-in" itemprop="headline">
             Prenota Ora il Tuo Soggiorno Perfetto
-        </h4>
-        <p class="text-lg leading-relaxed mb-8 fade-in">
+        </h2>
+        <p class="text-lg leading-relaxed mb-8 fade-in" itemprop="text">
             Venite a scoprire LangAmore e lasciatevi incantare dalla bellezza
             del Piemonte. Prenotate ora il vostro soggiorno e preparatevi a
             vivere un'esperienza indimenticabile.
