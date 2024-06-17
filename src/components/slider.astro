@@ -11,7 +11,7 @@ import { Image } from 'astro:assets';
   <div class="slide-container">
     {
       imagesSrc.map((image, index) => (
-        <Image src={image} alt={ImagesAlt[index]} width={800} height={400} class="slide-image" />
+        <Image src={image} alt={ImagesAlt[index]} width={800} height={400} class="slide-image object-scale-down" />
       ))
     }
   </div>
@@ -35,10 +35,7 @@ import { Image } from 'astro:assets';
 
 .slide-image {
   flex: 0 0 auto; /* Ogni immagine occupa il 100% della larghezza del contenitore */
-  padding: 30px;/* Limita la larghezza massima al 100% del contenitore */
-  max-height: 100%; /* Limita l'altezza massima al 100% del contenitore */
-  object-fit: contain; /* Scala l'immagine per contenere nel contesto */
-  border-radius: 255px; /* Arrotonda gli angoli */
+  padding: 50px;/* Limita la larghezza massima al 100% del contenitore */
 }
 
 @media (max-width: 768px) {
