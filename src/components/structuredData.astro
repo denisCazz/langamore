@@ -1,0 +1,53 @@
+---
+export const schemaJson = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "BedAndBreakfast",
+  name: "LangAmore Guest House",
+  url: "https://langamorepollenzo.it/",
+  logo: "https://langamorepollenzo.it/images/logo.jpg",
+  image: [
+    "https://langamorepollenzo.it/images/langhe/ingresso_pollenzo.jpeg",
+    "https://langamorepollenzo.it/images/Camera_vasca_idro/letto3.jpg",
+    "https://langamorepollenzo.it/images/Camera_Deluxe/letto.jpg"
+  ],
+  telephone: "+39 333 164 5850",
+  priceRange: "€€",
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: "Via Regina Margherita 6",
+    addressLocality: "Pollenzo",
+    addressRegion: "CN",
+    postalCode: "12042",
+    addressCountry: "IT"
+  },
+  sameAs: [
+    "https://www.booking.com/hotel/it/langamore-guest-house.it.html"
+  ],
+  aggregateRating: {
+    "@type": "AggregateRating",
+    ratingValue: "4.9",
+    reviewCount: "48",
+    bestRating: "5",
+    worstRating: "1"
+  },
+  review: [
+    {
+      "@type": "Review",
+      name: "Esperienza nelle Langhe",
+      reviewRating: {
+        "@type": "Rating",
+        ratingValue: "5",
+        bestRating: "5",
+        worstRating: "1"
+      },
+      author: {
+        "@type": "Person",
+        name: "Ospite Booking.com"
+      },
+      reviewBody: "Camere curate, posizione strategica per esplorare le Langhe e ospitalità impeccabile."
+    }
+  ]
+});
+---
+
+<script type="application/ld+json" is:inline>{schemaJson}</script>

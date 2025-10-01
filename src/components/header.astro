@@ -41,34 +41,36 @@
                     <a href="/contact" class="text-[var(--color-muted)] hover:text-[var(--color-primary)] transition-colors" title="Contatti">Contatti</a>
                 </div>
 
-                <div class="flex items-center gap-3">
-                    <a href="/services" class="btn btn-outline hidden md:inline-flex" title="Scopri i servizi">I nostri servizi</a>
+                <div class="hidden lg:flex items-center gap-3">
+                    <a href="/contact#richiesta" class="btn btn-outline" title="Richiedi disponibilità">Richiedi disponibilità</a>
                     <a
                         href="https://www.booking.com/hotel/it/langamore-guest-house.it.html"
-                        class="btn btn-primary hidden md:inline-flex"
+                        class="btn btn-primary"
                         target="_blank"
                         rel="noopener"
                         title="Prenota LangAmore"
                     >Prenota ora</a>
-                    <button
-                        class="inline-flex h-12 w-12 items-center justify-center rounded-full border border-white/60 bg-white/70 shadow-[0_12px_24px_rgba(48,34,21,0.12)] text-[var(--color-primary-dark)] transition hover:bg-white lg:hidden"
-                        id="mobile-nav-toggle"
-                        type="button"
-                        aria-expanded="false"
-                        aria-controls="mobile-nav"
-                    >
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4.5 6.75h15m-15 5.25h15m-15 5.25h15" />
-                        </svg>
-                    </button>
                 </div>
+                <button
+                    class="inline-flex h-12 w-12 items-center justify-center rounded-full border border-white/60 bg-white/70 shadow-[0_12px_24px_rgba(48,34,21,0.12)] text-[var(--color-primary-dark)] transition hover:bg-white lg:hidden"
+                    id="mobile-nav-toggle"
+                    type="button"
+                    aria-expanded="false"
+                    aria-controls="mobile-nav"
+                    aria-label="Apri il menu"
+                >
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4.5 6.75h15m-15 5.25h15m-15 5.25h15" />
+                    </svg>
+                </button>
             </div>
         </div>
     </div>
 
     <div
         id="mobile-nav"
-        class="lg:hidden fixed inset-x-0 top-[78px] origin-top scale-y-0 transform bg-white/95 backdrop-blur-xl shadow-[0_18px_40px_rgba(48,34,21,0.14)] transition-transform duration-200 ease-out"
+        class="mobile-nav lg:hidden fixed inset-x-0 top-[78px] bg-white/95 backdrop-blur-xl shadow-[0_18px_40px_rgba(48,34,21,0.14)] transition-transform duration-200 ease-out"
+        data-open="false"
     >
         <div class="px-5 py-6 space-y-4 text-base font-semibold text-[var(--color-muted)]">
             <a href="/" class="block hover:text-[var(--color-primary)]" title="Home">Home</a>
@@ -87,8 +89,8 @@
                 </div>
             </details>
             <a href="/contact" class="block hover:text-[var(--color-primary)]" title="Contatti">Contatti</a>
-            <div class="pt-4 border-t border-white/60 space-y-3">
-                <a href="/services" class="btn btn-outline w-full justify-center" title="Scopri i servizi">I nostri servizi</a>
+            <div class="pt-4 border-t border-white/60 flex flex-col gap-3">
+                <a href="/contact#richiesta" class="btn btn-outline w-full justify-center" title="Richiedi disponibilità">Richiedi disponibilità</a>
                 <a
                     href="https://www.booking.com/hotel/it/langamore-guest-house.it.html"
                     class="btn btn-primary w-full justify-center"
@@ -101,48 +103,86 @@
     </div>
 </nav>
 
-<script>
-    const mobileToggle = document.getElementById("mobile-nav-toggle");
-    const mobileNav = document.getElementById("mobile-nav");
+<script is:inline>
+    const initHeaderInteractions = () => {
+        const mobileToggle = document.getElementById("mobile-nav-toggle");
+        const mobileNav = document.getElementById("mobile-nav");
 
-    if (mobileToggle && mobileNav) {
-        mobileToggle.addEventListener("click", () => {
-            const isExpanded = mobileToggle.getAttribute("aria-expanded") === "true";
-            mobileToggle.setAttribute("aria-expanded", String(!isExpanded));
-            mobileNav.style.transform = isExpanded ? "scaleY(0)" : "scaleY(1)";
+        const setMenuState = (isOpen) => {
+            if (!mobileNav || !mobileToggle) return;
+            mobileNav.dataset.open = String(isOpen);
+            mobileToggle.setAttribute("aria-expanded", String(isOpen));
+            document.body.classList.toggle("menu-open", isOpen);
+        };
+
+        if (mobileToggle && mobileNav) {
+            setMenuState(false);
+
+            mobileToggle.addEventListener("click", (event) => {
+                event.stopPropagation();
+                const currentlyOpen = mobileNav.dataset.open === "true";
+                setMenuState(!currentlyOpen);
+            });
+
+            mobileNav.addEventListener("click", (event) => {
+                const target = event.target;
+                if (target instanceof HTMLAnchorElement) {
+                    setMenuState(false);
+                }
+            });
+
+            document.addEventListener("click", (event) => {
+                if (mobileNav.dataset.open !== "true") return;
+                const target = event.target;
+                if (!(target instanceof Node)) return;
+                if (!mobileNav.contains(target) && !mobileToggle.contains(target)) {
+                    setMenuState(false);
+                }
+            });
+
+            document.addEventListener("keydown", (event) => {
+                if (event.key === "Escape" && mobileNav.dataset.open === "true") {
+                    setMenuState(false);
+                }
+            });
+
+            const lgMediaQuery = window.matchMedia("(min-width: 1024px)");
+            const handleBreakpoint = (event) => {
+                if (event.matches) {
+                    setMenuState(false);
+                }
+            };
+
+            if (typeof lgMediaQuery.addEventListener === "function") {
+                lgMediaQuery.addEventListener("change", handleBreakpoint);
+            } else if (typeof lgMediaQuery.addListener === "function") {
+                lgMediaQuery.addListener(handleBreakpoint);
+            }
+        }
+
+        const dropdowns = document.querySelectorAll('[data-dropdown]');
+
+        dropdowns.forEach((dropdown) => {
+            const trigger = dropdown.querySelector('[data-dropdown-trigger]');
+            const panel = dropdown.querySelector('[data-dropdown-panel]');
+
+            if (!trigger || !panel) return;
+
+            const openPanel = () => panel.classList.remove("hidden");
+            const closePanel = () => panel.classList.add("hidden");
+
+            trigger.addEventListener("mouseenter", openPanel);
+            trigger.addEventListener("focus", openPanel);
+            dropdown.addEventListener("mouseleave", closePanel);
+            trigger.addEventListener("blur", closePanel);
         });
+    };
+
+    if (typeof window !== "undefined") {
+        if (document.readyState === "loading") {
+            document.addEventListener("DOMContentLoaded", initHeaderInteractions, { once: true });
+        } else {
+            initHeaderInteractions();
+        }
     }
-
-    document.addEventListener("click", (event) => {
-        if (!mobileNav || !mobileToggle) return;
-        const target = event.target;
-        if (!(target instanceof Node)) {
-            return;
-        }
-        if (
-            mobileNav.style.transform === "scaleY(1)" &&
-            !mobileNav.contains(target) &&
-            !mobileToggle.contains(target)
-        ) {
-            mobileNav.style.transform = "scaleY(0)";
-            mobileToggle.setAttribute("aria-expanded", "false");
-        }
-    });
-
-    const dropdowns = document.querySelectorAll('[data-dropdown]');
-
-    dropdowns.forEach((dropdown) => {
-        const trigger = dropdown.querySelector('[data-dropdown-trigger]');
-        const panel = dropdown.querySelector('[data-dropdown-panel]');
-
-        if (!trigger || !panel) return;
-
-        const openPanel = () => panel.classList.remove("hidden");
-        const closePanel = () => panel.classList.add("hidden");
-
-        trigger.addEventListener("mouseenter", openPanel);
-        trigger.addEventListener("focus", openPanel);
-        dropdown.addEventListener("mouseleave", closePanel);
-        trigger.addEventListener("blur", closePanel);
-    });
 </script>

@@ -1,0 +1,67 @@
+---
+import BaseLayout from "../layouts/baseLayout.astro";
+
+const pageMeta = {
+  title: "Privacy & Cookie Policy | LangAmore",
+  description: "Informativa completa su privacy, cookie e trattamento dei dati personali di LangAmore Guest House.",
+  url: "https://langamorepollenzo.it/privacy",
+};
+---
+
+<BaseLayout title={pageMeta.title}>
+  <Fragment slot="head">
+    <meta name="description" content={pageMeta.description} />
+    <meta property="og:url" content={pageMeta.url} />
+  </Fragment>
+  <main class="space-y-16 pb-20">
+    <section class="section-wrapper space-y-8">
+      <header class="section-header">
+        <span class="chip">Privacy</span>
+        <h1 class="text-4xl font-semibold text-[var(--color-primary-dark)]">Privacy & Cookie Policy</h1>
+        <p class="tagline mx-auto">Trasparenza sul trattamento dei dati personali, l'utilizzo dei cookie e i diritti degli ospiti di LangAmore.</p>
+      </header>
+
+      <article class="floating-card space-y-6">
+        <section class="space-y-3">
+          <h2 class="text-2xl font-semibold">Titolare del trattamento</h2>
+          <p class="text-[var(--color-muted)] leading-7">
+            LangAmore Guest House – Via Regina Margherita 6, 12042 Pollenzo (Bra) – email: <a href="mailto:c.elisacravero@yahoo.it">c.elisacravero@yahoo.it</a> – tel: <a href="tel:+393331645850">+39 333 164 5850</a>.
+          </p>
+        </section>
+
+        <section class="space-y-3">
+          <h2 class="text-2xl font-semibold">Dati raccolti</h2>
+          <p class="text-[var(--color-muted)] leading-7">
+            I dati trasmessi tramite il form di richiesta soggiorno (nome, email, telefono, periodo, numero di ospiti e note) sono trattati esclusivamente per rispondere alla richiesta e predisporre il preventivo. I dati sono conservati per il tempo necessario a completare la pratica e non vengono ceduti a terzi.
+          </p>
+        </section>
+
+        <section class="space-y-3">
+          <h2 class="text-2xl font-semibold">Cookie utilizzati</h2>
+          <ul class="list-disc pl-6 space-y-2 text-[var(--color-muted)] leading-7">
+            <li><strong>Cookie tecnici</strong> necessari al funzionamento del sito e alla memorizzazione del consenso.</li>
+            <li><strong>Cookie analitici</strong> aggregati per monitorare traffico e performance (anonimizzati ove possibile).</li>
+            <li><strong>Cookie di terze parti</strong> eventualmente collegati a servizi esterni come Booking.com o mappe embed.</li>
+          </ul>
+          <p class="text-[var(--color-muted)] leading-7">
+            Puoi gestire o revocare il consenso ai cookie non necessari tramite il banner o scrivendoci a <a href="mailto:c.elisacravero@yahoo.it">c.elisacravero@yahoo.it</a>.
+          </p>
+        </section>
+
+        <section class="space-y-3">
+          <h2 class="text-2xl font-semibold">Diritti dell'interessato</h2>
+          <p class="text-[var(--color-muted)] leading-7">
+            Puoi richiedere in qualsiasi momento l'accesso, la rettifica, la cancellazione o la limitazione del trattamento dei tuoi dati personali. È possibile inoltre proporre reclamo all'Autorità Garante per la protezione dei dati personali.
+          </p>
+        </section>
+
+        <section class="space-y-3">
+          <h2 class="text-2xl font-semibold">Contatti</h2>
+          <p class="text-[var(--color-muted)] leading-7">
+            Per informazioni sulla privacy o per aggiornare le tue preferenze, contattaci via email o telefono. Saremo lieti di assisterti.
+          </p>
+        </section>
+      </article>
+    </section>
+  </main>
+</BaseLayout>

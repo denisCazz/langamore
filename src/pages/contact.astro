@@ -1,26 +1,33 @@
 ---
-title: "Contatti"
-summary: "Una pagina di contatti per LangAmore, una guest house in Piemonte."
-url: "https://langamorepollenzo/contact"
-
 import BaseLayout from "../layouts/baseLayout.astro";
+
+const pageMeta = {
+	title: "Contatti | LangAmore",
+	description: "Contatta LangAmore per prenotare o costruire il tuo soggiorno su misura a Pollenzo.",
+	url: "https://langamorepollenzo.it/contact",
+};
 
 const contactDetails = [
 	{ label: "Telefono", value: "Elisa: +39 333 164 5850", href: "tel:+393331645850" },
 	{ label: "Email", value: "c.elisacravero@yahoo.it", href: "mailto:c.elisacravero@yahoo.it" },
 ];
 
+const submitted = Astro.url.searchParams.get("submitted") === "1";
+const formAction = "https://formsubmit.co/c.elisacravero@yahoo.it";
+
 ---
 
-<BaseLayout title="Contatti | LangAmore">
+<BaseLayout title={pageMeta.title}>
+	<Fragment slot="head">
+		<meta name="description" content={pageMeta.description} />
+		<meta property="og:url" content={pageMeta.url} />
+	</Fragment>
 	<main class="space-y-16 pb-20">
 		<section class="section-wrapper space-y-10">
 			<header class="section-header">
 				<span class="chip">Contattaci</span>
 				<h1 class="text-4xl font-semibold text-[var(--color-primary-dark)]">Siamo qui per te</h1>
-				<p class="tagline mx-auto">
-					Chiamaci, scrivici o raggiungici direttamente a Pollenzo. Saremo felici di costruire insieme il tuo soggiorno su misura.
-				</p>
+				<p class="tagline mx-auto">{pageMeta.description}</p>
 			</header>
 
 			<div class="floating-card space-y-8">
@@ -42,6 +49,73 @@ const contactDetails = [
 
 				<div class="chip">Arrivi serali su richiesta · Parcheggio interno disponibile</div>
 			</div>
+		</section>
+
+		<section id="richiesta" class="section-wrapper space-y-6">
+			<div class="section-header">
+				<span class="chip">Richiedi disponibilità</span>
+				<h2 class="text-3xl font-semibold text-[var(--color-primary-dark)]">Prenota direttamente con noi</h2>
+				<p class="tagline mx-auto">
+					Compila il form indicando le date e il numero di ospiti: ti risponderemo entro poche ore con una proposta personalizzata.
+				</p>
+			</div>
+
+			{submitted ? (
+				<div class="floating-card space-y-2 text-center">
+					<h3 class="text-2xl font-semibold text-[var(--color-primary-dark)]">Richiesta inviata!</h3>
+					<p class="text-[var(--color-muted)] leading-7">
+						Grazie per averci contattato, ti risponderemo al più presto con la disponibilità e le migliori opzioni per il tuo soggiorno.
+					</p>
+				</div>
+			) : (
+				<form
+					action={formAction}
+					method="POST"
+					class="floating-card grid gap-6 md:grid-cols-2"
+				>
+					<input type="hidden" name="_next" value="https://langamorepollenzo.it/contact?submitted=1" />
+					<input type="hidden" name="_subject" value="Nuova richiesta di soggiorno LangAmore" />
+					<input type="hidden" name="_captcha" value="false" />
+					<input type="text" name="_honey" class="hidden" tabindex="-1" autocomplete="off" />
+
+					<label class="form-field">
+						<span>Nome e cognome *</span>
+						<input type="text" name="nome" required autocomplete="name" />
+					</label>
+					<label class="form-field">
+						<span>Email *</span>
+						<input type="email" name="email" required autocomplete="email" />
+					</label>
+					<label class="form-field">
+						<span>Telefono</span>
+						<input type="tel" name="telefono" autocomplete="tel" />
+					</label>
+					<label class="form-field">
+						<span>Numero di ospiti *</span>
+						<input type="number" name="ospiti" min="1" max="8" required inputmode="numeric" />
+					</label>
+					<label class="form-field">
+						<span>Arrivo *</span>
+						<input type="date" name="arrivo" required />
+					</label>
+					<label class="form-field">
+						<span>Partenza *</span>
+						<input type="date" name="partenza" required />
+					</label>
+					<label class="form-field md:col-span-2">
+						<span>Richieste particolari</span>
+						<textarea name="messaggio" rows="4" placeholder="Allergie, esigenze particolari, orari di arrivo..."></textarea>
+					</label>
+
+					<div class="md:col-span-2 flex flex-wrap gap-3 items-center justify-between">
+						<label class="text-sm text-[var(--color-muted)]">
+							<input type="checkbox" name="privacy" required class="mr-2" />
+							Ho letto e accetto l'informativa privacy.
+						</label>
+						<button type="submit" class="btn btn-primary">Invia richiesta</button>
+					</div>
+				</form>
+			)}
 		</section>
 
 		<section class="section-wrapper space-y-6">

@@ -1,97 +1,90 @@
 ---
-title: "Camere";
-summary: "Scopri le nostre camere accoglienti e confortevoli per un soggiorno indimenticabile a LangAmore.";
-url: "https://langamorepollenzo/bedroom/";
-
 import BaseLayout from "../../layouts/baseLayout.astro";
+
+const pageMeta = {
+	title: "Camere | LangAmore",
+	description: "Tre camere dallo stile unico per vivere le Langhe con il comfort che desideri.",
+	url: "https://langamorepollenzo.it/bedroom",
+};
+
+const rooms = [
+	{
+		title: "Camera Matrimoniale",
+		description:
+			"Una camera accogliente con letto matrimoniale, bagno privato e dettagli pensati per un soggiorno rilassante.",
+		image: "/images/Camera_2/letto.jpg",
+		link: "/bedroom/matrimoniale",
+		accent: "Intimità",
+	},
+	{
+		title: "Camera Deluxe",
+		description:
+			"Spazi generosi, area living e letto supplementare per famiglie o piccoli gruppi.",
+		image: "/images/Camera_Deluxe/letto.jpg",
+		link: "/bedroom/deluxe",
+		accent: "Famiglie",
+	},
+	{
+		title: "Camera Idro",
+		description:
+			"Vasca idromassaggio privata, cromoterapia e luci soffuse per un'esperienza romantica.",
+		image: "/images/Camera_vasca_idro/letto3.jpg",
+		link: "/bedroom/idro",
+		accent: "Benessere",
+	},
+];
+
 ---
 
-<BaseLayout title="Camere | LangAmore">
-    <main class="container mx-auto px-6 md:px-16 py-8 mb-12 mt-10">
-        <h1 class="text-3xl md:text-4xl font-bold text-center mb-8">
-            Le Camere di LangAmore: Un Rifugio di Relax e Benessere
-        </h1>
-        <p class="text-lg mt-4 text-gray-700 text-center leading-8 md:leading-9">
-            LangAmore non è solo una guest house, ma un rifugio per l'anima.
-            <br />
-            Immersa nel borgo di Pollenzo, a pochi passi da Alba e Bra, LangAmore
-            vi invita a riscoprire il piacere del riposo e la bellezza della semplicità.
-            <br />
-            Lasciatevi avvolgere dall'atmosfera calda e accogliente delle nostre
-            camere, arredate con gusto e curate in ogni dettaglio per garantirvi
-            un soggiorno confortevole e rilassante.
-            <br />
-            Scegli la camera che più si adatta alle tue esigenze e preparati a vivere
-            un'esperienza indimenticabile a LangAmore.
-        </p>
+<BaseLayout title={pageMeta.title}>
+	<Fragment slot="head">
+		<meta name="description" content={pageMeta.description} />
+		<meta property="og:url" content={pageMeta.url} />
+	</Fragment>
+	<main class="space-y-20 pb-20">
+		<section class="section-wrapper space-y-8 text-center">
+			<header class="section-header">
+				<span class="chip">Camere</span>
+				<h1 class="text-4xl font-semibold text-[var(--color-primary-dark)]">Le camere di LangAmore</h1>
+				<p class="tagline mx-auto">{pageMeta.description}</p>
+			</header>
+		</section>
 
-        <section class="mt-8">
-            <h2 class="text-2xl md:text-3xl font-bold text-center mb-8">
-                Camere per Tutti i Gusti
-            </h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-8">
-                <div class="card bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
-                    <a href="/bedroom/matrimoniale" title="camera matrimoniale">
-                        <img
-                            src="/images/Camera_2/letto.jpg"
-                            alt="Camera Matrimoniale"
-                            class="w-full rounded-lg mb-4 object-cover h-48 md:h-64"
-                        />
-                    </a>
-                    <h3 class="text-xl font-semibold mb-2">
-                        <a href="/bedroom/matrimoniale" title="camera Matrimoniale">Camera Matrimoniale</a>
-                    </h3>
-                    <p class="text-gray-700">
-                        Per un soggiorno accogliente e confortevole, la nostra camera matrimoniale offre
-                        un letto matrimoniale e un bagno privato.
-                    </p>
-                </div>
-                <div class="card bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
-                    <a href="/bedroom/deluxe" title="camera deluxe">
-                        <img
-                            src="/images/Camera_Deluxe/letto.jpg"
-                            alt="Camera Deluxe"
-                            class="w-full rounded-lg mb-4 object-cover h-48 md:h-64"
-                        />
-                    </a>
-                    <h3 class="text-xl font-semibold mb-2">
-                        <a href="/bedroom/deluxe" title="camera deluxe">Camera Deluxe</a>
-                    </h3>
-                    <p class="text-gray-700">
-                        Perfetta per amici o famiglie, la nostra camera deluxe offre un letto matrimoniale 
-                        e un letto supplementare, un bagno privato e un'area salotto con tv.
-                    </p>
-                </div>
-                <div class="card bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
-                    <a href="/bedroom/idro" title="camera idro">
-                        <img
-                            src="/images/Camera_vasca_idro/letto3.jpg"
-                            alt="Camera Idro"
-                            class="w-full rounded-lg mb-4 object-cover h-48 md:h-64"
-                        />
-                    </a>
-                    <h3 class="text-xl font-semibold mb-2">
-                        <a href="/bedroom/idro" title="camera idro">Camera Idro</a>
-                    </h3>
-                    <p class="text-gray-700">
-                        Ideale per coppie, la nostra camera idro offre un 
-                        letto matrimoniale e un bagno privato con vasca idromassaggio.
-                    </p>
-                </div>
-            </div>
-        </section>
+		<section class="section-wrapper grid-auto-fit">
+			{rooms.map((room) => (
+				<article class="floating-card space-y-4">
+					<a href={room.link} class="block" title={room.title}>
+						<div class="gradient-border">
+							<img src={room.image} alt={room.title} class="w-full h-60 object-cover rounded-[22px]" loading="lazy" />
+						</div>
+					</a>
+					<span class="chip">{room.accent}</span>
+					<h2 class="text-2xl font-semibold text-[var(--color-primary-dark)]">
+						<a href={room.link} title={room.title}>{room.title}</a>
+					</h2>
+					<p class="text-[var(--color-muted)] leading-7">{room.description}</p>
+					<a href={room.link} class="btn btn-outline w-max" title={`Scopri ${room.title.toLowerCase()}`}>Scopri la camera</a>
+				</article>
+			))}
+		</section>
 
-        <section class="mt-16 text-center">
-            <h2 class="text-2xl md:text-3xl font-bold">Prenota il Tuo Soggiorno</h2>
-            <p class="text-lg mt-4 text-gray-700">
-                Scegli la camera che più si adatta alle tue esigenze e prenota
-                il tuo soggiorno a LangAmore. Ti aspettiamo!
-            </p>
-            <div
-                class="bg-green-500 hover:bg-green-700 text-white font-bold py-3 px-6 rounded-full shadow-lg transform transition-transform duration-300 ease-in-out hover:scale-105 mt-6 inline-block"
-            >
-                <a href="/contact" title="prenota ora">Prenota Ora</a>
-            </div>
-        </section>
-    </main>
+		<section class="section-wrapper text-center space-y-6">
+			<h2 class="text-3xl font-semibold text-[var(--color-primary-dark)]">Prenota il tuo soggiorno</h2>
+			<p class="tagline mx-auto">
+				Scegli la camera che meglio racconta il tuo viaggio nelle Langhe e blocca subito le date che preferisci.
+			</p>
+			<div class="flex justify-center gap-3 flex-wrap">
+				<a
+					href="https://www.booking.com/hotel/it/langamore-guest-house.it.html"
+					class="btn btn-primary"
+					target="_blank"
+					rel="noopener"
+					title="Prenota LangAmore"
+				>
+					Prenota ora
+				</a>
+				<a href="/contact" class="btn btn-outline" title="Richiedi informazioni">Richiedi informazioni</a>
+			</div>
+		</section>
+	</main>
 </BaseLayout>

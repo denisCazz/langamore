@@ -1,8 +1,4 @@
 ---
-title: "LangAmore | Guest House LangAmore";
-summary: "Benvenuti alla Guest House LangAmore, situata nel suggestivo borgo di Pollenzo, ai piedi delle Langhe e a breve distanza da Alba e Bra. La nostra struttura offre un'esperienza unica di relax e scoperta delle bellezze enogastronomiche della regione, con ogni dettaglio pensato per garantire un soggiorno all'insegna del comfort e del benessere.";
-url: "/";
-
 import BaseLayout from "../layouts/baseLayout.astro";
 import Slider from "../components/slider.astro";
 import IndexPresentation from "../components/indexPresentation.astro";
@@ -59,8 +55,14 @@ const benefits = [
 						>
 							Prenota ora
 						</a>
-						<a href="/bedroom" class="btn btn-outline" title="Scopri le camere">Esplora le camere</a>
+						<a href="/contact#richiesta" class="btn btn-outline" title="Richiedi disponibilità">Richiedi disponibilità</a>
 					</div>
+					<a href="/bedroom" class="text-sm font-semibold tracking-wide text-[var(--color-primary-dark)] inline-flex items-center gap-2" title="Scopri le camere">
+						Scopri tutte le camere
+						<svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+							<path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l5 5a1 1 0 010 1.414l-5 5a1 1 0 01-1.414-1.414L13.586 10H4a1 1 0 110-2h9.586l-3.293-3.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+						</svg>
+					</a>
 					<ul class="space-y-3">
 						{benefits.map((benefit, index) => (
 							<li class="list-step" data-index={`0${index + 1}`}>{benefit}</li>
@@ -139,7 +141,7 @@ const benefits = [
 				>
 					Prenota ora
 				</a>
-				<a href="/contact" class="btn btn-outline" title="Scrivi a LangAmore">Scrivici</a>
+				<a href="/contact#richiesta" class="btn btn-outline" title="Richiedi disponibilità">Richiedi disponibilità</a>
 			</div>
 		</section>
 	</main>

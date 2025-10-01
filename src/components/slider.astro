@@ -1,6 +1,6 @@
 ---
-const imagesSrc = Astro.props.src;
-const imagesAlt = Astro.props.alt;
+const imagesSrc = (Astro.props.src ?? []) as string[];
+const imagesAlt = (Astro.props.alt ?? []) as string[];
 
 ---
 
@@ -115,6 +115,9 @@ const imagesAlt = Astro.props.alt;
     if (!slides.length) return;
 
     let current = 0;
+    /**
+     * @param {number} index
+     */
     const activateSlide = (index) => {
       slides.forEach((slide, slideIndex) => {
         slide.classList.toggle('is-active', slideIndex === index);

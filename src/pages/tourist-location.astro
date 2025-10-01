@@ -1,10 +1,12 @@
 ---
-title: "Locazione turistica";
-summary: "Scopri la nostra Locazione turistica accoglienti e confortevoli per un soggiorno indimenticabile a LangAmore.";
-url: "https://www.langamorepollenzo.it/tourist-location";
-
 import BaseLayout from "../layouts/baseLayout.astro";
 import Slider4Bed from "../components/slider4bed.astro";
+
+const pageMeta = {
+    title: "Locazione Turistica | LangAmore",
+    description: "Un appartamento elegante e luminoso per vivere le Langhe con tutto il comfort di casa.",
+    url: "https://langamorepollenzo.it/tourist-location",
+};
 
 const imagesSrc = [
     "/images/Locazione_turistica/letto.jpg",
@@ -26,15 +28,17 @@ const features = [
 
 ---
 
-<BaseLayout title="Locazione Turistica | LangAmore">
+<BaseLayout title={pageMeta.title}>
+    <Fragment slot="head">
+        <meta name="description" content={pageMeta.description} />
+        <meta property="og:url" content={pageMeta.url} />
+    </Fragment>
     <main class="space-y-20 pb-20">
         <section class="section-wrapper space-y-8 text-center">
             <header class="section-header">
                 <span class="chip">Locazione Turistica</span>
                 <h1 class="text-4xl font-semibold text-[var(--color-primary-dark)]">La tua casa nel cuore delle Langhe</h1>
-                <p class="tagline mx-auto">
-                    Un appartamento elegante e luminoso, ideale per famiglie, coppie e viaggiatori in cerca di comfort totale.
-                </p>
+                <p class="tagline mx-auto">{pageMeta.description}</p>
             </header>
 
             <p class="tagline mx-auto max-w-3xl">

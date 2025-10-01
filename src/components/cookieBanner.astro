@@ -1,0 +1,68 @@
+<aside
+    id="cookie-banner"
+    class="cookie-banner fixed inset-x-4 bottom-4 z-[70] max-w-xl rounded-2xl bg-white/95 px-5 py-4 shadow-[0_18px_40px_rgba(48,34,21,0.18)] border border-white/70 flex flex-col gap-3 md:flex-row md:items-center md:justify-between"
+    data-visible="false"
+>
+    <div class="space-y-1 text-sm text-[var(--color-muted)] md:max-w-[70%]">
+        <strong class="block text-base text-[var(--color-primary-dark)]">Utilizziamo i cookie</strong>
+        <p>
+            Per offrirti un'esperienza migliore analizziamo il traffico e memorizziamo le preferenze. Puoi accettare o gestire le scelte in qualsiasi momento.
+        </p>
+        <a href="/privacy" class="underline text-[var(--color-primary-dark)]" title="Informativa privacy">Informativa privacy</a>
+    </div>
+    <div class="flex w-full flex-col gap-2 md:w-auto md:flex-row">
+        <button id="cookie-customize" class="btn btn-outline w-full justify-center" type="button">Gestisci preferenze</button>
+        <button id="cookie-accept" class="btn btn-primary w-full justify-center" type="button">Accetta tutti</button>
+    </div>
+</aside>
+
+<script>
+    const CONSENT_KEY = "langamore-cookie-consent";
+    const banner = document.getElementById("cookie-banner");
+    const acceptButton = document.getElementById("cookie-accept");
+    const customizeButton = document.getElementById("cookie-customize");
+
+    const openPreferences = () => {
+        window.location.href = "/privacy";
+    };
+
+    const hideBanner = () => {
+        if (!banner) return;
+        banner.dataset.visible = "false";
+        banner.classList.remove("cookie-banner--visible");
+    };
+
+    const showBanner = () => {
+        if (!banner || banner.dataset.visible === "true") return;
+        banner.dataset.visible = "true";
+        banner.classList.add("cookie-banner--visible");
+    };
+
+    if (banner) {
+        const consent = (() => {
+            try {
+                return window.localStorage.getItem(CONSENT_KEY);
+            } catch (error) {
+                console.warn("Cookie banner: impossibile leggere lo storage", error);
+                return null;
+            }
+        })();
+        if (!consent) {
+            window.setTimeout(showBanner, 300);
+        }
+    }
+
+    acceptButton?.addEventListener("click", () => {
+        try {
+            window.localStorage.setItem(
+                CONSENT_KEY,
+                JSON.stringify({ necessary: true, analytics: true, timestamp: Date.now() })
+            );
+        } catch (error) {
+            console.warn("Cookie banner: impossibile salvare lo storage", error);
+        }
+        hideBanner();
+    });
+
+    customizeButton?.addEventListener("click", openPreferences);
+</script>

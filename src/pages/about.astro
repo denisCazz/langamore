@@ -1,9 +1,12 @@
 ---
-title: "Chi Siamo";
-summary: "Un semplice sito web per un bed and breakfast.";
-url: "https://langamorepollenzo/about";
 
 import BaseLayout from "../layouts/baseLayout.astro";
+
+const pageMeta = {
+	title: "Chi Siamo | LangAmore",
+	description: "Scopri chi siamo e perché LangAmore è il tuo rifugio autentico tra le colline di Pollenzo.",
+	url: "https://langamorepollenzo.it/about",
+};
 
 const values = [
     {
@@ -53,15 +56,17 @@ const testimonials = [
 
 ---
 
-<BaseLayout title="Chi Siamo | LangAmore">
+<BaseLayout title={pageMeta.title}>
+	<Fragment slot="head">
+		<meta name="description" content={pageMeta.description} />
+		<meta property="og:url" content={pageMeta.url} />
+	</Fragment>
 	<main class="space-y-24 pb-20">
 		<section class="section-wrapper space-y-10">
 			<header class="section-header fade-block" data-animate>
 				<span class="chip">Chi siamo</span>
 				<h1 class="text-4xl md:text-5xl font-semibold">LangAmore è un invito a rallentare</h1>
-				<p class="tagline mx-auto">
-					Siamo una famiglia innamorata delle Langhe e del Roero. Apriamo le porte della nostra casa per accompagnarti tra vigne, cultura e buon cibo.
-				</p>
+				<p class="tagline mx-auto">{pageMeta.description}</p>
 			</header>
 
 			<div class="floating-card space-y-6 fade-block" data-animate>

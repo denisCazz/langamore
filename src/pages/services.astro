@@ -1,9 +1,11 @@
 ---
-title: "Servizi";
-summary: "A simple website for a bed and breakfast business.";
-url: "https://langamorepollenzo/services";
-
 import BaseLayout from "../layouts/baseLayout.astro";
+
+const pageMeta = {
+	title: "Servizi | LangAmore",
+	description: "Scopri le esperienze e i servizi esclusivi pensati per il tuo soggiorno a LangAmore.",
+	url: "https://langamorepollenzo.it/services",
+};
 
 const services = [
 	{
@@ -46,15 +48,17 @@ const services = [
 
 ---
 
-<BaseLayout title="Servizi | LangAmore">
+<BaseLayout title={pageMeta.title}>
+	<Fragment slot="head">
+		<meta name="description" content={pageMeta.description} />
+		<meta property="og:url" content={pageMeta.url} />
+	</Fragment>
 	<main class="space-y-20 pb-20">
 		<section class="section-wrapper space-y-10 text-center">
 			<header class="section-header">
 				<span class="chip">Servizi su misura</span>
 				<h1 class="text-4xl font-semibold text-[var(--color-primary-dark)]">Tutto quello che rende unico il tuo soggiorno</h1>
-				<p class="tagline mx-auto">
-					LangAmore significa esperienze curate, partner selezionati e dettagli pensati per chi ama le Langhe.
-				</p>
+				<p class="tagline mx-auto">{pageMeta.description}</p>
 			</header>
 
 			<div class="grid-auto-fit">
