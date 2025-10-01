@@ -6,7 +6,15 @@ const images = (Astro.props.images ?? []) as string[];
 <div class="room-slider" data-room-slider>
   {images.map((image, index) => (
     <figure class={`room-slide${index === 0 ? " is-active" : ""}`} data-room-slide>
-      <img src={image} alt={`Dettaglio camera ${index + 1}`} loading={index === 0 ? "eager" : "lazy"} />
+      <img
+        src={image}
+        alt={`Dettaglio camera ${index + 1}`}
+        loading={index === 0 ? "eager" : "lazy"}
+        decoding="async"
+        width="1200"
+        height="900"
+        sizes="(min-width: 1024px) 520px, (min-width: 640px) 80vw, 100vw"
+      />
     </figure>
   ))}
   <div class="room-slider__controls">
@@ -91,38 +99,211 @@ const images = (Astro.props.images ?? []) as string[];
 </style>
 
 <script>
-  const roomSliders = document.querySelectorAll('[data-room-slider]');
+  (() => {
+    if (typeof window === 'undefined') return;
 
-  roomSliders.forEach((slider) => {
-    const slides = slider.querySelectorAll('[data-room-slide]');
-    const prevBtn = slider.querySelector('[data-room-prev]');
-    const nextBtn = slider.querySelector('[data-room-next]');
-
-    if (!slides.length || !prevBtn || !nextBtn) return;
-
-    let index = 0;
     /**
-     * @param {number} value
+     * @param {HTMLElement} slider
+     * @returns {() => void | undefined}
      */
-    const activate = (value) => {
-      slides.forEach((slide, slideIndex) => {
-        slide.classList.toggle('is-active', slideIndex === value);
-      });
-    };
+    const setupRoomSlider = (slider) => {
+      const slides = slider.querySelectorAll('[data-room-slide]');
+      const prevBtn = slider.querySelector('[data-room-prev]');
+      const nextBtn = slider.querySelector('[data-room-next]');
 
-    const showNext = () => {
-      index = (index + 1) % slides.length;
+      if (!slides.length || !prevBtn || !nextBtn) return undefined;
+
+      let index = 0;
+      /** @type {ReturnType<typeof setInterval> | undefined} */
+      let autoplayId;
+
+      /**
+       * @param {number} value
+       */
+      const activate = (value) => {
+        slides.forEach((slide, slideIndex) => {
+          slide.classList.toggle('is-active', slideIndex === value);
+        });
+      };
+
+      const showNext = () => {
+        index = (index + 1) % slides.length;
+        activate(index);
+      };
+
+      const showPrev = () => {
+        index = (index - 1 + slides.length) % slides.length;
+        activate(index);
+      };
+
+      const stopAutoPlay = () => {
+        if (autoplayId) {
+          clearInterval(autoplayId);
+          autoplayId = undefined;
+        }
+      };
+
+      const startAutoPlay = () => {
+        if (slides.length <= 1 || autoplayId) return;
+        autoplayId = setInterval(showNext, 5000);
+      };
+
+      const handleNext = () => {
+        showNext();
+        stopAutoPlay();
+        startAutoPlay();
+      };
+
+      const handlePrev = () => {
+        showPrev();
+        stopAutoPlay();
+        startAutoPlay();
+      };
+
+      const handleVisibility = () => {
+        if (document.visibilityState === 'hidden') {
+          stopAutoPlay();
+        } else {
+          startAutoPlay();
+        }
+      };
+
+      const reducedMotionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+      /**
+       * @param {MediaQueryList | MediaQueryListEvent} source
+       */
+      const handleMotionPreference = (source) => {
+        const prefersReduced = typeof source.matches === 'boolean' ? source.matches : false;
+        if (prefersReduced) {
+          stopAutoPlay();
+        } else {
+          startAutoPlay();
+        }
+      };
+
+      prevBtn.addEventListener('click', handlePrev);
+      nextBtn.addEventListener('click', handleNext);
+      slider.addEventListener('mouseenter', stopAutoPlay);
+      slider.addEventListener('mouseleave', startAutoPlay);
+      document.addEventListener('visibilitychange', handleVisibility);
+      if (typeof reducedMotionQuery.addEventListener === 'function') {
+        reducedMotionQuery.addEventListener('change', handleMotionPreference);
+      } else if (typeof reducedMotionQuery.addListener === 'function') {
+        reducedMotionQuery.addListener(handleMotionPreference);
+      }
+
       activate(index);
+      handleMotionPreference(reducedMotionQuery);
+
+      return () => {
+        stopAutoPlay();
+        prevBtn.removeEventListener('click', handlePrev);
+        nextBtn.removeEventListener('click', handleNext);
+        slider.removeEventListener('mouseenter', stopAutoPlay);
+        slider.removeEventListener('mouseleave', startAutoPlay);
+        document.removeEventListener('visibilitychange', handleVisibility);
+        if (typeof reducedMotionQuery.removeEventListener === 'function') {
+          reducedMotionQuery.removeEventListener('change', handleMotionPreference);
+        } else if (typeof reducedMotionQuery.removeListener === 'function') {
+          reducedMotionQuery.removeListener(handleMotionPreference);
+        }
+      };
     };
 
-    const showPrev = () => {
-      index = (index - 1 + slides.length) % slides.length;
-      activate(index);
+    const init = () => {
+      const sliders = document.querySelectorAll('[data-room-slider]');
+      if (!sliders.length) return;
+
+      /** @type {WeakMap<Element, () => void>} */
+      const cleanupMap = new WeakMap();
+      let observer;
+
+      /**
+       * @param {Element} slider
+       */
+      const mountSlider = (slider) => {
+        if (cleanupMap.has(slider)) return;
+        const cleanup = setupRoomSlider(slider);
+        if (typeof cleanup === 'function') {
+          cleanupMap.set(slider, cleanup);
+        }
+      };
+
+      /**
+       * @param {Element} slider
+       */
+      const unmountSlider = (slider) => {
+        const cleanup = cleanupMap.get(slider);
+        if (cleanup) {
+          cleanup();
+          cleanupMap.delete(slider);
+        }
+      };
+
+      const enableInteractive = () => {
+        if ('IntersectionObserver' in window) {
+          if (observer) return;
+          observer = new IntersectionObserver(
+            (entries) => {
+              entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                  mountSlider(entry.target);
+                } else {
+                  unmountSlider(entry.target);
+                }
+              });
+            },
+            { threshold: 0.2 }
+          );
+
+          sliders.forEach((slider) => observer.observe(slider));
+        } else {
+          sliders.forEach(mountSlider);
+        }
+      };
+
+      const disableInteractive = () => {
+        if (observer) {
+          observer.disconnect();
+          observer = undefined;
+        }
+        sliders.forEach(unmountSlider);
+      };
+
+      const desktopQuery = window.matchMedia('(min-width: 769px)');
+      /**
+       * @param {boolean} matches
+       */
+      const handleViewport = (matches) => {
+        if (matches) {
+          enableInteractive();
+        } else {
+          disableInteractive();
+        }
+      };
+
+      handleViewport(desktopQuery.matches);
+
+      const onViewportChange = (event) => handleViewport(event.matches);
+      if (typeof desktopQuery.addEventListener === 'function') {
+        desktopQuery.addEventListener('change', onViewportChange);
+      } else if (typeof desktopQuery.addListener === 'function') {
+        desktopQuery.addListener(onViewportChange);
+      }
     };
 
-    prevBtn.addEventListener('click', showPrev);
-    nextBtn.addEventListener('click', showNext);
+    const start = () => {
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init, { once: true });
+      } else {
+        init();
+      }
+    };
 
-    setInterval(showNext, 5000);
-  });
+    if ('requestIdleCallback' in window) {
+      window.requestIdleCallback(start, { timeout: 500 });
+    } else {
+      setTimeout(start, 200);
+    }
+  })();
 </script>

@@ -12,6 +12,10 @@ const imagesAlt = (Astro.props.alt ?? []) as string[];
         alt={imagesAlt[index] ?? ""}
         class="hero-slide__image"
         loading={index === 0 ? "eager" : "lazy"}
+  decoding="async"
+        width="1280"
+        height="720"
+        sizes="(min-width: 1024px) 640px, (min-width: 640px) 80vw, 100vw"
       />
       <div class="hero-slide__overlay"></div>
     </div>
@@ -107,38 +111,211 @@ const imagesAlt = (Astro.props.alt ?? []) as string[];
 </style>
 
 <script>
-  const sliders = document.querySelectorAll('[data-slider]');
+  (() => {
+    if (typeof window === 'undefined') return;
 
-  sliders.forEach((slider) => {
-    const slides = slider.querySelectorAll('[data-slide]');
-    const indicators = slider.querySelectorAll('[data-slider-indicator]');
-    if (!slides.length) return;
-
-    let current = 0;
     /**
-     * @param {number} index
+     * @param {HTMLElement} slider
+     * @returns {() => void | undefined}
      */
-    const activateSlide = (index) => {
-      slides.forEach((slide, slideIndex) => {
-        slide.classList.toggle('is-active', slideIndex === index);
-      });
-      indicators.forEach((indicator, indicatorIndex) => {
-        indicator.classList.toggle('is-active', indicatorIndex === index);
-      });
-    };
+    const setupSlider = (slider) => {
+      const slides = slider.querySelectorAll('[data-slide]');
+      const indicators = slider.querySelectorAll('[data-slider-indicator]');
+      if (!slides.length) return undefined;
 
-    indicators.forEach((indicator, index) => {
-      indicator.addEventListener('click', () => {
+      let current = 0;
+  /** @type {ReturnType<typeof setInterval> | undefined} */
+  let autoplayId;
+
+      /**
+       * @param {number} index
+       */
+      const activateSlide = (index) => {
+        slides.forEach((slide, slideIndex) => {
+          slide.classList.toggle('is-active', slideIndex === index);
+        });
+        indicators.forEach((indicator, indicatorIndex) => {
+          indicator.classList.toggle('is-active', indicatorIndex === index);
+        });
+      };
+
+      const goTo = (index) => {
         current = index;
         activateSlide(current);
+      };
+
+      const showNext = () => {
+        goTo((current + 1) % slides.length);
+      };
+
+      const stopAutoPlay = () => {
+        if (autoplayId) {
+          clearInterval(autoplayId);
+          autoplayId = undefined;
+        }
+      };
+
+      const startAutoPlay = () => {
+        if (slides.length <= 1 || autoplayId) return;
+        autoplayId = setInterval(showNext, 4500);
+      };
+
+  /** @type {Map<Element, () => void>} */
+  const indicatorHandlers = new Map();
+      indicators.forEach((indicator, index) => {
+        const handler = () => {
+          goTo(index);
+          stopAutoPlay();
+          startAutoPlay();
+        };
+        indicator.addEventListener('click', handler);
+        indicatorHandlers.set(indicator, handler);
       });
-    });
 
-    activateSlide(current);
+      const handleVisibility = () => {
+        if (document.visibilityState === 'hidden') {
+          stopAutoPlay();
+        } else {
+          startAutoPlay();
+        }
+      };
 
-    setInterval(() => {
-      current = (current + 1) % slides.length;
+      const reducedMotionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+      /**
+       * @param {MediaQueryList | MediaQueryListEvent} source
+       */
+      const handleMotionPreference = (source) => {
+        const prefersReduced = typeof source.matches === 'boolean' ? source.matches : false;
+        if (prefersReduced) {
+          stopAutoPlay();
+        } else {
+          startAutoPlay();
+        }
+      };
+
+      slider.addEventListener('mouseenter', stopAutoPlay);
+      slider.addEventListener('mouseleave', startAutoPlay);
+      document.addEventListener('visibilitychange', handleVisibility);
+      if (typeof reducedMotionQuery.addEventListener === 'function') {
+        reducedMotionQuery.addEventListener('change', handleMotionPreference);
+      } else if (typeof reducedMotionQuery.addListener === 'function') {
+        reducedMotionQuery.addListener(handleMotionPreference);
+      }
+
       activateSlide(current);
-    }, 4500);
-  });
+      handleMotionPreference(reducedMotionQuery);
+
+      return () => {
+        stopAutoPlay();
+        slider.removeEventListener('mouseenter', stopAutoPlay);
+        slider.removeEventListener('mouseleave', startAutoPlay);
+        document.removeEventListener('visibilitychange', handleVisibility);
+        if (typeof reducedMotionQuery.removeEventListener === 'function') {
+          reducedMotionQuery.removeEventListener('change', handleMotionPreference);
+        } else if (typeof reducedMotionQuery.removeListener === 'function') {
+          reducedMotionQuery.removeListener(handleMotionPreference);
+        }
+        indicatorHandlers.forEach((handler, indicator) => {
+          indicator.removeEventListener('click', handler);
+        });
+        indicatorHandlers.clear();
+      };
+    };
+
+    const init = () => {
+      const sliders = document.querySelectorAll('[data-slider]');
+      if (!sliders.length) return;
+
+      /** @type {WeakMap<Element, () => void>} */
+      const cleanupMap = new WeakMap();
+      let observer;
+
+      /**
+       * @param {Element} slider
+       */
+      const mountSlider = (slider) => {
+        if (cleanupMap.has(slider)) return;
+        const cleanup = setupSlider(slider);
+        if (typeof cleanup === 'function') {
+          cleanupMap.set(slider, cleanup);
+        }
+      };
+
+      /**
+       * @param {Element} slider
+       */
+      const unmountSlider = (slider) => {
+        const cleanup = cleanupMap.get(slider);
+        if (cleanup) {
+          cleanup();
+          cleanupMap.delete(slider);
+        }
+      };
+
+      const enableInteractive = () => {
+        if ('IntersectionObserver' in window) {
+          if (observer) return;
+          observer = new IntersectionObserver(
+            (entries) => {
+              entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                  mountSlider(entry.target);
+                } else {
+                  unmountSlider(entry.target);
+                }
+              });
+            },
+            { threshold: 0.3 }
+          );
+
+          sliders.forEach((slider) => observer.observe(slider));
+        } else {
+          sliders.forEach(mountSlider);
+        }
+      };
+
+      const disableInteractive = () => {
+        if (observer) {
+          observer.disconnect();
+          observer = undefined;
+        }
+        sliders.forEach(unmountSlider);
+      };
+
+      const desktopQuery = window.matchMedia('(min-width: 769px)');
+      /**
+       * @param {boolean} matches
+       */
+      const handleViewport = (matches) => {
+        if (matches) {
+          enableInteractive();
+        } else {
+          disableInteractive();
+        }
+      };
+
+      handleViewport(desktopQuery.matches);
+
+      const onViewportChange = (event) => handleViewport(event.matches);
+      if (typeof desktopQuery.addEventListener === 'function') {
+        desktopQuery.addEventListener('change', onViewportChange);
+      } else if (typeof desktopQuery.addListener === 'function') {
+        desktopQuery.addListener(onViewportChange);
+      }
+    };
+
+    const start = () => {
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init, { once: true });
+      } else {
+        init();
+      }
+    };
+
+    if ('requestIdleCallback' in window) {
+      window.requestIdleCallback(start, { timeout: 500 });
+    } else {
+      setTimeout(start, 200);
+    }
+  })();
 </script>

@@ -320,6 +320,10 @@ body.menu-open {
 }
 
 @media (max-width: 768px) {
+	body {
+		background-attachment: scroll;
+	}
+
 	.section-wrapper {
 		padding: 2.5rem 1.25rem;
 	}

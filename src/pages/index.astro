@@ -35,6 +35,7 @@ const benefits = [
 	<Fragment slot="head">
 		<meta name="description" content={pageMeta.description} />
 		<meta property="og:url" content={pageMeta.url} />
+		<link rel="preload" as="image" href={imagesSrc[0]} />
 	</Fragment>
 	<main class="space-y-24 pb-20">
 		<section class="section-wrapper hero-pattern">
