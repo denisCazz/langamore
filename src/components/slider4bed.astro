@@ -35,6 +35,7 @@ const images = (Astro.props.images ?? []) as string[];
   background: rgba(0, 0, 0, 0.85);
   aspect-ratio: 4 / 3;
   width: 100%;
+  touch-action: pan-y;
 }
 
 .room-slide {
@@ -181,10 +182,89 @@ const images = (Astro.props.images ?? []) as string[];
         }
       };
 
+      const swipeThreshold = 45;
+      let activePointerId;
+      let pointerStartX = 0;
+      let pointerStartY = 0;
+      let pointerLastX = 0;
+      let pointerLastY = 0;
+      let isPointerDown = false;
+
+      const releasePointer = (event) => {
+        if (typeof activePointerId !== 'number') return;
+        if (typeof slider.releasePointerCapture === 'function') {
+          try {
+            slider.releasePointerCapture(activePointerId);
+          } catch (error) {
+            // Ignora eventuali errori sui browser che non supportano pointer capture.
+          }
+        }
+        activePointerId = undefined;
+        isPointerDown = false;
+      };
+
+      const handlePointerDown = (event) => {
+        if (!event.isPrimary) return;
+        if (event.pointerType === 'mouse' && event.button !== 0) return;
+        isPointerDown = true;
+        activePointerId = event.pointerId;
+        pointerStartX = event.clientX;
+        pointerStartY = event.clientY;
+        pointerLastX = event.clientX;
+        pointerLastY = event.clientY;
+        if (typeof slider.setPointerCapture === 'function') {
+          try {
+            slider.setPointerCapture(activePointerId);
+          } catch (error) {
+            // Ignora eventuali errori sui browser che non supportano pointer capture.
+          }
+        }
+        stopAutoPlay();
+      };
+
+      const handlePointerMove = (event) => {
+        if (!isPointerDown || event.pointerId !== activePointerId) return;
+        pointerLastX = event.clientX;
+        pointerLastY = event.clientY;
+      };
+
+      const handlePointerEnd = (event) => {
+        if (!isPointerDown || event.pointerId !== activePointerId) return;
+        pointerLastX = event.clientX;
+        pointerLastY = event.clientY;
+        const deltaX = pointerLastX - pointerStartX;
+        const deltaY = pointerLastY - pointerStartY;
+        const isHorizontalGesture = Math.abs(deltaX) > Math.abs(deltaY);
+        if (isHorizontalGesture && Math.abs(deltaX) > swipeThreshold) {
+          if (deltaX < 0) {
+            showNext();
+          } else {
+            showPrev();
+          }
+        }
+        releasePointer(event);
+        startAutoPlay();
+      };
+
+      const handlePointerCancel = (event) => {
+        if (!isPointerDown || event.pointerId !== activePointerId) return;
+        releasePointer(event);
+        startAutoPlay();
+      };
+
+      const preventNativeDrag = (event) => {
+        event.preventDefault();
+      };
+
       prevBtn.addEventListener('click', handlePrev);
       nextBtn.addEventListener('click', handleNext);
       slider.addEventListener('mouseenter', stopAutoPlay);
       slider.addEventListener('mouseleave', startAutoPlay);
+      slider.addEventListener('pointerdown', handlePointerDown);
+      slider.addEventListener('pointermove', handlePointerMove);
+      slider.addEventListener('pointerup', handlePointerEnd);
+      slider.addEventListener('pointercancel', handlePointerCancel);
+      slider.addEventListener('dragstart', preventNativeDrag);
       document.addEventListener('visibilitychange', handleVisibility);
       if (typeof reducedMotionQuery.addEventListener === 'function') {
         reducedMotionQuery.addEventListener('change', handleMotionPreference);
@@ -201,6 +281,11 @@ const images = (Astro.props.images ?? []) as string[];
         nextBtn.removeEventListener('click', handleNext);
         slider.removeEventListener('mouseenter', stopAutoPlay);
         slider.removeEventListener('mouseleave', startAutoPlay);
+        slider.removeEventListener('pointerdown', handlePointerDown);
+        slider.removeEventListener('pointermove', handlePointerMove);
+        slider.removeEventListener('pointerup', handlePointerEnd);
+        slider.removeEventListener('pointercancel', handlePointerCancel);
+        slider.removeEventListener('dragstart', preventNativeDrag);
         document.removeEventListener('visibilitychange', handleVisibility);
         if (typeof reducedMotionQuery.removeEventListener === 'function') {
           reducedMotionQuery.removeEventListener('change', handleMotionPreference);
@@ -270,26 +355,13 @@ const images = (Astro.props.images ?? []) as string[];
         sliders.forEach(unmountSlider);
       };
 
-      const desktopQuery = window.matchMedia('(min-width: 769px)');
-      /**
-       * @param {boolean} matches
-       */
-      const handleViewport = (matches) => {
-        if (matches) {
-          enableInteractive();
-        } else {
-          disableInteractive();
-        }
+      enableInteractive();
+
+      const handlePageHide = () => {
+        disableInteractive();
       };
 
-      handleViewport(desktopQuery.matches);
-
-      const onViewportChange = (event) => handleViewport(event.matches);
-      if (typeof desktopQuery.addEventListener === 'function') {
-        desktopQuery.addEventListener('change', onViewportChange);
-      } else if (typeof desktopQuery.addListener === 'function') {
-        desktopQuery.addListener(onViewportChange);
-      }
+      window.addEventListener('pagehide', handlePageHide, { once: true });
     };
 
     const start = () => {
