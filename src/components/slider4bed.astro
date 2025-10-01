@@ -1,46 +1,125 @@
 ---
 const { images } = Astro.props;
-import { Image } from "astro:assets";
 
 ---
-<div class="relative w-full max-w-3xl mx-auto">
-  <div class="overflow-hidden relative h-64 md:h-96 lg:h-[30rem]">
-    <div id="slider" class="flex transition-transform duration-500 ease-in-out">
-      {images.map((image, index) => (
-        <Image src={image} alt={`Slide ${index + 1}`} width={200} height={200} class="w-full flex-shrink-0 h-64 md:h-96 lg:h-[30rem] object-scale-down" />
-      ))}
-    </div>
+
+<div class="room-slider" data-room-slider>
+  {images.map((image, index) => (
+    <figure class={`room-slide${index === 0 ? " is-active" : ""}`} data-room-slide>
+      <img src={image} alt={`Dettaglio camera ${index + 1}`} loading={index === 0 ? "eager" : "lazy"} />
+    </figure>
+  ))}
+  <div class="room-slider__controls">
+    <button type="button" class="room-slider__btn" data-room-prev aria-label="Immagine precedente">
+      <span>&larr;</span>
+    </button>
+    <button type="button" class="room-slider__btn" data-room-next aria-label="Immagine successiva">
+      <span>&rarr;</span>
+    </button>
   </div>
-  <button id="prev" class="absolute top-1/2 left-0 transform -translate-y-1/2 bg-gray-800 text-white p-2">Prev</button>
-  <button id="next" class="absolute top-1/2 right-0 transform -translate-y-1/2 bg-gray-800 text-white p-2">Next</button>
 </div>
 
+<style>
+.room-slider {
+  position: relative;
+  overflow: hidden;
+  border-radius: 24px;
+  background: rgba(0, 0, 0, 0.85);
+  aspect-ratio: 4 / 3;
+  width: 100%;
+}
+
+.room-slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 0.7s ease, transform 0.7s ease;
+  transform: scale(1.05);
+}
+
+.room-slide.is-active {
+  opacity: 1;
+  transform: scale(1);
+  z-index: 1;
+}
+
+.room-slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 24px;
+}
+
+.room-slider__controls {
+  position: absolute;
+  bottom: 18px;
+  right: 18px;
+  display: flex;
+  gap: 0.75rem;
+}
+
+.room-slider__btn {
+  width: 42px;
+  height: 42px;
+  display: grid;
+  place-items: center;
+  background: rgba(255, 255, 255, 0.85);
+  border: none;
+  border-radius: 999px;
+  color: var(--color-primary-dark);
+  font-weight: 600;
+  font-size: 1.15rem;
+  cursor: pointer;
+  box-shadow: 0 14px 30px rgba(48, 34, 21, 0.22);
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.room-slider__btn:hover {
+  transform: translateY(-2px);
+  background: #fff;
+}
+
+@media (max-width: 768px) {
+  .room-slider {
+    border-radius: 18px;
+  }
+
+  .room-slide img {
+    border-radius: 18px;
+  }
+}
+</style>
+
 <script>
-document.addEventListener('DOMContentLoaded', () => {
-  let currentIndex = 0;
-  const images = document.querySelectorAll('#slider img');
-  const totalImages = images.length;
-  const slider = document.getElementById('slider');
+  const roomSliders = document.querySelectorAll('[data-room-slider]');
 
-  const updateSliderWidth = () => {
-    const sliderWidth = slider.clientWidth;
-    slider.style.transform = `translateX(-${currentIndex * sliderWidth}px)`;
-    images.forEach(image => {
-      image.style.width = `${sliderWidth}px`;
-    });
-  };
+  roomSliders.forEach((slider) => {
+    const slides = slider.querySelectorAll('[data-room-slide]');
+    const prevBtn = slider.querySelector('[data-room-prev]');
+    const nextBtn = slider.querySelector('[data-room-next]');
 
-  window.addEventListener('resize', updateSliderWidth);
-  updateSliderWidth();
+    if (!slides.length || !prevBtn || !nextBtn) return;
 
-  document.getElementById('prev').addEventListener('click', () => {
-    currentIndex = (currentIndex - 1 + totalImages) % totalImages;
-    slider.style.transform = `translateX(-${currentIndex * slider.clientWidth}px)`;
+    let index = 0;
+    const activate = (value) => {
+      slides.forEach((slide, slideIndex) => {
+        slide.classList.toggle('is-active', slideIndex === value);
+      });
+    };
+
+    const showNext = () => {
+      index = (index + 1) % slides.length;
+      activate(index);
+    };
+
+    const showPrev = () => {
+      index = (index - 1 + slides.length) % slides.length;
+      activate(index);
+    };
+
+    prevBtn.addEventListener('click', showPrev);
+    nextBtn.addEventListener('click', showNext);
+
+    setInterval(showNext, 5000);
   });
-
-  document.getElementById('next').addEventListener('click', () => {
-    currentIndex = (currentIndex + 1) % totalImages;
-    slider.style.transform = `translateX(-${currentIndex * slider.clientWidth}px)`;
-  });
-});
 </script>

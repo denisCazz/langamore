@@ -5,63 +5,142 @@ url: "/";
 
 import BaseLayout from "../layouts/baseLayout.astro";
 import Slider from "../components/slider.astro";
-
 import IndexPresentation from "../components/indexPresentation.astro";
 
-//define the images for the slider
-var imagesSrc = [
-	"/images/logo3.jpg",
+const pageMeta = {
+	title: "Home | LangAmore Guest House",
+	description:
+		"Un indirizzo intimo e raffinato a pochi minuti da Alba e Bra per vivere le Langhe tra comfort e servizi su misura.",
+	url: "https://langamorepollenzo.it/",
+};
+
+const imagesSrc = [
 	"/images/pollenzo_view.jpeg",
-	"/images/langhe/relax.jpeg"
+	"/images/langhe/relax.jpeg",
+	"/images/Locazione_turistica/divano.jpg"
 ];
 
-var imagesAlt = [
-	"Camera da letto",
-	"Ingresso",
-	"Camera da letto"
+const imagesAlt = [
+	"Vista su Pollenzo",
+	"Relax nelle Langhe",
+	"Gli interni di LangAmore"
+];
+
+const benefits = [
+	"Camere con vasca idromassaggio privata",
+	"Colline UNESCO a due passi",
+	"Esperienze su misura tra Langhe e Roero"
 ];
 
 
 ---
 
-<BaseLayout title="Home | LangAmore Guest House">
-	<!-- Main content -->
-	<main class="max-w-7xl mx-auto px-4 py-6 flex flex-col items-center">
-		<!-- Title -->
-		<h1 class="text-4xl font-bold text-gray-800 my-6 font-roboto text-center">
-			Guest House e locazione Turistica <br />
-			
-			LangAmore
-		</h1>
+<BaseLayout title={pageMeta.title}>
+	<Fragment slot="head">
+		<meta name="description" content={pageMeta.description} />
+		<meta property="og:url" content={pageMeta.url} />
+	</Fragment>
+	<main class="space-y-24 pb-20">
+		<section class="section-wrapper hero-pattern">
+			<div class="grid gap-12 lg:grid-cols-[minmax(0,1fr),minmax(0,1.1fr)] items-center">
+				<div class="space-y-8">
+					<span class="chip">Guest house a Pollenzo</span>
+					<h1 class="text-4xl md:text-5xl font-semibold leading-tight text-[var(--color-primary-dark)]">
+						LangAmore, il tuo rifugio di charme tra le colline delle Langhe
+					</h1>
+					<p class="tagline">{pageMeta.description}</p>
+					<div class="flex flex-wrap gap-3">
+						<a
+							href="https://www.booking.com/hotel/it/langamore-guest-house.it.html"
+							class="btn btn-primary"
+							target="_blank"
+							rel="noopener"
+							title="Prenota LangAmore"
+						>
+							Prenota ora
+						</a>
+						<a href="/bedroom" class="btn btn-outline" title="Scopri le camere">Esplora le camere</a>
+					</div>
+					<ul class="space-y-3">
+						{benefits.map((benefit, index) => (
+							<li class="list-step" data-index={`0${index + 1}`}>{benefit}</li>
+						))}
+					</ul>
+				</div>
 
-
-		<!-- Image Slider -->
-		<Slider src = {imagesSrc} alt = {imagesAlt}/>
+				<div class="relative">
+					<div class="gradient-border">
+						<div class="surface-card surface-card--accent">
+							<Slider src={imagesSrc} alt={imagesAlt} />
+						</div>
+					</div>
+					<div class="absolute -bottom-10 -left-6 hidden sm:flex gap-3 px-6 py-4 bg-white/85 backdrop-blur-lg rounded-2xl shadow-[0_18px_38px_rgba(48,34,21,0.18)]">
+						<div class="flex flex-col">
+							<span class="text-xs uppercase tracking-[0.28em] text-[var(--color-muted)]">Langhe</span>
+							<span class="text-lg font-semibold text-[var(--color-primary-dark)]">Wine & Relax</span>
+						</div>
+						<span class="chip">Weekend romantici</span>
+					</div>
+				</div>
+			</div>
+		</section>
 
 		<IndexPresentation />
 
-		<!-- Call to Action -->
-		<a
-			href="/services"
-			class="bg-blue-300 text-black hover:bg-blue-800 hover:text-white font-bold py-3 px-6 rounded-full shadow-lg transform transition-transform duration-300 ease-in-out hover:scale-105 inline-block -mt-10 mb-8"
-		>
-			Scopri i Nostri Servizi
-		</a>
+		<section class="section-wrapper space-y-10">
+			<header class="section-header">
+				<span class="chip">Servizi selezionati</span>
+				<h2 class="text-3xl md:text-4xl font-semibold">Esperienze pensate per te</h2>
+				<p class="tagline mx-auto">
+					Dalle degustazioni private ai tour esclusivi, LangAmore apre le porte delle Langhe più autentiche.
+				</p>
+			</header>
 
+			<div class="grid-auto-fit">
+				<div class="floating-card space-y-3">
+					<span class="chip">Benessere</span>
+					<h3 class="text-2xl font-semibold">Suite Idromassaggio</h3>
+					<p class="text-[var(--color-muted)] leading-7">
+						La nostra camera idro offre vasca privata, cromoterapia e un'ambientazione accogliente per un relax totale.
+					</p>
+					<a href="/bedroom/idro" class="btn btn-outline w-max" title="Camera idromassaggio">Scopri di più</a>
+				</div>
+				<div class="floating-card space-y-3">
+					<span class="chip">Esperienze</span>
+					<h3 class="text-2xl font-semibold">Tour nelle Langhe</h3>
+					<p class="text-[var(--color-muted)] leading-7">
+						Organizziamo degustazioni guidate, tour in Vespa e visite alle cantine storiche per farti vivere il territorio.
+					</p>
+					<a href="/services" class="btn btn-outline w-max" title="Servizi LangAmore">Tutti i servizi</a>
+				</div>
+				<div class="floating-card space-y-3">
+					<span class="chip">Comfort</span>
+					<h3 class="text-2xl font-semibold">Parcheggio privato</h3>
+					<p class="text-[var(--color-muted)] leading-7">
+						Accesso diretto con ascensore, parcheggio interno e supporto per arrivi serali su richiesta.
+					</p>
+					<a href="/contact" class="btn btn-outline w-max" title="Contatta LangAmore">Contattaci</a>
+				</div>
+			</div>
+		</section>
+
+		<section class="section-wrapper text-center space-y-6">
+			<h2 class="text-3xl md:text-4xl font-semibold text-[var(--color-primary-dark)]">Pronto a vivere LangAmore?</h2>
+			<p class="tagline mx-auto">
+				Blocca ora le migliori date disponibili e lasciati accompagnare nel tuo viaggio nelle Langhe.
+			</p>
+			<div class="flex flex-wrap justify-center gap-3">
+				<a
+					href="https://www.booking.com/hotel/it/langamore-guest-house.it.html"
+					class="btn btn-primary"
+					target="_blank"
+					rel="noopener"
+					title="Prenota LangAmore"
+				>
+					Prenota ora
+				</a>
+				<a href="/contact" class="btn btn-outline" title="Scrivi a LangAmore">Scrivici</a>
+			</div>
+		</section>
 	</main>
-
-	<style>
-		.booking-button {
-			display: inline-block;
-		}
-
-		.booking-button img {
-			width: 150px; /* Imposta la larghezza dell'immagine */
-			height: auto; /* L'altezza si adatta automaticamente */
-			border: none; /* Rimuovi il bordo dell'immagine */
-			align-items: center; /* Allinea l'immagine al centro */
-			vertical-align: middle; /* Allinea l'immagine verticalmente */
-			margin-left: 30px; /* Aggiungi un margine a sinistra */
-		}
-	</style>
 </BaseLayout>

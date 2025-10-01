@@ -6,91 +6,95 @@ url: "https://www.langamorepollenzo.it/tourist-location";
 import BaseLayout from "../layouts/baseLayout.astro";
 import Slider4Bed from "../components/slider4bed.astro";
 
-//define the images for the slider
-var imagesSrc = [
-	"/images/Locazione_turistica/letto.jpg",
-	"/images/Locazione_turistica/divano.jpg",
-	"/images/Locazione_turistica/cucina2.jpg",
-	"/images/Locazione_turistica/bagno.jpg",
-	"/images/Locazione_turistica/cucina.jpg",
-	"/images/Locazione_turistica/bagno4.jpeg",
-	"/images/Locazione_turistica/bagno5.jpeg"
+const imagesSrc = [
+    "/images/Locazione_turistica/letto.jpg",
+    "/images/Locazione_turistica/divano.jpg",
+    "/images/Locazione_turistica/cucina2.jpg",
+    "/images/Locazione_turistica/bagno.jpg",
+    "/images/Locazione_turistica/cucina.jpg",
+    "/images/Locazione_turistica/bagno4.jpeg",
+    "/images/Locazione_turistica/bagno5.jpeg"
 ];
+
+const features = [
+    "Camera matrimoniale climatizzata con cassaforte",
+    "Zona living con divano letto e luce naturale",
+    "Cucina completa con elettrodomestici e welcome breakfast",
+    "Bagno con doccia, set cortesia e asciugacapelli",
+    "Aria condizionata in tutti gli ambienti",
+];
+
 ---
 
 <BaseLayout title="Locazione Turistica | LangAmore">
-    <main class="container mx-auto px-10 mt-20">
-        <h1 class="text-3xl font-bold text-center">
-            La Locazione Turistica di LangAmore
-        </h1>
-        <p class="text-lg mt-4 text-gray-700 text-center leading-9 mb-10">
-            Scopri la nostra locazione turistica a LangAmore, perfetta per un soggiorno indimenticabile. Situata vicino alle Langhe e al Roero, la nostra struttura offre camere spaziose e arredate con gusto, dotate di tutti i comfort.
-            <br />
-            L'appartamento è ideale per immergersi nella natura e gustare i piatti della tradizione piemontese. 
-            <br />
-            Grazie alla posizione strategica di LangAmore, potrai esplorare le Langhe e il Roero, patrimonio dell'Unesco. Visita cantine prestigiose, degusta vini pregiati e scopri borghi medievali.
-            <br />
-            Vieni a LangAmore e lasciati affascinare dalla bellezza del Piemonte. Ti aspettiamo per un soggiorno indimenticabile.
-        </p>
+    <main class="space-y-20 pb-20">
+        <section class="section-wrapper space-y-8 text-center">
+            <header class="section-header">
+                <span class="chip">Locazione Turistica</span>
+                <h1 class="text-4xl font-semibold text-[var(--color-primary-dark)]">La tua casa nel cuore delle Langhe</h1>
+                <p class="tagline mx-auto">
+                    Un appartamento elegante e luminoso, ideale per famiglie, coppie e viaggiatori in cerca di comfort totale.
+                </p>
+            </header>
 
-        <section class="mt-8">
-            <h2 class="text-2xl font-bold text-center mb-6">
-                Maggiori Informazioni sulla Locazione Turistica
-            </h2>
-            
-            <main class="container mx-auto mb-12 mt-10">        
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    <div>
-                        <Slider4Bed images={imagesSrc} />
-                    </div>
-                    <div class="content-section">
-                        <p>
-                            Caratteristiche principali dell'appartamento:
-                            <li class="font-bold">Camera da letto: Arredata con gusto e climatizzata, offre la possibilità di aggiungere un letto supplementare. Presente anche la cassaforte.</li>
-                            <li class="font-bold">Zona living: Spaziosa e luminosa, comprende un divano letto per ospiti aggiuntivi.</li>
-                            <li class="font-bold">Cucina: Completamente attrezzata con fornelli a induzione, frigo e forno a microonde, oltre che macchinetta del caffè e tutto il necessario per preparare una colazione leggera a base di tè, caffè o cappuccino, fette biscottate e marmellata.</li>
-                            <li class="font-bold">Bagno: Dotato di doccia e tutti i servizi essenziali, inclusi asciugamani e asciugacapelli.</li>
-                            <br />
-                            L'aria condizionata è presente in tutto l'appartamento per garantire il massimo comfort. Perfetto per coppie, famiglie o piccoli gruppi, questo appartamento ti farà sentire come a casa mentre esplori le meraviglie di LangAmore.
-                        </p>
-                    </div>
-                </div>
-            </main>
+            <p class="tagline mx-auto max-w-3xl">
+                La nostra locazione turistica offre spazi ampi, arredamento contemporaneo e servizi pensati per chi desidera immergersi nel territorio tra Langhe e Roero.
+            </p>
+        </section>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-6">
-                <div class="bg-gray-100 p-6 rounded-lg shadow-lg">
-                    <h3 class="text-xl font-bold">Camere Confortevoli</h3>
-                    <p class="mt-4 text-gray-700">
-                        Le nostre camere sono spaziose e luminose, arredate con
-                        gusto e dotate di tutti i comfort per garantire un
-                        soggiorno piacevole e rilassante. Ogni camera dispone di
-                        bagno privato, aria condizionata, TV a schermo piatto,
-                        connessione Wi-Fi gratuita e molto altro.
-                    </p>
-                </div>
-
-                <div class="bg-gray-100 p-6 rounded-lg shadow-lg">
-                    <h3 class="text-xl font-bold">Servizi Esclusivi</h3>
-                    <p class="mt-4 text-gray-700">
-                        Presso la nostra locazione turistica potrai usufruire di
-                        una serie di servizi esclusivi per rendere il tuo
-                        soggiorno ancora più piacevole e confortevole (puoi consultarli <a href="/services" class="text-blue-500 hover:text-blue-700">qui</a>). 
-                        Inoltre, il nostro staff sarà a tua disposizione per soddisfare ogni tua esigenza e rendere la tua vacanza indimenticabile.
+        <section class="section-wrapper grid gap-12 lg:grid-cols-[minmax(0,1.15fr),minmax(0,0.85fr)] items-start">
+            <div class="gradient-border">
+                <div class="surface-card surface-card--accent">
+                    <Slider4Bed images={imagesSrc} />
                 </div>
             </div>
-
-            <section class="mt-8 text-center mb-20">
-                <h2 class="text-2xl font-bold">Prenota il Tuo Soggiorno</h2>
-                <p class="text-lg mt-4 text-gray-700">
-                    Scegli la camera che più si adatta alle tue esigenze e
-                    prenota il tuo soggiorno a LangAmore. Ti aspettiamo!
+            <div class="floating-card space-y-6">
+                <h2 class="text-3xl font-semibold text-[var(--color-primary-dark)]">Tutto ciò che serve per sentirsi a casa</h2>
+                <p class="text-[var(--color-muted)] leading-7">
+                    Un appartamento curato in ogni dettaglio, con ambienti separati e luminosi. Perfetto per vivere le Langhe con libertà, senza rinunciare a comfort e privacy.
                 </p>
-                <div
-                    class="bg-green-500 hover:bg-green-700 text-white font-bold py-3 px-6 rounded-full shadow-lg transform transition-transform duration-300 ease-in-out hover:scale-105 mt-6 inline-block"
+                <ul class="space-y-3">
+                    {features.map((feature, index) => (
+                        <li class="list-step" data-index={`0${index + 1}`}>{feature}</li>
+                    ))}
+                </ul>
+            </div>
+        </section>
+
+        <section class="section-wrapper grid-auto-fit">
+            <div class="floating-card space-y-3">
+                <span class="chip">Comfort</span>
+                <h3 class="text-2xl font-semibold text-[var(--color-primary-dark)]">Camere confortevoli</h3>
+                <p class="text-[var(--color-muted)] leading-7">
+                    Spazi ampi, materiali naturali e dettagli wellness per un riposo rigenerante. Wi-Fi dedicato, smart TV e climatizzazione indipendente ti accompagnano durante il soggiorno.
+                </p>
+            </div>
+            <div class="floating-card space-y-3">
+                <span class="chip">Plus</span>
+                <h3 class="text-2xl font-semibold text-[var(--color-primary-dark)]">Servizi esclusivi</h3>
+                <p class="text-[var(--color-muted)] leading-7">
+                    Convenzioni con partner selezionati, parcheggio interno e ascensore dedicato. Scopri tutte le possibilità <a href="/services" class="underline hover:text-[var(--color-primary)]">qui</a> e lasciati ispirare.
+                </p>
+            </div>
+        </section>
+
+        <section class="section-wrapper text-center space-y-6">
+            <h2 class="text-3xl font-semibold text-[var(--color-primary-dark)]">Prenota la tua permanenza</h2>
+            <p class="tagline mx-auto">
+                Verifica la disponibilità e scegli le date ideali per vivere un'esperienza autentica a LangAmore.
+            </p>
+            <div class="flex flex-wrap justify-center gap-3">
+                <a
+                    href="https://www.booking.com/hotel/it/langamore-guest-house.it.html"
+                    class="btn btn-primary"
+                    target="_blank"
+                    rel="noopener"
+                    title="Prenota LangAmore"
                 >
-                    <a href="/contact" class="">Prenota Ora</a>
-                </div>
-            </section>
+                    Prenota ora
+                </a>
+                <a href="/contact" class="btn btn-outline" title="Contattaci">Chiedi informazioni</a>
+            </div>
         </section>
     </main>
 </BaseLayout>

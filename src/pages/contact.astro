@@ -3,82 +3,63 @@ title: "Contatti"
 summary: "Una pagina di contatti per LangAmore, una guest house in Piemonte."
 url: "https://langamorepollenzo/contact"
 
-import BaseLayout from "../layouts/baseLayout.astro"
+import BaseLayout from "../layouts/baseLayout.astro";
+
+const contactDetails = [
+	{ label: "Telefono", value: "Elisa: +39 333 164 5850", href: "tel:+393331645850" },
+	{ label: "Email", value: "c.elisacravero@yahoo.it", href: "mailto:c.elisacravero@yahoo.it" },
+];
+
 ---
 
 <BaseLayout title="Contatti | LangAmore">
-    <style>
-        .contact-container {
-            background-color: #f9f9f9;
-            padding: 2rem;
-            border-radius: 0.5rem;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            width: 100%;
-            max-width: 800px;
-        }
-        .contact-info {
-            text-align: center;
-        }
-        .contact-info h2 {
-            color: #3490dc;
-        }
-        .contact-info p {
-            font-size: 1.1rem;
-            color: #333;
-        }
-        .contact-info a {
-            color: #3490dc;
-            text-decoration: none;
-            font-weight: 600;
-        }
-        .contact-info a:hover {
-            text-decoration: underline;
-        }
-        .map-container {
-            margin-top: 2rem;
-            border-radius: 0.5rem;
-            overflow: hidden;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-        @media (min-width: 768px) {
-            .contact-container {
-                padding: 3rem;
-            }
-        }
-        @media (min-width: 1024px) {
-            .contact-container {
-                padding: 4rem;
-            }
-        }
-    </style>
+	<main class="space-y-16 pb-20">
+		<section class="section-wrapper space-y-10">
+			<header class="section-header">
+				<span class="chip">Contattaci</span>
+				<h1 class="text-4xl font-semibold text-[var(--color-primary-dark)]">Siamo qui per te</h1>
+				<p class="tagline mx-auto">
+					Chiamaci, scrivici o raggiungici direttamente a Pollenzo. Saremo felici di costruire insieme il tuo soggiorno su misura.
+				</p>
+			</header>
 
-    <main class="flex flex-col items-center px-4 py-6 sm:px-6 lg:px-8">
-        <div class="contact-container">
-            <h1 class="text-4xl font-bold mb-6 text-center text-primary">Contatti</h1>
+			<div class="floating-card space-y-8">
+				<div class="text-center space-y-3">
+					<h2 class="text-2xl font-semibold text-[var(--color-primary-dark)]">LangAmore Guest House</h2>
+					<p class="text-[var(--color-muted)] leading-7">
+						Via Regina Margherita 6 · 12042 Pollenzo (Bra)
+					</p>
+				</div>
 
-            <div class="contact-info m-10">
-                <h3 class="text-xl font-bold text-primary">LangAmore si trova in: </h3>
-                <p>Via Regina Margherita, 6</p>
-                <p>12042 Pollenzo (CN)</p>
-            </div>
+				<div class="grid gap-4 sm:grid-cols-2">
+					{contactDetails.map((detail) => (
+						<a href={detail.href} class="floating-card bg-white/85 hover:-translate-y-1 transition" title={detail.label}>
+							<p class="text-xs uppercase tracking-[0.3em] text-[var(--color-muted)]">{detail.label}</p>
+							<p class="mt-1 text-lg font-semibold text-[var(--color-primary-dark)]">{detail.value}</p>
+						</a>
+					))}
+				</div>
 
-            <div class="contact-info">
-                <p>Telefono: <a href="tel:+393331645850">Elisa: +39 333 164 5850</a></p>
-                <p>Invia un'email a LangAmore: 
-                    <a href="mailto:c.elisacravero@yahoo.it">
-                        c.elisacravero@yahoo.it
-                    </a>
-                </p>
-            </div>
+				<div class="chip">Arrivi serali su richiesta · Parcheggio interno disponibile</div>
+			</div>
+		</section>
 
-            <div class="map-container w-full h-64 sm:h-80 lg:h-96 mt-8">
-                <iframe 
-                    class="w-full h-full"
-                    src="https://www.google.com/maps/embed/v1/place?q=Via+Regina+Margherita,+6,+12042+Pollentia,+Bra+Province+of+Cuneo,+Italia&key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8" 
-                    allowfullscreen="" 
-                    loading="lazy">
-                </iframe>
-            </div>
-        </div>
-    </main>
+		<section class="section-wrapper space-y-6">
+			<h2 class="text-3xl font-semibold text-[var(--color-primary-dark)] text-center">Raggiungerci è semplicissimo</h2>
+			<p class="tagline mx-auto text-center">
+				A pochi minuti da Alba e Bra, LangAmore è il punto di riferimento ideale per esplorare le Langhe e il Roero.
+			</p>
+			<div class="gradient-border">
+				<div class="rounded-[22px] overflow-hidden h-[380px] sm:h-[480px]">
+					<iframe
+						class="w-full h-full"
+						src="https://www.google.com/maps/embed/v1/place?q=Via+Regina+Margherita,+6,+12042+Pollentia,+Bra+Province+of+Cuneo,+Italia&key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8"
+						allowfullscreen
+						loading="lazy"
+						title="LangAmore su Google Maps"
+					></iframe>
+				</div>
+			</div>
+		</section>
+	</main>
 </BaseLayout>

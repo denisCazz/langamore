@@ -2,64 +2,60 @@
 // Footer component
 ---
 
-<footer class="bg-gray-200 text-black py-8">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-        <!-- Social Media Links -->
-        <div>
-          <h2 class="text-lg font-bold mb-4">Seguici</h2>
-          <ul class="space-y-2">
-            <li>
-              <a href="https://www.facebook.com/profile.php?id=61560662845868" target="_blank" rel="noopener" title="facebook" class="hover:text-blue-500">
-                Facebook
-              </a>
-            </li>
-            <li>
-              <a href="https://twitter.com" title="twitter" target="_blank" rel="noopener" class="hover:text-blue-400">
-                Twitter
-              </a>
-            </li>
-            <li>
-              <a href="https://instagram.com" title="Instagram" target="_blank" rel="noopener" class="hover:text-pink-500">
-                Instagram
-              </a>
-            </li>
-          </ul>
+<footer class="relative mt-20">
+    <div class="absolute inset-0 bg-gradient-to-b from-white/60 via-white/80 to-[rgba(139,93,55,0.08)]"></div>
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+            <div class="floating-card">
+                <h2 class="text-lg font-semibold text-[var(--color-primary-dark)]">Seguici</h2>
+                <p class="tagline mt-3">Raccontiamo ogni giorno la vita di LangAmore tra vigneti, colline e accoglienza sincera.</p>
+                <div class="flex gap-3 mt-6">
+                    <a
+                        href="https://www.facebook.com/profile.php?id=61560662845868"
+                        target="_blank"
+                        rel="noopener"
+                        title="Facebook"
+                        class="btn btn-outline px-4"
+                    >Facebook</a>
+                    <a href="https://instagram.com" target="_blank" rel="noopener" title="Instagram" class="btn btn-outline px-4">Instagram</a>
+                </div>
+            </div>
+
+            <div class="floating-card">
+                <h2 class="text-lg font-semibold text-[var(--color-primary-dark)]">Check-in & Check-out</h2>
+                <ul class="mt-4 space-y-3 text-[var(--color-muted)]">
+                    <li class="chip bg-white/65">Check-in dalle 15:00</li>
+                    <li class="chip bg-white/65">Check-out entro le 10:30</li>
+                    <li class="chip bg-white/65">Arrivi serali su richiesta</li>
+                </ul>
+            </div>
+
+            <div class="floating-card">
+                <h2 class="text-lg font-semibold text-[var(--color-primary-dark)]">Dove Siamo</h2>
+                <p class="mt-4 text-[var(--color-muted)] leading-7">
+                    Via Regina Margherita 6<br />
+                    12042 Pollenzo (Bra) · Italia
+                </p>
+                <a
+                    href="https://www.google.com/maps/dir/44.8396831,7.7222154/Via+Regina+Margherita,+6,+12042+Pollenzo+CN/@44.7565694,7.6438081,11z/data=!3m1!4b1!4m9!4m8!1m1!4e1!1m5!1m1!1s0x12d2ac5e6b0bcef9:0x3b2a6856176ebdc2!2m2!1d7.8954435!2d44.6860955?entry=ttu"
+                    target="_blank"
+                    rel="noopener"
+                    class="btn btn-primary mt-6"
+                    title="Apri su Google Maps"
+                >Apri in Maps</a>
+            </div>
         </div>
-        <!-- Opening Hours -->
-        <div>
-          <h2 class="text-lg font-bold mb-4">Orari Check-in e Check-Out</h2>
-          <ul class="space-y-2">
-            <li>Check-in: dalle 15</li>
-            <li>Check-out: entro le 10.30</li>
-          </ul>
+
+        <div class="section-divider"></div>
+
+        <div class="text-center space-y-2 text-sm text-[var(--color-muted)]">
+            <p>&copy; 2025 LangAmore · Tutti i diritti riservati.</p>
+            <p>
+                Sito realizzato da
+                <a href="https://smeon.it" target="_blank" rel="noopener" class="hover:text-[var(--color-primary)]">SMEON</a>
+            </p>
+            <p class="text-xs tracking-wide uppercase">CIR Guest House: 004029-AFF-00015 · CIR Locazione Turistica: 00402900049</p>
         </div>
-        <!-- Location -->
-        <div>
-          <h2 class="text-lg font-bold mb-4">Posizione</h2>
-          <p>
-            Via Regina Margherita 6, <br>
-            12042 Bra, Italia
-          </p>
-          <a href="https://www.google.com/maps/dir/44.8396831,7.7222154/Via+Regina+Margherita,+6,+12042+Pollenzo+CN/@44.7565694,7.6438081,11z/data=!3m1!4b1!4m9!4m8!1m1!4e1!1m5!1m1!1s0x12d2ac5e6b0bcef9:0x3b2a6856176ebdc2!2m2!1d7.8954435!2d44.6860955?entry=ttu" 
-             target="_blank" rel="noopener" class="block mt-2 text-blue-500 hover:underline">
-            Visualizza su Google Maps
-          </a>
-        
-        </div>
-      </div>
-      <!-- Footer Bottom -->
-      <div class="mt-8 border-t border-gray-700 pt-4 text-center">
-        <p>&copy; 2024 LangAmore. Tutti i diritti riservati.</p>
-        <p>
-          Sito realizzato da <a href="https://smeon.it" target="_blank" rel="noopener" class="text-blue-500 hover:underline">SMEON</a>
-        </p>
-        <p class="text-xs mt-1">
-          CIR GUEST HOUSE: 004029-AFF-00015
-          <br/>
-          CIR LOCAZIONE TURISTICA: 00402900049
-        </p>
-      </div>
     </div>
-  </footer>
+</footer>
   

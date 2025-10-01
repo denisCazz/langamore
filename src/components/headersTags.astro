@@ -1,6 +1,5 @@
 ---
 //componente per la gestione dei tag head
-import { AstroFont } from "astro-font";
 ---
 
 <meta charset="utf-8" />
@@ -17,14 +16,19 @@ import { AstroFont } from "astro-font";
 <meta name="language" content="It" />
 <meta name="title" content="LangAmore" />
 <meta name="author" content="LangAmore" />
-<meta charset="UTF-8" />
+<meta name="theme-color" content="#e5ddc5" />
 <link
+    rel="preconnect"
+    href="https://fonts.googleapis.com"
+/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Source+Sans+3:wght@300;400;500;600;700&display=swap"
     rel="stylesheet"
-    href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
 />
 <link
     rel="stylesheet"
-    href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+    href="https://cdn.jsdelivr.net/npm/tailwindcss@3.4.4/dist/tailwind.min.css"
 />
 <!-- OG TAGS -->
 <meta property="og:type" content="website" />
@@ -66,18 +70,6 @@ import { AstroFont } from "astro-font";
 <!-- sitemap -->
 <link rel="sitemap" href="/sitemap-index.xml" />
 
-<AstroFont
-    config={[
-        {
-            src: [],
-            name: "PT SANS",
-            googleFontsURL: "https://fonts.googleapis.com/css2?famil:PT+Sans:ital,wght@0,400;0,700;1,400;1,700&displa:swap",
-            preload: true,
-            display: "swap",
-            selector: "body",
-            fallback: "sans-serif"
-        },
-    ]}
-/>
+
 
 <link rel="canonical" href="https://langamorepollenzo.it/">

@@ -4,243 +4,90 @@ summary: "A simple website for a bed and breakfast business.";
 url: "https://langamorepollenzo/services";
 
 import BaseLayout from "../layouts/baseLayout.astro";
+
+const services = [
+	{
+		title: "Campo da tennis privato",
+		description: "Prenota il nostro campo in terra rossa circondato dal verde per un match esclusivo.",
+		image: "/images/conventions/tennis2.jpeg",
+		accent: "Benessere attivo",
+	},
+	{
+		title: "Tour guidati di Pollenzo",
+		description: "Esplora il borgo reale e i suoi tesori UNESCO con guide dedicate.",
+		image: "/images/conventions/pollenzo.png",
+		accent: "Scoperta",
+	},
+	{
+		title: "Giri in Vespa",
+		description: "Vivi le Langhe in libertà con itinerari panoramici e soste enogastronomiche.",
+		image: "/images/conventions/vespa.png",
+		accent: "Avventura",
+	},
+	{
+		title: "Degustazioni private",
+		description: "Accesso a cantine selezionate e tasting guidati dai produttori locali.",
+		image: "/images/conventions/wine.png",
+		accent: "Sapori",
+	},
+	{
+		title: "Parcheggio interno & ascensore",
+		description: "Arriva in totale comodità: posti auto riservati e ascensore diretto alle camere.",
+		image: "/images/conventions/parcheggio.jpg",
+		accent: "Comfort",
+	},
+	{
+		title: "Ka' Momi Bar",
+		description: "A pochi passi da LangAmore, il luogo perfetto per un aperitivo o un caffè del mattino.",
+		image: "/images/conventions/bar.jpeg",
+		accent: "Lifestyle",
+	},
+];
+
 ---
 
 <BaseLayout title="Servizi | LangAmore">
-    <div class="container mx-auto p-4 text-center mb-20 mt-10">
-        <h1 class="text-3xl font-bold mb-4">I nostri servizi</h1>
-        <p class="text-lg text-gray-600 mb-4">
-            Offriamo una vasta gamma di convenzioni e servizi privati per rendere il tuo soggiorno
-            indimenticabile.
-        </p>
-        <br>
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4">
-            <div class="card-container">
-                <div class="card">
-                    <div class="card-front">
-                        <img
-                            src="/images/conventions/tennis2.jpeg"
-                            alt="Campo da tennis"
-                            class="logo object-cover"
-                        />
-                        <div class="card-content">
-                            <h3 class="card-title">Campo da tennis privato</h3>
-                            <p class="card-text">
-                                Goditi il nostro campo da tennis privato durante il tuo soggiorno.
-                            </p>
-                        </div>
-                    </div>
-                    <div class="card-back">
-                        <p>
-                            Prenota il nostro campo da tennis di terra rossa per goderti una partita immersa nel verde.
-                        </p>
-                    </div>
-                </div>
-            </div>
-            <div class="card-container">
-                <div class="card">
-                    <div class="card-front">
-                        <img
-                            src="/images/conventions/pollenzo.png"
-                            alt="Tour privati"
-                            class="logo"
-                        />
-                        <div class="card-content">
-                            <h3 class="card-title">Tour privati a Pollenzo</h3>
-                            <p class="card-text">
-                                Esplora Pollenzo con guide personalizzate per un'esperienza unica.
-                            </p>
-                        </div>
-                    </div>
-                    <div class="card-back">
-                        <p>
-                            Scopri Pollenzo con i nostri tour privati per un'esperienza indimenticabile.
-                        </p>
-                    </div>
-                </div>
-            </div>
-            <div class="card-container">
-                <div class="card">
-                    <div class="card-front">
-                        <img
-                            src="/images/conventions/vespa.png"
-                            alt="Giri in vespa"
-                            class="logo"
-                        />
-                        <div class="card-content">
-                            <h3 class="card-title">Giri in vespa</h3>
-                            <p class="card-text">
-                                Scopri il paesaggio circostante con i nostri giri in vespa.
-                            </p>
-                        </div>
-                    </div>
-                    <div class="card-back">
-                        <p>
-                            Noleggia una Vespa per esplorare la zona in modo divertente e avventuroso.
-                        </p>
-                    </div>
-                </div>
-            </div>
-            <div class="card-container">
-                <div class="card">
-                    <div class="card-front">
-                        <img
-                            src="/images/conventions/wine.png"
-                            alt="Degustazioni vini"
-                            class="logo"
-                        />
-                        <div class="card-content">
-                            <h3 class="card-title">Degustazione vini</h3>
-                            <p class="card-text">
-                                Partecipa alle degustazioni di vini locali.
-                            </p>
-                        </div>
-                    </div>
-                    <div class="card-back">
-                        <p>
-                            Scopri i migliori vini locali con le nostre degustazioni guidate.
-                        </p>
-                    </div>
-                </div>
-            </div>
+	<main class="space-y-20 pb-20">
+		<section class="section-wrapper space-y-10 text-center">
+			<header class="section-header">
+				<span class="chip">Servizi su misura</span>
+				<h1 class="text-4xl font-semibold text-[var(--color-primary-dark)]">Tutto quello che rende unico il tuo soggiorno</h1>
+				<p class="tagline mx-auto">
+					LangAmore significa esperienze curate, partner selezionati e dettagli pensati per chi ama le Langhe.
+				</p>
+			</header>
 
-            <div class="card-container">
-                <div class="card">
-                    <div class="card-front">
-                        <img
-                            src="/images/conventions/parcheggio.jpg"
-                            alt="Degustazioni vini"
-                            class="logo object-scale-down"
-                        />
-                        <div class="card-content">
-                            <h3 class="card-title">Parcheggio interno e ascensore</h3>
-                            <p class="card-text">
-                                Lascia la tua macchina al sicuro e usufruisci del nostro comodo ascensore
-                            </p>
-                        </div>
-                    </div>
-                    <div class="card-back">
-                        <p>
-                            Il parcheggio interno e l'ascensore sono inclusi nel prezzo.
-                        </p>
-                    </div>
-                </div>
-            </div>
+			<div class="grid-auto-fit">
+				{services.map((service) => (
+					<article class="floating-card space-y-4 text-left">
+						<div class="gradient-border">
+							<img src={service.image} alt={service.title} class="w-full h-60 object-cover rounded-[22px]" loading="lazy" />
+						</div>
+						<span class="chip">{service.accent}</span>
+						<h2 class="text-2xl font-semibold text-[var(--color-primary-dark)]">{service.title}</h2>
+						<p class="text-[var(--color-muted)] leading-7">{service.description}</p>
+					</article>
+				))}
+			</div>
+		</section>
 
-            <div class="card-container">
-                <div class="card">
-                    <div class="card-front">
-                        <img
-                            src="/images/conventions/bar.jpeg"
-                            alt="Degustazioni vini"
-                            class="logo object-scale-down"
-                        />
-                        <div class="card-content">
-                            <h3 class="card-title">Ka' Momi Bar!!</h3>
-                            <p class="card-text">
-                                Il bar è sottostante alla nostra struttura
-                            </p>
-                        </div>
-                    </div>
-                    <div class="card-back">
-                        <p>
-                            Nemmeno due passi separano LangAmore e il bar!
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <section class="mt-16 text-center mb-20">
-        <h2 class="text-2xl md:text-3xl font-bold">Prenota il Tuo Soggiorno</h2>
-        <p class="text-lg mt-4 text-gray-700">
-            Prenota ora il tuo soggiorno per godere di tutti i nostri servizi!
-        </p>
-        <div
-            class="bg-green-500 hover:bg-green-700 text-white font-bold py-3 px-6 rounded-full shadow-lg transform transition-transform duration-300 ease-in-out hover:scale-105 mt-6 inline-block"
-        >
-            <a href="/contact" class="">Prenota Ora</a>
-        </div>
-    </section>
-
-    <style>
-        .card-container {
-            perspective: 1000px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            width: 100%;
-            height: 100%;
-        }
-
-        .card {
-            width: 100%;
-            max-width: 550px;
-            height: 500px;
-            position: relative;
-            transform-style: preserve-3d;
-            transition: transform 0.6s;
-        }
-
-        .card-container:hover .card {
-            transform: rotateY(180deg);
-        }
-
-        .card-front, .card-back {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            backface-visibility: hidden;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 4px 6px rgba(107, 125, 100, 0.1);
-        }
-
-        .card-front {
-            background-color: #ffffff;
-        }
-
-        .card-back {
-            background-color: #74747451;
-            transform: rotateY(180deg);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-
-        .card img {
-            width: 100%;
-            max-height: 300px;
-        }
-
-        .card-content {
-            padding: 40px;
-        }
-
-        .card-title {
-            font-weight: bold;
-            margin-bottom: 10px;
-            color: #333333;
-        }
-
-        .card-text {
-            line-height: 1.6;
-            color: #666666;
-        }
-
-        .logo {
-            width: 100px;
-            height: auto;
-            margin-bottom: 10px;
-        }
-
-        @media (min-width: 640px) {
-            .card {
-                border-radius: 20px;
-            }
-        }
-    </style>
+		<section class="section-wrapper text-center space-y-6">
+			<h2 class="text-3xl font-semibold text-[var(--color-primary-dark)]">Scegli la tua esperienza LangAmore</h2>
+			<p class="tagline mx-auto">
+				Contattaci per personalizzare il tuo soggiorno tra degustazioni, tour privati e momenti di puro benessere.
+			</p>
+			<div class="flex justify-center gap-3 flex-wrap">
+				<a
+					href="https://www.booking.com/hotel/it/langamore-guest-house.it.html"
+					class="btn btn-primary"
+					target="_blank"
+					rel="noopener"
+					title="Prenota LangAmore"
+				>
+					Prenota ora
+				</a>
+				<a href="/contact" class="btn btn-outline" title="Richiedi informazioni">Richiedi informazioni</a>
+			</div>
+		</section>
+	</main>
 </BaseLayout>

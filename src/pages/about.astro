@@ -4,165 +4,147 @@ summary: "Un semplice sito web per un bed and breakfast.";
 url: "https://langamorepollenzo/about";
 
 import BaseLayout from "../layouts/baseLayout.astro";
+
+const values = [
+    {
+        title: "Accoglienza autentica",
+        description:
+            "LangAmore è nato dal desiderio di condividere il ritmo lento delle Langhe e far sentire ogni ospite parte della nostra casa.",
+    },
+    {
+        title: "Luoghi ricchi di storia",
+        description:
+            "Il borgo reale di Pollenzo, con il castello sabaudo e la Banca del Vino, è il punto di partenza perfetto per esplorare le eccellenze del Piemonte.",
+    },
+    {
+        title: "Esperienze personalizzate",
+        description:
+            "Dalle degustazioni private alle passeggiate tra vigneti, costruisci il tuo itinerario ideale con la nostra guida dedicata.",
+    },
+];
+
+const pillars = [
+    "Atmosfera calda e familiare",
+    "Camere curate in ogni dettaglio",
+    "Convenzioni selezionate con realtà locali",
+    "Accesso facilitato ai servizi sanitari vicini",
+    "Percorsi enogastronomici tailor-made",
+    "Assistenza dedicata durante tutto il soggiorno",
+    "Relax garantito tra vigne e colline",
+];
+
+const testimonials = [
+    {
+        quote:
+            "Elisa è stata squisita, la location è nuovissima ed arredata con ottimo gusto, è stato proprio un bel weekend!",
+        author: "Laura (Booking.com)",
+    },
+    {
+        quote:
+            "Camera pulita, letto comodo e vasca idromassaggio ad uso privato. Abbiamo apprezzato la simpatia e l'ospitalità di Elisa.",
+        author: "Patrizia (Booking.com)",
+    },
+    {
+        quote:
+            "Tutto nuovissimo e comodo. Accoglienza premurosa e posizione ideale tra Bra e Alba. Perfetto per un weekend di relax!",
+        author: "Vanessa (Booking.com)",
+    },
+];
+
 ---
 
 <BaseLayout title="Chi Siamo | LangAmore">
-    <style>
-        .fade-in {
-            opacity: 0;
-            transition: opacity 1.5s ease-in-out;
-        }
+	<main class="space-y-24 pb-20">
+		<section class="section-wrapper space-y-10">
+			<header class="section-header fade-block" data-animate>
+				<span class="chip">Chi siamo</span>
+				<h1 class="text-4xl md:text-5xl font-semibold">LangAmore è un invito a rallentare</h1>
+				<p class="tagline mx-auto">
+					Siamo una famiglia innamorata delle Langhe e del Roero. Apriamo le porte della nostra casa per accompagnarti tra vigne, cultura e buon cibo.
+				</p>
+			</header>
 
-        .fade-in.visible {
-            opacity: 1;
-        }
+			<div class="floating-card space-y-6 fade-block" data-animate>
+				<p class="text-[var(--color-muted)] leading-8">
+					LangAmore è più di una guest house: è un rifugio pensato per chi cerca autenticità, cura dei dettagli e atmosfere raccolte. Ci trovi nel cuore di Pollenzo, borgo reale ricco di storia e sede dell'Università di Scienze Gastronomiche.
+				</p>
+				<p class="text-[var(--color-muted)] leading-8">
+					Ogni camera è stata progettata per accoglierti con eleganza, mantenendo uno stile contemporaneo che valorizza le origini del territorio. Dal mattino alla sera ti accompagniamo tra degustazioni, passeggiate e incontri con produttori locali.
+				</p>
+			</div>
+		</section>
 
-        .custom-image {
-            max-width: 55%;
-            height: auto;
-        }
+		<section class="section-wrapper grid gap-10 lg:grid-cols-[minmax(0,1.2fr),minmax(0,0.8fr)] items-center">
+			<div class="space-y-6">
+				<h2 class="text-3xl font-semibold text-[var(--color-primary-dark)] fade-block" data-animate>Il castello di Pollenzo e la Banca del Vino</h2>
+				<p class="text-[var(--color-muted)] leading-8 fade-block" data-animate>
+					A pochi passi da LangAmore si erge il castello sabaudo, riconosciuto patrimonio UNESCO. Tra le sue mura si trova la Banca del Vino, custode delle migliori etichette italiane. Qui inizia ogni percorso sensoriale che proponiamo ai nostri ospiti.
+				</p>
+				<div class="grid-auto-fit">
+					{values.map((value) => (
+						<div class="floating-card space-y-2 fade-block" data-animate>
+							<h3 class="text-xl font-semibold">{value.title}</h3>
+							<p class="text-[var(--color-muted)] leading-7">{value.description}</p>
+						</div>
+					))}
+				</div>
+			</div>
+			<div class="gradient-border fade-block" data-animate>
+				<img src="/images/langhe/pollenzo1.jpeg" alt="Castello di Pollenzo" class="w-full h-full object-cover rounded-[22px]" loading="lazy" />
+			</div>
+		</section>
 
-        @media (max-width: 768px) {
-            .custom-image {
-                max-width: 100%;
-            }
-        }
-    
-    </style>
+		<section class="section-wrapper grid gap-12 lg:grid-cols-2 items-center">
+			<div class="gradient-border fade-block" data-animate>
+				<img src="/images/langhe/ingresso_pollenzo.jpeg" alt="Passeggiata tra le vigne" class="w-full h-full object-cover rounded-[22px]" loading="lazy" />
+			</div>
+			<div class="space-y-5 fade-block" data-animate>
+				<h2 class="text-3xl font-semibold text-[var(--color-primary-dark)]">Esperienze da vivere</h2>
+				<p class="text-[var(--color-muted)] leading-7">
+					Dalle degustazioni in cantine iconiche ai giri in Vespa lungo le strade panoramiche, creiamo itinerari su misura per chi desidera scoprire il lato più autentico delle Langhe.
+				</p>
+				<p class="text-[var(--color-muted)] leading-7">
+					Siamo vicini ai presidi ospedalieri di eccellenza di Verduno e Bra: un punto di riferimento confortevole per chi viaggia anche per necessità.
+				</p>
+			</div>
+		</section>
 
-    <main class="container mx-auto px-8 py-12">
-        <h1 class="text-4xl font-bold text-center text-primary mb-6 fade-in">
-            LangAmore: chi siamo?
-        </h1>
-        <p class="text-lg mt-4 text-gray-700 text-center leading-8 max-w-3xl mx-auto fade-in">
-            LangAmore non è solo una guest house, ma un rifugio per l'anima.
-            <br />
-            Troverai uno spazio accogliente situato a pochi km da Alba e Bra, tra due territori unici come le Langhe e il Roero, patrimonio dell’Unesco con tutto quello che hanno da offrire
-            <br />
-            <br />
-            Vi invitiamo a riscoprire il piacere del riposo e la bellezza della semplicità immersi nel borgo di Pollenzo, una località carica di storia e cultura, la nostra struttura è il punto di partenza ideale per scoprire le sue meraviglie. 
-            Potrete visitare la prestigiosa banca del vino, esplorare il castello e passeggiare per le stradine. 
-            <br />
-            <br />
-            Esplorate le Langhe, un territorio ricco di storia, cultura e sapori autentici.
-            <br />
-            Concedetevi un'esperienza enogastronomica indimenticabile, degustando i vini pregiati e i piatti tipici della tradizione piemontese.
-            <br />
-            <br />
-            A LangAmore, il tempo scorre lentamente, tra passeggiate nella natura, visite ai borghi medievali e momenti di relax. Venite a scoprire LangAmore e lasciatevi incantare dalla bellezza del Piemonte.
-        </p>
+		<section class="section-wrapper space-y-6">
+			<h2 class="text-3xl font-semibold text-[var(--color-primary-dark)] text-center fade-block" data-animate>Cosa ti attende a LangAmore</h2>
+			<ul class="grid-auto-fit">
+				{pillars.map((pillar, index) => (
+					<li class="floating-card list-step" data-index={`0${index + 1}`} data-animate>{pillar}</li>
+				))}
+			</ul>
+		</section>
 
-        <h2 class="text-3xl font-bold text-center text-primary mt-8 fade-in">La Nostra Storia</h2>
+		<section class="section-wrapper space-y-6">
+			<h2 class="text-3xl font-semibold text-center text-[var(--color-primary-dark)] fade-block" data-animate>Le parole dei nostri ospiti</h2>
+			<div class="grid-auto-fit">
+				{testimonials.map((testimonial) => (
+					<blockquote class="testimonial-card fade-block" data-animate>
+						<p class="text-[var(--color-muted)] leading-7">“{testimonial.quote}”</p>
+						<footer class="mt-4">{testimonial.author}</footer>
+					</blockquote>
+				))}
+			</div>
+		</section>
+	</main>
 
-        <h2 class="text-2xl font-bold text-center text-primary mt-8 fade-in">Il Castello di Pollenzo</h2>
-        <p class="text-lg mt-4 text-gray-700 text-center leading-8 max-w-3xl mx-auto fade-in">
-            A pochi passi da LangAmore si erge il maestoso castello di Pollenzo, una delle residenze sabaude riconosciute dall'UNESCO come patrimonio dell'umanità.
-            <br />
-            Il castello è circondato da un vasto parco, che ospita il Centro Universitario di Gastronomia e Scienze degli Alimenti dell'Università di Scienze Gastronomiche di Pollenzo.
-        </p>
+	<script>
+		const aboutBlocks = document.querySelectorAll('[data-animate]');
+		const aboutObserver = new IntersectionObserver(
+			(entries) => {
+				entries.forEach((entry) => {
+					if (entry.isIntersecting) {
+						entry.target.classList.add('is-visible');
+						aboutObserver.unobserve(entry.target);
+					}
+				});
+			},
+			{ threshold: 0.15 }
+		);
 
-        <div class="mt-8 flex justify-center fade-in">
-            <img src="/images/langhe/pollenzo1.jpeg" alt="Pollenzo" class="custom-image rounded-lg shadow-lg" />
-        </div>
-
-        <section class="mt-12 fade-in">
-            <h2 class="text-3xl font-semibold text-center text-primary">Un Territorio da Esplorare</h2>
-            <div class="flex justify-center mt-4">
-                <img src="/images/langhe/ingresso_pollenzo.jpeg" alt="Paesaggio Langhe" class="custom-image rounded-lg shadow-lg" />
-            </div>
-
-            <p class="text-lg mt-4 text-gray-700 text-center leading-8 max-w-3xl mx-auto">
-                Le Langhe sono un territorio ricco di storia, cultura e sapori autentici. 
-                <br />
-                Da LangAmore potrete facilmente raggiungere i borghi medievali più belli della zona, come Barolo, La Morra e Monforte d'Alba, e scoprire le tradizioni e le eccellenze enogastronomiche del Piemonte.
-            </p>
-        </section>
-
-        <section class="mt-12 fade-in">
-            <h2 class="text-3xl font-semibold text-center text-primary">Un'Esperienza Enogastronomica Indimenticabile</h2>
-            <div class="mt-4 flex justify-center">
-                <img src="/images/langhe/cibo.jpeg" alt="Piatti tipici piemontesi" class="custom-image rounded-lg shadow-lg" />
-            </div>
-            <p class="text-lg mt-4 text-gray-700 text-center leading-8 max-w-3xl mx-auto">
-                Le Langhe sono famose in tutto il mondo per i loro vini pregiati e i piatti tipici della tradizione piemontese. 
-                <br />
-                Da LangAmore potrete facilmente raggiungere le cantine vinicole più rinomate e i ristoranti stellati della zona, per un'esperienza enogastronomica indimenticabile.
-            </p>
-        
-        </section>
-
-        <section class="mt-12 fade-in">
-            <h2 class="text-3xl font-semibold text-center text-primary">Momenti di Relax e Benessere</h2>
-            <div class="flex justify-center mt-4">
-                <img src="/images/langhe/relax.jpeg" alt="Sala comune LangAmore" class="custom-image rounded-lg shadow-lg" />
-            </div>
-            <p class="text-lg mt-4 text-gray-700 text-center leading-8 max-w-3xl mx-auto">
-                Venite a scoprire LangAmore e lasciatevi incantare dalla bellezza del Piemonte.
-            </p>
-        
-        </section>
-
-        <section class="mt-12 fade-in">
-            <h2 class="text-3xl font-bold text-center text-primary">Cosa Vi Aspetta a LangAmore</h2>
-            <ul class="list-disc list-inside text-lg mt-6 text-gray-700 mx-auto max-w-2xl">
-                <li class="mt-4">Atmosfera accogliente e familiare</li>
-                <li class="mt-4">Camere confortevoli e curate</li>
-                <li class="mt-4">Vari servizi convenzionati (scopri di piu <a href="/services" class="text-blue-400">qui</a>)</li>
-                <li class="mt-4">Posizione ideale per esplorare le Langhe</li>
-                <li class="mt-4">Posizione ideale per esperienze enogastronomiche autentiche</li>
-                <li class="mt-4">Servizio attento</li>
-                <li class="mt-4">Momenti di relax e benessere</li>
-            </ul>
-        </section>
-
-        <section class="mt-12 fade-in">
-            <h2 class="text-3xl font-bold text-center text-primary">Le Recensioni dei Nostri Ospiti</h2>
-        
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-8">
-                <blockquote class="bg-white p-8 rounded-lg shadow-md">
-                    <p class="text-lg font-medium text-gray-700">
-                        "Elisa è stata squisita, la location è nuovissima ed arredata con ottimo gusto, è stato proprio un bel weekend!"
-                    </p>
-                    <footer class="text-sm mt-4 text-gray-500">- Laura (Booking.com)</footer>
-                </blockquote>
-                <blockquote class="bg-white p-8 rounded-lg shadow-md">
-                    <p class="text-lg font-medium text-gray-700">
-                        "Camera pulita, letto comodo e vasca idromassaggio ad uso privato.
-                        Abbiamo apprezzato la simpatia e l' ospitalità di Elisa. Assolutamente consigliato."
-                    </p>
-                    <footer class="text-sm mt-4 text-gray-500">- Patrizia (Booking.com)</footer>
-                </blockquote>
-                <blockquote class="bg-white p-8 rounded-lg shadow-md">
-                    <p class="text-lg font-medium text-gray-700">
-                        "Tutto nuovissimo e comodo. Siamo stati qui solo una notte, ma la proprietaria ci ha accolto con gentilezza, è stata davvero premurosa ❤️ ci ha fornito tutto ciò di cui avevamo bisogno. Abbiamo particolarmente apprezzato la posizione (a Pollenzo, non lontano da Bra e Alba) e la vasca da bagno: questa struttura è perfetta per un weekend di relax!!"
-                    </p>
-                    <footer class="text-sm mt-4 text-gray-500">- Vanessa (Booking.com)</footer>
-                </blockquote>
-            </div>
-        </section>
-    </main>
-
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            const elements = document.querySelectorAll(".fade-in");
-            const options = {
-                root: null,
-                rootMargin: "0px",
-                threshold: 0.1
-            };
-
-            const observer = new IntersectionObserver((entries, observer) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add("visible");
-                        observer.unobserve(entry.target);
-                    }
-                });
-            }, options);
-
-            elements.forEach(element => {
-                observer.observe(element);
-            });
-        });
-    </script>
+		aboutBlocks.forEach((block) => aboutObserver.observe(block));
+	</script>
 </BaseLayout>

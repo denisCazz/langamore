@@ -1,165 +1,98 @@
 ---
-const images = [
-    "/images/Ingresso/angolo.jpg",
-    "/images/Camera_vasca_idro/letto3.jpg",
-    "/images/Locazione_turistica/ingresso.jpeg",
-    "/images/Camera_Deluxe/letto.jpg",
+const highlights = [
+    {
+        image: "/images/Locazione_turistica/ingresso.jpeg",
+        title: "Tradizione & modernità",
+        description:
+            "Nel cuore del borgo reale di Pollenzo, LangAmore fonde l'eleganza delle dimore storiche con dettagli contemporanei pensati per il tuo relax.",
+    },
+    {
+        image: "/images/Camera_vasca_idro/letto3.jpg",
+        title: "Benessere su misura",
+        description:
+            "Camere luminose, vasca idromassaggio privata e servizi esclusivi ti accompagnano dal risveglio alla buonanotte.",
+    },
+    {
+        image: "/images/Ingresso/angolo2.jpg",
+        title: "Esperienze autentiche",
+        description:
+            "Tour privati, degustazioni, giri in Vespa: ti guidiamo tra le eccellenze delle Langhe per un soggiorno da ricordare.",
+    },
+    {
+        image: "/images/langhe/relax.jpeg",
+        title: "Vicini a ciò che conta",
+        description:
+            "A pochi minuti da Alba e Bra, comodi ai presidi sanitari di eccellenza e alle colline patrimonio UNESCO.",
+    },
 ];
-
-import { Image } from 'astro:assets';
-
 ---
 
-<style>
-    .fade-in {
-        opacity: 0;
-        transform: translateY(20px);
-        transition:
-            opacity 1s ease-out,
-            transform 1s ease-out;
-    }
+<section
+    class="section-wrapper space-y-16"
+    itemscope
+    itemtype="http://schema.org/WebPage"
+>
+    <meta itemprop="name" content="LangAmore Guest House" />
+    <meta
+        itemprop="description"
+        content="Discover the LangAmore Guest House, located in the picturesque village of Pollenzo, at the foot of the Langhe and a short distance from Alba and Bra."
+    />
 
-    .fade-in.visible {
-        opacity: 1;
-        transform: translateY(0);
-    }
+    <header class="section-header fade-block" data-animate>
+        <span class="chip">Per chi ama le Langhe</span>
+        <h2 class="text-3xl md:text-4xl font-semibold">Benvenuti in casa LangAmore</h2>
+        <p class="tagline mx-auto">
+            Un rifugio intimo e curato, dove vivere la magia del Piemonte tra comfort contemporaneo e accoglienza autentica.
+        </p>
+    </header>
 
-    .img-left,
-    .img-right {
-        width: 100%;
-        max-width: 400px;
-        height: auto;
-        max-height: 300px;
-        object-fit: cover;
-        border-radius: 0.5rem;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        margin-bottom: 1.5rem;
-    }
+    <div class="grid-auto-fit">
+        {highlights.map((highlight) => (
+            <article
+                class="floating-card space-y-6 fade-block"
+                data-animate
+                itemprop="mainContentOfPage"
+                itemscope
+                itemtype="http://schema.org/WebPageElement"
+            >
+                <div class="gradient-border">
+                    <img
+                        src={highlight.image}
+                        alt={highlight.title}
+                        class="w-full h-64 object-cover rounded-[22px]"
+                        itemprop="image"
+                        loading="lazy"
+                    />
+                </div>
+                <div class="space-y-3">
+                    <h3 class="text-2xl font-semibold" itemprop="headline">{highlight.title}</h3>
+                    <p class="text-[var(--color-muted)] leading-7" itemprop="text">{highlight.description}</p>
+                </div>
+            </article>
+        ))}
+    </div>
 
-    @media (min-width: 1024px) {
-        .img-left,
-        .img-right {
-            width: 45%;
-        }
-
-        .content {
-            width: 50%;
-        }
-    }
-
-    .row {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-    }
-    /* Stack Images Vertically on Small Screens */
-    @media (max-width: 767px) {
-        .row {
-            flex-direction: column; /* Make rows stack vertically on small screens */
-        }
-
-        .img-left,
-        .img-right {
-            width: 100%; /* Images take full width on small screens */
-        }
-
-        .row.reverse {
-            flex-direction: column-reverse; /* Reverse the order of the columns on small screens */
-        }
-
-    }
-</style>
-
-<script>
-    const handleScroll = () => {
-        const fadeInElements = document.querySelectorAll(".fade-in");
-        fadeInElements.forEach((element) => {
-            const rect = element.getBoundingClientRect();
-            if (rect.top < window.innerHeight && rect.bottom > 0) {
-                element.classList.add("visible");
-            }
-        });
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    document.addEventListener("DOMContentLoaded", handleScroll);
-</script>
-
-<section class="text-gray-600 body-font py-10 lg:p-20" itemscope itemtype="http://schema.org/WebPage">
-    <meta itemprop="name" content="LangAmore Guest House">
-    <meta itemprop="description" content="Discover the LangAmore Guest House, located in the picturesque village of Pollenzo, at the foot of the Langhe and a short distance from Alba and Bra.">
-
-    <div class="container mx-auto px-5 text-center">
-
-        <div class="row" itemprop="mainContentOfPage" itemscope itemtype="http://schema.org/WebPageElement">
-            <Image src={images[2]} alt="Immagine LangAmore" height={200} width={200} class="img-left fade-in" itemprop="image" />
-            <div class="content fade-in">
-                <h2 class="text-2xl font-bold text-gray-800 mb-6" itemprop="headline">
-                    Una Combinazione di Tradizione e Modernità
-                </h2>
-                <p class="text-lg leading-relaxed mb-8" itemprop="text">
-                    Situata nel cuore del borgo di Pollenzo, la nostra struttura
-                    combina tradizione e modernità, creando un rifugio ideale
-                    per chi cerca tranquillità e comfort. Il nostro servizio
-                    attento e personalizzato vi farà sentire accolti e coccolati
-                    in ogni momento.
-                </p>
-            </div>
-        </div>
-        <div class="row reverse" itemprop="mainContentOfPage" itemscope itemtype="http://schema.org/WebPageElement">
-            <div class="content fade-in">
-                <h2 class="text-2xl font-bold text-gray-800 mb-6" itemprop="headline">
-                    Un Rifugio di Tranquillità e Comfort
-                </h2>
-                <p class="text-lg leading-relaxed mb-8" itemprop="text">
-                    A LangAmore, vi sentirete come a casa, sia che siate qui per
-                    una fuga romantica, un viaggio enogastronomico o per
-                    necessità. La nostra guest house offre tutto ciò di cui
-                    avete bisogno per un soggiorno perfetto. LangAmore nasce dal
-                    desiderio di condividere l'amore per il Piemonte, un
-                    territorio ricco di storia, cultura e bellezze naturali.
-                </p>
-            </div>
-            <Image src={images[1]} alt="Immagine LangAmore" height={200} width={200} class="img-right fade-in" itemprop="image" />
-        </div>
-        
-        <div class="row" itemprop="mainContentOfPage" itemscope itemtype="http://schema.org/WebPageElement">
-            <Image src={images[0]} alt="Immagine LangAmore" height={200} width={200} class="img-left fade-in" itemprop="image" />
-            <div class="content fade-in">
-                <h2 class="text-2xl font-bold text-gray-800 mb-6" itemprop="headline">
-                    Comfort, benessere e molto altro...
-                </h2>
-                <p class="text-lg leading-relaxed mb-8" itemprop="text">
-                    Scoprite la Guest House LangAmore, situata nel suggestivo
-                    borgo di Pollenzo, tra le Langhe e il Roero, a breve distanza
-                    da Alba e Bra. La nostra struttura offre un'esperienza unica
-                    di relax e scoperta delle bellezze enogastronomiche della
-                    regione, con ogni dettaglio pensato per garantire un
-                    soggiorno all'insegna del comfort e del benessere.
-                </p>
-            </div>
-        </div>
-        <div class="row reverse" itemprop="mainContentOfPage" itemscope itemtype="http://schema.org/WebPageElement">
-            <div class="content fade-in">
-                <h2 class="text-2xl font-bold text-gray-800 mb-6" itemprop="headline">
-                    Vicino a Tutto Ciò di Cui Avete Bisogno
-                </h2>
-                <p class="text-lg leading-relaxed mb-8" itemprop="text">
-                    LangAmore si trova a pochi chilometri dall’ospedale di
-                    Verduno e alla casa di cura Citta di Bra, rendendola la scelta perfetta sia per chi cerca un
-                    soggiorno di relax sia per chi necessita di una sistemazione
-                    comoda e vicina a una struttura sanitaria di eccellenza.
-                </p>
-            </div>
-            <Image src={images[3]} alt="Immagine LangAmore" height={200} width={200} class="img-right fade-in" itemprop="image" />
-        </div>
-        <h2 class="text-2xl font-bold text-gray-800 mb-6 fade-in" itemprop="headline">
-            Prenota Ora il Tuo Soggiorno Perfetto
-        </h2>
-        <p class="text-lg leading-relaxed mb-8 fade-in" itemprop="text">
-            Venite a scoprire LangAmore e lasciatevi incantare dalla bellezza
-            del Piemonte. Prenotate ora il vostro soggiorno e preparatevi a
-            vivere un'esperienza indimenticabile.
+    <div class="text-center fade-block" data-animate>
+        <h3 class="text-3xl font-semibold text-[var(--color-primary-dark)]">Prenota ora il tuo soggiorno</h3>
+        <p class="tagline mx-auto mt-4">
+            Concediti un fine settimana romantico, una fuga gourmet o un viaggio slow tra le colline patrimonio UNESCO.
         </p>
     </div>
 </section>
+
+<script>
+    const animatedBlocks = document.querySelectorAll('[data-animate]');
+    const observer = new IntersectionObserver(
+        (entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        },
+        { threshold: 0.2 }
+    );
+
+    animatedBlocks.forEach((block) => observer.observe(block));
+</script>

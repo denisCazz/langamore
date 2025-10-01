@@ -4,105 +4,86 @@ import Slider4Bed from "../components/slider4bed.astro";
 
 const { type, maintext } = Astro.props;
 
-var img = [
+let images = [
     "/images/Camera_vasca_idro/bdeddc17-8310-4e40-b568-d65afcd3ff8a.jpg",
 ];
-var title = "Camera ";
+let title = "Camera ";
 
 switch (type) {
     case "matrimoniale":
-        img = [
+        images = [
             "/images/Camera_2/ingresso.jpg",
             "/images/Camera_2/vista1.jpg",
             "/images/Camera_2/bagno.jpg",
             "/images/Camera_2/letto.jpg",
         ];
-        title = title + "Idro | LangAmore";
+        title += "Idro | LangAmore";
         break;
     case "deluxe":
-        img = [
+        images = [
             "/images/Camera_Deluxe/letto.jpg",
             "/images/Camera_Deluxe/bagno.jpg",
             "/images/Camera_Deluxe/entrata.jpg",
         ];
-        title = title + "Deluxe | LangAmore";
+        title += "Deluxe | LangAmore";
         break;
     case "idro":
-        img = [
+        images = [
             "/images/Camera_vasca_idro/camera.jpg",
             "/images/Camera_vasca_idro/vasca.jpg",
             "/images/Camera_vasca_idro/letto.jpg",
         ];
-        title = title + "Matrimoniale | LangAmore";
+        title += "Matrimoniale | LangAmore";
         break;
 }
 ---
 
 <BaseLayout title={title}>
-    <style>
-        .hero-image {
-            width: 100%;
-            height: auto;
-            object-fit: cover;
-            border-radius: 0.5rem;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-        .content-section {
-            padding: 2rem;
-            background-color: #fff;
-            border-radius: 0.5rem;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-        .booking-button {
-            display: inline-block;
-            margin-top: 2rem;
-            padding: 0.75rem 1.5rem;
-            background-color: #3490dc;
-            color: #fff;
-            font-weight: 600;
-            border-radius: 0.5rem;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            transition: background-color 0.3s ease;
-        }
-        .booking-button:hover {
-            background-color: #2779bd;
-        }
-    </style>
+    <main class="space-y-20 pb-20" itemscope itemtype="http://schema.org/WebPage">
+        <meta itemprop="name" content={`Camera ${type}`} />
+        <meta itemprop="description" content={maintext} />
 
-    <main
-        class="container mx-auto px-8 py-12 mb-12"
-        itemscope
-        itemtype="http://schema.org/WebPage"
-    >
-        <meta itemprop="name" content="Camera {type}" />
-        <meta itemprop="description" content="{maintext}" />
+        <section class="section-wrapper space-y-6 text-center">
+            <span class="chip">Camere LangAmore</span>
+            <h1 class="text-4xl font-semibold text-[var(--color-primary-dark)]" itemprop="headline">
+                Camera {type}
+            </h1>
+            <p class="tagline mx-auto">
+                Comfort contemporaneo, atmosfera intima e servizi dedicati per vivere al meglio le Langhe.
+            </p>
+        </section>
 
-        <h1 class="text-4xl font-bold text-center mb-8" itemprop="headline">
-            Camera {type}
-        </h1>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div>
-                <Slider4Bed images={img} itemprop="image" />
+        <section class="section-wrapper grid gap-10 lg:grid-cols-[minmax(0,1.1fr),minmax(0,0.9fr)] items-start">
+            <div class="gradient-border" itemprop="image">
+                <div class="surface-card surface-card--accent">
+                    <Slider4Bed images={images} />
+                </div>
             </div>
 
-            <div
-                class="content-section"
+            <article
+                class="floating-card space-y-5"
                 itemprop="mainContentOfPage"
                 itemscope
                 itemtype="http://schema.org/WebPageElement"
             >
-                <h2 class="text-3xl font-semibold mb-4" itemprop="headline">
-                    Cosa offre?
+                <h2 class="text-3xl font-semibold text-[var(--color-primary-dark)]" itemprop="headline">
+                    Cosa offre
                 </h2>
-
-                <p class="text-lg text-gray-700 mb-4" itemprop="text">
+                <p class="text-[var(--color-muted)] leading-7" itemprop="text">
                     {maintext}
                 </p>
-                <a href="/contact" class="booking-button" itemprop="url">
-                    Prenota ora
-                </a>
-            </div>
-        </div>
+                <div class="flex flex-wrap gap-3">
+                    <a
+                        href="https://www.booking.com/hotel/it/langamore-guest-house.it.html"
+                        class="btn btn-primary"
+                        target="_blank"
+                        rel="noopener"
+                        itemprop="url"
+                        title="Prenota LangAmore"
+                    >Prenota ora</a>
+                    <a href="/contact" class="btn btn-outline" title="Contatta LangAmore">Scrivici</a>
+                </div>
+            </article>
+        </section>
     </main>
 </BaseLayout>

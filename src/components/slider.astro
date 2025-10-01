@@ -1,72 +1,141 @@
 ---
-
-var imagesSrc = Astro.props.src;
-var ImagesAlt = Astro.props.alt;
-
-import { Image } from 'astro:assets';
+const imagesSrc = Astro.props.src;
+const imagesAlt = Astro.props.alt;
 
 ---
 
-<div class="relative w-full overflow-hidden p-10" id="slider">
-  <div class="slide-container">
-    {
-      imagesSrc.map((image, index) => (
-        <Image src={image} alt={ImagesAlt[index]} width={800} height={400} class="slide-image object-scale-down" />
-      ))
-    }
+<div class="hero-slider" data-slider>
+  {imagesSrc.map((image, index) => (
+    <div class={`hero-slide${index === 0 ? " is-active" : ""}`} data-slide>
+      <img
+        src={image}
+        alt={imagesAlt[index] ?? ""}
+        class="hero-slide__image"
+        loading={index === 0 ? "eager" : "lazy"}
+      />
+      <div class="hero-slide__overlay"></div>
+    </div>
+  ))}
+  <div class="hero-slider__indicators" data-slider-indicators>
+    {imagesSrc.map((_, index) => (
+      <button
+        type="button"
+        class={`hero-indicator${index === 0 ? " is-active" : ""}`}
+        data-slider-indicator
+        aria-label={`Mostra slide ${index + 1}`}
+      ></button>
+    ))}
   </div>
 </div>
 
 <style>
- .relative {
-  height: 50vh; /* Imposta l'altezza del contenitore principale */
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.hero-slider {
   position: relative;
-  overflow: hidden; /* Nascondi il contenuto in eccesso */
+  overflow: hidden;
+  border-radius: 24px;
+  isolation: isolate;
+  aspect-ratio: 16 / 9;
+  width: 100%;
+  background: #1f2937;
+  box-shadow: 0 30px 60px rgba(31, 41, 55, 0.25);
 }
 
-.slide-container {
-  display: flex; /* Layout flex per contenere le immagini in linea */
-  transition: transform 0.5s ease; /* Transizione per lo spostamento */
-  width: 100%; /* Larghezza al 100% per contenere tutte le immagini */
+.hero-slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 1.1s ease, transform 1.1s ease;
+  transform: scale(1.05);
 }
 
-.slide-image {
-  flex: 0 0 auto; /* Ogni immagine occupa il 100% della larghezza del contenitore */
-  padding: 50px;/* Limita la larghezza massima al 100% del contenitore */
+.hero-slide.is-active {
+  opacity: 1;
+  transform: scale(1);
+  z-index: 1;
+}
+
+.hero-slide__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.hero-slide__overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(120deg, rgba(17, 24, 39, 0.45) 0%, rgba(17, 24, 39, 0.15) 60%, rgba(255, 255, 255, 0) 100%);
+}
+
+.hero-slider__indicators {
+  position: absolute;
+  bottom: 22px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: inline-flex;
+  gap: 0.75rem;
+  padding: 0.4rem 0.75rem;
+  background: rgba(255, 255, 255, 0.55);
+  border-radius: 999px;
+  backdrop-filter: blur(10px);
+}
+
+.hero-indicator {
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+  border: none;
+  background: rgba(139, 93, 55, 0.25);
+  transition: transform 0.3s ease, background 0.3s ease;
+  cursor: pointer;
+}
+
+.hero-indicator.is-active {
+  background: var(--color-primary);
+  transform: scale(1.35);
 }
 
 @media (max-width: 768px) {
-  #slider {
-    display: none; /* Nascondi le immagini su schermi più piccoli */
+  .hero-slider {
+    border-radius: 18px;
+    aspect-ratio: 4 / 3;
+  }
+
+  .hero-slider__indicators {
+    bottom: 16px;
   }
 }
-
 </style>
 
 <script>
-  document.addEventListener("DOMContentLoaded", function () {
-  const slides = document.querySelectorAll(".slide-image");
-  const slideContainer = document.querySelector(".slide-container");
+  const sliders = document.querySelectorAll('[data-slider]');
 
-  let currentIndex = 0;
+  sliders.forEach((slider) => {
+    const slides = slider.querySelectorAll('[data-slide]');
+    const indicators = slider.querySelectorAll('[data-slider-indicator]');
+    if (!slides.length) return;
 
-  function showSlide(index) {
-    const totalSlides = slides.length;
-    currentIndex = (index + totalSlides) % totalSlides; // Assicura che l'indice si riavvolga
-    const offset = currentIndex * -70; // Calcola l'offset corretto
-    slideContainer.style.transform = `translateX(${offset}%)`;
-    slideContainer.style.marginLeft = `${offset + 200}px`;
-    slideContainer.style.marginRight = `${offset - 200}px`;
-  }
+    let current = 0;
+    const activateSlide = (index) => {
+      slides.forEach((slide, slideIndex) => {
+        slide.classList.toggle('is-active', slideIndex === index);
+      });
+      indicators.forEach((indicator, indicatorIndex) => {
+        indicator.classList.toggle('is-active', indicatorIndex === index);
+      });
+    };
 
-  setInterval(() => {
-    showSlide(currentIndex + 1);
-  }, 3000);
+    indicators.forEach((indicator, index) => {
+      indicator.addEventListener('click', () => {
+        current = index;
+        activateSlide(current);
+      });
+    });
 
-  showSlide(currentIndex); // Mostra l'immagine iniziale
-});
+    activateSlide(current);
 
+    setInterval(() => {
+      current = (current + 1) % slides.length;
+      activateSlide(current);
+    }, 4500);
+  });
 </script>
