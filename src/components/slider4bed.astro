@@ -22,25 +22,36 @@ document.addEventListener('DOMContentLoaded', () => {
   const totalImages = images.length;
   const slider = document.getElementById('slider');
 
+  if (!slider || !(slider instanceof HTMLElement)) return;
+
   const updateSliderWidth = () => {
     const sliderWidth = slider.clientWidth;
     slider.style.transform = `translateX(-${currentIndex * sliderWidth}px)`;
     images.forEach(image => {
-      image.style.width = `${sliderWidth}px`;
+      if (image instanceof HTMLElement) {
+        image.style.width = `${sliderWidth}px`;
+      }
     });
   };
 
   window.addEventListener('resize', updateSliderWidth);
   updateSliderWidth();
 
-  document.getElementById('prev').addEventListener('click', () => {
-    currentIndex = (currentIndex - 1 + totalImages) % totalImages;
-    slider.style.transform = `translateX(-${currentIndex * slider.clientWidth}px)`;
-  });
+  const prevBtn = document.getElementById('prev');
+  const nextBtn = document.getElementById('next');
 
-  document.getElementById('next').addEventListener('click', () => {
-    currentIndex = (currentIndex + 1) % totalImages;
-    slider.style.transform = `translateX(-${currentIndex * slider.clientWidth}px)`;
-  });
+  if (prevBtn instanceof HTMLElement) {
+    prevBtn.addEventListener('click', () => {
+      currentIndex = (currentIndex - 1 + totalImages) % totalImages;
+      slider.style.transform = `translateX(-${currentIndex * slider.clientWidth}px)`;
+    });
+  }
+
+  if (nextBtn instanceof HTMLElement) {
+    nextBtn.addEventListener('click', () => {
+      currentIndex = (currentIndex + 1) % totalImages;
+      slider.style.transform = `translateX(-${currentIndex * slider.clientWidth}px)`;
+    });
+  }
 });
 </script>
