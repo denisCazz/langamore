@@ -10,22 +10,22 @@
             </div>
             <!-- Primary Nav -->
             <div class="hidden md:flex items-center space-x-1">
-                <a href="/" class="py-5 px-3 text-gray-700 hover:text-blue-900" title="Home"
+                <a href="/" class="py-5 px-3 text-gray-700 hover:text-blue-900 transition-colors duration-200 relative group focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500" title="Home"
                     >Home</a
                 >
                 <a
                     href="/about"
-                    class="py-5 px-3 text-gray-700 hover:text-blue-900" title="Noi">Noi</a
+                    class="py-5 px-3 text-gray-700 hover:text-blue-900 transition-colors duration-200 relative group focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500" title="Noi">Noi</a
                 >
                 <a
                     href="/services" title="Servizi"
-                    class="py-5 px-3 text-gray-700 hover:text-blue-900"
+                    class="py-5 px-3 text-gray-700 hover:text-blue-900 transition-colors duration-200 relative group focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
                     >Servizi</a
                 >
                 <div class="relative">
                     <button
                         id="structure-btn" title="La struttura"
-                        class="py-5 px-3 text-gray-700 hover:text-blue-900 focus:outline-none"
+                        class="py-5 px-3 text-gray-700 hover:text-blue-900 transition-colors duration-200 focus:outline-none relative group focus-visible:ring-2 focus-visible:ring-blue-500"
                         >La struttura</button
                     >
                     <div
@@ -34,19 +34,19 @@
                     >
                         <a
                             href="/bedroom" title="Le camere"
-                            class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-200"
+                            class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-200 transition-colors duration-150"
                             >Le camere</a
                         >
                         <a
                             href="/tourist-location" title="Locazione turistica"
-                            class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-200"
+                            class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-200 transition-colors duration-150"
                             >Locazione turistica</a
                         >
                     </div>
                 </div>
                 <a
                     href="/contact" title="Contatti"
-                    class="py-5 px-3 text-gray-700 hover:text-blue-900"
+                    class="py-5 px-3 text-gray-700 hover:text-blue-900 transition-colors duration-200 relative group focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
                     >Contatti</a
                 >
             </div>
@@ -72,32 +72,32 @@
     </div>
     <!-- Mobile Menu -->
     <div class="hidden mobile-menu md:hidden">
-        <a href="/" title="Home" class="block py-2 px-4 text-sm hover:bg-gray-200">Home</a>
-        <a href="/about" title="noi" class="block py-2 px-4 text-sm hover:bg-gray-200"
+        <a href="/" title="Home" class="block py-2 px-4 text-sm hover:bg-gray-200 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500">Home</a>
+        <a href="/about" title="noi" class="block py-2 px-4 text-sm hover:bg-gray-200 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
             >Noi</a
         >
-        <a href="/services" title="servizi" class="block py-2 px-4 text-sm hover:bg-gray-200"
+        <a href="/services" title="servizi" class="block py-2 px-4 text-sm hover:bg-gray-200 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
             >Servizi</a
         >
         <div class="relative">
             <button
-                class="block w-full text-left py-2 px-4 text-sm hover:bg-gray-200 focus:outline-none"
+                class="block w-full text-left py-2 px-4 text-sm hover:bg-gray-200 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
                 >La struttura</button
             >
             <div class="hidden w-48">
                 <a
                     href="/bedroom" title="Le camere"
-                    class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-200"
+                    class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-200 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
                     >Le camere</a
                 >
                 <a
                     href="/tourist-location" title="Locazione turistica"
-                    class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-200"
+                    class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-200 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
                     >Locazione turistica</a
                 >
             </div>
         </div>
-        <a href="/contact" class="block py-2 px-4 text-sm hover:bg-gray-200" title="Contatti"
+        <a href="/contact" class="block py-2 px-4 text-sm hover:bg-gray-200 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500" title="Contatti"
             >Contatti</a
         >
     </div>
@@ -164,3 +164,23 @@
         });
     }
 </script>
+
+<style>
+    /* Effetto underline morbido per i link desktop */
+    .group::after {
+        content: "";
+        position: absolute;
+        left: 1rem; /* allineato con px-3 */
+        right: 1rem;
+        bottom: 0.75rem; /* poco sopra il bordo */
+        height: 2px;
+        background: currentColor;
+        transform: scaleX(0);
+        transform-origin: left;
+        transition: transform 200ms ease;
+        opacity: 0.7;
+    }
+    .group:hover::after, .group:focus-visible::after {
+        transform: scaleX(1);
+    }
+</style>
