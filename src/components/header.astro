@@ -49,6 +49,15 @@
                     class="py-5 px-3 text-gray-700 hover:text-blue-900 transition-colors duration-200 relative group focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
                     >Contatti</a
                 >
+                                <!-- Call Now Button (Desktop) -->
+                                <a
+                                    href="tel:+393331645850"
+                                    title="Chiama ora"
+                                    class="ml-3 inline-flex items-center gap-2 bg-blue-600 text-white font-semibold py-2 px-4 rounded-full shadow hover:bg-blue-700 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
+                                >
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5"><path d="M2.25 6.75c0-1.243 1.007-2.25 2.25-2.25h2.123c.98 0 1.84.63 2.12 1.566l.65 2.166a2.25 2.25 0 01-.564 2.238l-1.21 1.21a14.978 14.978 0 006.06 6.06l1.21-1.21a2.25 2.25 0 012.238-.564l2.165.65a2.25 2.25 0 011.567 2.12V19.5a2.25 2.25 0 01-2.25 2.25H18c-8.284 0-15-6.716-15-15V6.75z"/></svg>
+                                    Chiama ora
+                                </a>
             </div>
             <!-- Hamburger Icon -->
             <div class="md:hidden flex items-center">
@@ -71,7 +80,7 @@
         </div>
     </div>
     <!-- Mobile Menu -->
-    <div class="hidden mobile-menu md:hidden">
+    <div class="hidden mobile-menu md:hidden flex flex-col gap-1 p-2">
         <a href="/" title="Home" class="block py-2 px-4 text-sm hover:bg-gray-200 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500">Home</a>
         <a href="/about" title="noi" class="block py-2 px-4 text-sm hover:bg-gray-200 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
             >Noi</a
@@ -97,9 +106,15 @@
                 >
             </div>
         </div>
-        <a href="/contact" class="block py-2 px-4 text-sm hover:bg-gray-200 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500" title="Contatti"
+                <a href="/contact" class="block py-2 px-4 text-sm hover:bg-gray-200 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500" title="Contatti"
             >Contatti</a
         >
+                <!-- CTA Chiama ora (Mobile) at the bottom -->
+                <div class="mt-3 p-2">
+                    <a href="tel:+393331645850" title="Chiama ora" class="block w-full text-center py-3 px-4 text-sm font-semibold text-white bg-blue-600 hover:bg-blue-700 transition-colors rounded-full shadow">
+                        Chiama ora
+                    </a>
+                </div>
     </div>
 </nav>
 
