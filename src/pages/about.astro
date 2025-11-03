@@ -8,12 +8,12 @@ import BaseLayout from "../layouts/baseLayout.astro";
 
 <BaseLayout title="Chi Siamo | LangAmore">
     <style>
-        .fade-in {
+        .js .fade-in {
             opacity: 0;
             transition: opacity 1.5s ease-in-out;
         }
 
-        .fade-in.visible {
+        .js .fade-in.visible {
             opacity: 1;
         }
 
@@ -142,27 +142,5 @@ import BaseLayout from "../layouts/baseLayout.astro";
         </section>
     </main>
 
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            const elements = document.querySelectorAll(".fade-in");
-            const options = {
-                root: null,
-                rootMargin: "0px",
-                threshold: 0.1
-            };
-
-            const observer = new IntersectionObserver((entries, observer) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add("visible");
-                        observer.unobserve(entry.target);
-                    }
-                });
-            }, options);
-
-            elements.forEach(element => {
-                observer.observe(element);
-            });
-        });
-    </script>
+    
 </BaseLayout>

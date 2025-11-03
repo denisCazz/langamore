@@ -11,7 +11,8 @@ import { Image } from 'astro:assets';
 ---
 
 <style>
-    .fade-in {
+    /* Only hide when JS is enabled; otherwise content remains visible */
+    .js .fade-in {
         opacity: 0;
         transform: translateY(20px);
         transition:
@@ -19,7 +20,7 @@ import { Image } from 'astro:assets';
             transform 1s ease-out;
     }
 
-    .fade-in.visible {
+    .js .fade-in.visible {
         opacity: 1;
         transform: translateY(0);
     }
@@ -71,18 +72,7 @@ import { Image } from 'astro:assets';
 </style>
 
 <script>
-    const handleScroll = () => {
-        const fadeInElements = document.querySelectorAll(".fade-in");
-        fadeInElements.forEach((element) => {
-            const rect = element.getBoundingClientRect();
-            if (rect.top < window.innerHeight && rect.bottom > 0) {
-                element.classList.add("visible");
-            }
-        });
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    document.addEventListener("DOMContentLoaded", handleScroll);
+    // No-op: rely on global reveal script in the base layout
 </script>
 
 <section class="text-gray-600 body-font py-10 lg:p-20" itemscope itemtype="http://schema.org/WebPage">

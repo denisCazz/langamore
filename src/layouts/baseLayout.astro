@@ -14,12 +14,72 @@ const {title} = Astro.props;
   <head>
     <HeadersTags />
     <title>{title}</title>
+    <!-- Mark when JS is enabled to allow CSS fallbacks -->
+    <script>
+      // keep it tiny and synchronous in head so CSS can react immediately
+      document.documentElement.classList.add('js');
+    </script>
   </head>
   <body>
     <Header />
     <br>
     <slot />
     <Footer />
+
+    <!-- Global fade-in reveal: IntersectionObserver with robust fallbacks -->
+    <script>
+      (function () {
+        const addVisible = (el) => el.classList.add('visible');
+        const inViewport = (el) => {
+          const r = el.getBoundingClientRect();
+          return r.top < (window.innerHeight || document.documentElement.clientHeight) && r.bottom > 0;
+        };
+
+        const init = () => {
+          const els = Array.from(document.querySelectorAll('.fade-in'));
+          if (els.length === 0) return;
+
+          if ('IntersectionObserver' in window) {
+            const observer = new IntersectionObserver((entries, obs) => {
+              for (const entry of entries) {
+                if (entry.isIntersecting) {
+                  addVisible(entry.target);
+                  obs.unobserve(entry.target);
+                }
+              }
+            }, { root: null, rootMargin: '0px', threshold: 0.01 });
+
+            // Observe all, and ensure above-the-fold elements are revealed immediately
+            els.forEach((el) => {
+              if (inViewport(el)) {
+                addVisible(el);
+              } else {
+                observer.observe(el);
+              }
+            });
+
+            // iOS Safari sometimes needs a nudge after layout settles
+            requestAnimationFrame(() => {
+              els.forEach((el) => { if (inViewport(el)) addVisible(el); });
+            });
+            setTimeout(() => {
+              els.forEach((el) => { if (inViewport(el)) addVisible(el); });
+            }, 200);
+          } else {
+            // Fallback: simple scroll/resize listener
+            const check = () => els.forEach((el) => { if (!el.classList.contains('visible') && inViewport(el)) addVisible(el); });
+            ['scroll', 'resize', 'orientationchange'].forEach((ev) => window.addEventListener(ev, check, { passive: true }));
+            check();
+          }
+        };
+
+        if (document.readyState === 'loading') {
+          document.addEventListener('DOMContentLoaded', init, { once: true });
+        } else {
+          init();
+        }
+      })();
+    </script>
   </body>
 </html>
 

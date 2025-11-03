@@ -1,0 +1,29 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "Build Astro site",
+			"type": "shell",
+			"command": "npm",
+			"args": [
+				"run",
+				"build"
+			],
+			"problemMatcher": [
+				"$eslint-stylish"
+			],
+			"group": "build"
+		},
+		{
+			"label": "Preview Astro site",
+			"type": "shell",
+			"command": "npm",
+			"args": [
+				"run",
+				"preview"
+			],
+			"isBackground": true,
+			"group": "build"
+		}
+	]
+}

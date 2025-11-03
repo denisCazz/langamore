@@ -147,11 +147,11 @@ import { Image } from 'astro:assets';
 
     if (!slides || slides.length === 0 || !dotsContainer) return;
 
-    let current = 0;
-    const total = slides.length;
-    let autoTimer: number | undefined;
+  let current = 0;
+  const total = slides.length;
+  let autoTimer;
 
-    function show(index: number) {
+    function show(index) {
       slides.forEach((slide, i) => {
         slide.classList.toggle("active", i === index);
       });
